@@ -1627,7 +1627,7 @@ stroke-linecap="round" stroke-linejoin="round"/>
   <section class="tab-navigation">
     <div class="container">
       <div class="tabs-wrapper">
-        <button class="tab-btn" data-category="powder">Powder</button>
+        <button class="tab-btn active" data-category="powder">Powder</button>
         <button class="tab-btn" data-category="liquid">Liquid</button>
         <button class="tab-btn" data-category="granule">Granule / Snack</button>
         <button class="tab-btn" data-category="horizontal">Horizontal Wrap Machine</button>
@@ -2755,22 +2755,6 @@ function(e) {
 e.stopPropagation();
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-  let hash = window.location.hash.substring(1); // baca setelah #
-  if (!hash) {
-    hash = "powder"; // default fallback
-  }
-
-  // reset semua tab
-  document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
-
-  // aktifkan tab sesuai hash / default
-  const tabBtn = document.querySelector(`.tab-btn[data-category="${hash}"]`);
-  if (tabBtn) {
-    tabBtn.classList.add("active");
-  }
-});
-  
 // Product data
 const productData = {
   powder: [
@@ -2857,7 +2841,7 @@ const productData = {
     {
       id: 11,
       title: "Automatic FeasPack 2 Hoppers Weighing System Packaging Machine (FP-WC-162)",
-      image: "https://i.imgur.com/S9aIQaw.jpeg",
+      image: "https://i.imgur.com/CSfJtQJ.png",
       category: "PACKAGING MACHINE",
       subcategory: "POWDER",
       link: "product-detail.html?id=4"
@@ -3061,6 +3045,10 @@ function initializeTabNavigation() {
   }
 }
 
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  initializeTabNavigation();
+});
 </script>
 </body>
 </html>
