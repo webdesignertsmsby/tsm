@@ -3049,6 +3049,25 @@ function initializeTabNavigation() {
 document.addEventListener('DOMContentLoaded', function() {
   initializeTabNavigation();
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+  const hash = window.location.hash.substring(1); // ambil setelah #
+  if (hash) {
+    const tabBtn = document.querySelector(`.tab-btn[data-category="${hash}"]`);
+    const tabPanel = document.querySelector(`.tab-panel[data-category="${hash}"]`);
+    
+    if (tabBtn && tabPanel) {
+      // reset semua
+      document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+      document.querySelectorAll(".tab-panel").forEach(panel => panel.classList.remove("active"));
+      
+      // aktifkan tab sesuai hash
+      tabBtn.classList.add("active");
+      tabPanel.classList.add("active");
+    }
+  }
+});
+
 </script>
 </body>
 </html>
