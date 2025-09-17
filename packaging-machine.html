@@ -2756,22 +2756,18 @@ e.stopPropagation();
 });
 
 document.addEventListener("DOMContentLoaded", function() {
-  let hash = window.location.hash.substring(1); // ambil setelah #
+  let hash = window.location.hash.substring(1); // baca setelah #
   if (!hash) {
-    hash = "powder"; // fallback ke powder kalau tidak ada hash
+    hash = "powder"; // default fallback
   }
 
+  // reset semua tab
+  document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+
+  // aktifkan tab sesuai hash / default
   const tabBtn = document.querySelector(`.tab-btn[data-category="${hash}"]`);
-  const tabPanel = document.querySelector(`.tab-panel[data-category="${hash}"]`);
-  
-  if (tabBtn && tabPanel) {
-    // reset semua
-    document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
-    document.querySelectorAll(".tab-panel").forEach(panel => panel.classList.remove("active"));
-    
-    // aktifkan tab sesuai hash / default
+  if (tabBtn) {
     tabBtn.classList.add("active");
-    tabPanel.classList.add("active");
   }
 });
   
