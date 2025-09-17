@@ -634,6 +634,243 @@ background-color: var(--surface-btn-primary-hover);
 }
 }
 
+/* Main Content */
+.main-content {
+  padding-top: 80px;
+  min-height: calc(100vh - 80px);
+}
+
+/* Breadcrumb Section */
+.breadcrumb-section {
+  padding: 40px 0;
+  background-color: var(--surface-background);
+  border-bottom: 1px solid var(--separator);
+}
+
+.breadcrumb-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.breadcrumb-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--separator);
+  border-radius: 50%;
+  background-color: var(--surface-background);
+  color: var(--text-high-emphasize);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.breadcrumb-back:hover {
+  background-color: var(--surface-card);
+  transform: translateX(-2px);
+}
+
+.breadcrumb-trail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+}
+
+.breadcrumb-item {
+  color: var(--text-low-emphasize);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.breadcrumb-item:hover {
+  color: var(--brand-primary);
+}
+
+.breadcrumb-item.current {
+  color: var(--text-high-emphasize);
+  font-weight: 600;
+}
+
+.breadcrumb-separator {
+  color: var(--text-disabled);
+  font-size: 14px;
+}
+
+/* Tab Navigation */
+.tab-navigation {
+  padding: 0;
+  background-color: var(--surface-background);
+  border-bottom: 1px solid var(--separator);
+}
+
+.tabs-wrapper {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tabs-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.tab-btn {
+  flex: 1;
+  min-width: max-content;
+  padding: 20px 30px;
+  background-color: transparent;
+  border: none;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-low-emphasize);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: var(--text-high-emphasize);
+  background-color: var(--surface-card);
+}
+
+.tab-btn.active {
+  color: var(--brand-primary);
+  font-weight: 600;
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: var(--brand-primary);
+}
+
+/* Product Grid Section */
+.product-grid-section {
+  padding: 60px 0;
+  background-color: var(--surface-background);
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.product-card {
+  display: block;
+  text-decoration: none;
+  background-color: var(--surface-background);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.product-image {
+  width: 100%;
+  height: 240px;
+  overflow: hidden;
+  position: relative;
+  background-color: var(--surface-card);
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image img {
+  transform: scale(1.05);
+}
+
+.product-content {
+  padding: 20px;
+}
+
+.product-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-high-emphasize);
+  margin-bottom: 12px;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 44px;
+}
+
+.product-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.product-label {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.product-label.category {
+  background-color: var(--primary-10);
+  color: var(--brand-primary);
+}
+
+.product-label.subcategory {
+  background-color: var(--secondary-10);
+  color: var(--brand-secondary);
+}
+
+/* Loading State */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 0;
+  font-size: 18px;
+  color: var(--text-low-emphasize);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.empty-state h3 {
+  font-size: 24px;
+  color: var(--text-high-emphasize);
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  font-size: 16px;
+  color: var(--text-low-emphasize);
+}
+
 /* Footer Section */
 .footer {
   background-color: var(--surface-background);
@@ -822,7 +1059,55 @@ background-color: var(--surface-btn-primary-hover);
   
 /* Tablet Styles */
 @media (max-width: 1024px) {
-  	.footer {
+  .main-content {
+    padding-top: 70px;
+  }
+  
+  .breadcrumb-section {
+    padding: 30px 0;
+  }
+  
+  .breadcrumb-nav {
+    gap: 12px;
+  }
+  
+  .breadcrumb-back {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .breadcrumb-trail {
+    font-size: 14px;
+    gap: 10px;
+  }
+  
+  .tab-btn {
+    padding: 16px 24px;
+    font-size: 15px;
+  }
+  
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+  
+  .product-grid-section {
+    padding: 50px 0;
+  }
+  
+  .product-image {
+    height: 200px;
+  }
+  
+  .product-content {
+    padding: 16px;
+  }
+  
+  .product-title {
+    font-size: 15px;
+  }
+  
+  .footer {
     padding: 50px 0 25px;
     margin-top: 80px;
   }
@@ -865,7 +1150,51 @@ background-color: var(--surface-btn-primary-hover);
   
 /* Mobile Styles */
 @media (max-width: 768px) {
-  	.footer {
+  .main-content {
+    padding-top: 60px;
+  }
+  
+  .breadcrumb-section {
+    padding: 20px 0;
+  }
+  
+  .tabs-wrapper {
+    gap: 0;
+  }
+  
+  .tab-btn {
+    padding: 14px 20px;
+    font-size: 14px;
+  }
+  
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .product-grid-section {
+    padding: 40px 0;
+  }
+  
+  .product-image {
+    height: 180px;
+  }
+  
+  .product-content {
+    padding: 14px;
+  }
+  
+  .product-title {
+    font-size: 14px;
+    min-height: 40px;
+  }
+  
+  .product-label {
+    font-size: 11px;
+    padding: 3px 10px;
+  }
+  
+  .footer {
     padding: 40px 0 20px;
     margin-top: 60px;
   }
@@ -906,6 +1235,31 @@ background-color: var(--surface-btn-primary-hover);
 }
 
 @media (max-width: 480px) {
+  .breadcrumb-back {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .breadcrumb-trail {
+    font-size: 13px;
+  }
+  
+  .tab-btn {
+    padding: 12px 16px;
+    font-size: 13px;
+  }
+  
+  .product-image {
+    height: 160px;
+  }
+  
+  .product-content {
+    padding: 12px;
+  }
+  
+  .product-title {
+    font-size: 13px;
+  }
   
   .footer {
     padding: 30px 0 15px;
@@ -1253,6 +1607,48 @@ stroke-linecap="round" stroke-linejoin="round"/>
 <a href="contact.html" class="mobile-contact-btn">CONTACT US</a>
 </div>
 </div>
+
+<!-- Main Content -->
+<main class="main-content">
+  <!-- Breadcrumb Navigation -->
+  <section class="breadcrumb-section">
+    <div class="container">
+      <nav class="breadcrumb-nav">
+        <button onclick="history.back()" class="breadcrumb-back">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="breadcrumb-trail">
+          <a href="index.html" class="breadcrumb-item">Products</a>
+          <span class="breadcrumb-separator">></span>
+          <span class="breadcrumb-item current">Packaging Machine</span>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Tab Navigation -->
+  <section class="tab-navigation">
+    <div class="container">
+      <div class="tabs-wrapper">
+        <button class="tab-btn active" data-category="powder">Powder</button>
+        <button class="tab-btn" data-category="liquid">Liquid</button>
+        <button class="tab-btn" data-category="granule">Granule / Snack</button>
+        <button class="tab-btn" data-category="labeling">Labeling Machine</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Grid -->
+  <section class="product-grid-section">
+    <div class="container">
+      <div class="product-grid" id="productGrid">
+        <!-- Products will be dynamically loaded here -->
+      </div>
+    </div>
+  </section>
+</main>
 
 <!-- Footer Section -->
 <footer class="footer">
@@ -2362,6 +2758,157 @@ closeMobileLangDropdown();
 mobileLangDropdown.querySelector('.dropdown-content').addEventListener('click',
 function(e) {
 e.stopPropagation();
+});
+
+// Product data
+const productData = {
+  powder: [
+    {
+      id: 1,
+      title: "Automatic FeasPack Jumbo Volumetric System Packaging Machine (FP-JVS-1000)",
+      image: "https://via.placeholder.com/300x240/E5E8EF/012060?text=Jumbo+Volumetric",
+      category: "PACKAGING MACHINE",
+      subcategory: "POWDER",
+      link: "product-detail.html?id=1"
+    },
+    {
+      id: 2,
+      title: "Automatic FeasPack Small Auger System Packaging Machine (FP-SAS-100)",
+      image: "https://via.placeholder.com/300x240/E5E8EF/012060?text=Small+Auger",
+      category: "PACKAGING MACHINE",
+      subcategory: "POWDER",
+      link: "product-detail.html?id=2"
+    },
+    {
+      id: 3,
+      title: "Automatic FeasPack Vertical Servo Auger System Packaging Machine (FP-VSAS-500)",
+      image: "https://via.placeholder.com/300x240/E5E8EF/012060?text=Vertical+Servo",
+      category: "PACKAGING MACHINE",
+      subcategory: "POWDER",
+      link: "product-detail.html?id=3"
+    },
+    {
+      id: 4,
+      title: "Semi Automatic FeasPack Auger Filling Machine (FP-AF-200)",
+      image: "https://via.placeholder.com/300x240/E5E8EF/012060?text=Semi+Auto+Auger",
+      category: "PACKAGING MACHINE",
+      subcategory: "POWDER",
+      link: "product-detail.html?id=4"
+    }
+  ],
+  liquid: [
+    {
+      id: 5,
+      title: "Automatic Liquid Filling Packaging Machine (FP-LFP-500)",
+      image: "https://via.placeholder.com/300x240/E5E8EF/012060?text=Liquid+Filling",
+      category: "PACKAGING MACHINE",
+      subcategory: "LIQUID",
+      link: "product-detail.html?id=5"
+    },
+    {
+      id: 6,
+      title: "Semi Automatic Liquid Pouch Packaging Machine (FP-LPP-300)",
+      image: "https://via.placeholder.com/300x240/E5E8EF/012060?text=Liquid+Pouch",
+      category: "PACKAGING MACHINE",
+      subcategory: "LIQUID",
+      link: "product-detail.html?id=6"
+    }
+  ],
+  granule: [
+    {
+      id: 7,
+      title: "Automatic Granule Packaging Machine (FP-GP-800)",
+      image: "https://via.placeholder.com/300x240/E5E8EF/012060?text=Granule+Pack",
+      category: "PACKAGING MACHINE",
+      subcategory: "GRANULE / SNACK",
+      link: "product-detail.html?id=7"
+    },
+    {
+      id: 8,
+      title: "Multi-Head Weigher Snack Packaging System (FP-MWS-1000)",
+      image: "https://via.placeholder.com/300x240/E5E8EF/012060?text=Multi+Head",
+      category: "PACKAGING MACHINE",
+      subcategory: "GRANULE / SNACK",
+      link: "product-detail.html?id=8"
+    }
+  ],
+  labeling: [
+    {
+      id: 9,
+      title: "Automatic Labeling Machine (FP-AL-500)",
+      image: "https://via.placeholder.com/300x240/E5E8EF/012060?text=Auto+Label",
+      category: "LABELING MACHINE",
+      subcategory: "LABELING",
+      link: "product-detail.html?id=9"
+    },
+    {
+      id: 10,
+      title: "Semi Automatic Labeling System (FP-SAL-300)",
+      image: "https://via.placeholder.com/300x240/E5E8EF/012060?text=Semi+Label",
+      category: "LABELING MACHINE", 
+      subcategory: "LABELING",
+      link: "product-detail.html?id=10"
+    }
+  ]
+};
+
+// Tab functionality
+function initializeTabNavigation() {
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const productGrid = document.getElementById('productGrid');
+  let currentCategory = 'powder';
+
+  // Load initial products
+  loadProducts(currentCategory);
+
+  // Add click listeners to tabs
+  tabButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const category = this.getAttribute('data-category');
+      
+      // Update active tab
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+      
+      // Load products for selected category
+      currentCategory = category;
+      loadProducts(category);
+    });
+  });
+
+  function loadProducts(category) {
+    const products = productData[category] || [];
+    
+    if (products.length === 0) {
+      productGrid.innerHTML = `
+        <div class="empty-state" style="grid-column: 1 / -1;">
+          <h3>No Products Found</h3>
+          <p>No products available in this category at the moment.</p>
+        </div>
+      `;
+      return;
+    }
+
+    productGrid.innerHTML = products.map(product => `
+      <a href="${product.link}" class="product-card">
+        <div class="product-image">
+          <img src="${product.image}" alt="${product.title}" loading="lazy">
+        </div>
+        <div class="product-content">
+          <h3 class="product-title">${product.title}</h3>
+          <div class="product-labels">
+            <span class="product-label category">${product.category}</span>
+            <span class="product-label subcategory">${product.subcategory}</span>
+          </div>
+        </div>
+      </a>
+    `).join('');
+  }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  initializeTabNavigation();
 });
 </script>
 </body>
