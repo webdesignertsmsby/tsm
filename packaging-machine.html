@@ -2993,56 +2993,77 @@ const productData = {
 
 // Tab functionality
 function initializeTabNavigation() {
-  const tabButtons = document.querySelectorAll('.tab-btn');
-  const productGrid = document.getElementById('productGrid');
-  let currentCategory = 'powder';
-
-  // Load initial products
-  loadProducts(currentCategory);
-
-  // Add click listeners to tabs
-  tabButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      const category = this.getAttribute('data-category');
-      
-      // Update active tab
-      tabButtons.forEach(btn => btn.classList.remove('active'));
-      this.classList.add('active');
-      
-      // Load products for selected category
-      currentCategory = category;
-      loadProducts(category);
-    });
-  });
-
-  function loadProducts(category) {
-    const products = productData[category] || [];
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const productGrid = document.getElementById('productGrid');
+    let currentCategory = 'powder';
     
-    if (products.length === 0) {
-      productGrid.innerHTML = `
-        <div class="empty-state" style="grid-column: 1 / -1;">
-          <h3>No Products Found</h3>
-          <p>No products available in this category at the moment.</p>
-        </div>
-      `;
-      return;
+    // Get category from URL hash or use default
+    function getCategoryFromHash() {
+        const hash = window.location.hash.substring(1); // Remove '#'
+        const validCategories = ['powder', 'liquid', 'granule', 'horizontal'];
+        return validCategories.includes(hash) ? hash : 'powder';
     }
+    
+    // Set active tab based on category
+    function setActiveTab(category) {
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        const targetTab = document.querySelector(`[data-category="${category}"]`);
+        if (targetTab) {
+            targetTab.classList.add('active');
+        }
+        currentCategory = category;
+        loadProducts(category);
+    }
+    
+    // Load initial products based on URL hash
+    const initialCategory = getCategoryFromHash();
+    setActiveTab(initialCategory);
+    
+    // Add click listeners to tabs
+    tabButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+            
+            // Update URL hash without triggering page reload
+            history.pushState(null, null, `#${category}`);
+            
+            setActiveTab(category);
+        });
+    });
+    
+    // Listen for hash changes (back/forward navigation)
+    window.addEventListener('hashchange', function() {
+        const category = getCategoryFromHash();
+        setActiveTab(category);
+    });
 
-    productGrid.innerHTML = products.map(product => `
-      <a href="${product.link}" class="product-card">
-        <div class="product-image">
-          <img src="${product.image}" alt="${product.title}" loading="lazy">
-        </div>
-        <div class="product-content">
-          <h3 class="product-title">${product.title}</h3>
-          <div class="product-labels">
-            <span class="product-label category">${product.category}</span>
-            <span class="product-label subcategory">${product.subcategory}</span>
-          </div>
-        </div>
-      </a>
-    `).join('');
-  }
+    function loadProducts(category) {
+        const products = productData[category] || [];
+        if (products.length === 0) {
+            productGrid.innerHTML = `
+                <div class="empty-state" style="grid-column: 1 / -1;">
+                    <h3>No Products Found</h3>
+                    <p>No products available in this category at the moment.</p>
+                </div>
+            `;
+            return;
+        }
+        
+        productGrid.innerHTML = products.map(product => `
+            <a href="${product.link}" class="product-card">
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.title}" loading="lazy">
+                </div>
+                <div class="product-content">
+                    <h3 class="product-title">${product.title}</h3>
+                    <div class="product-labels">
+                        <span class="product-label category">${product.category}</span>
+                        <span class="product-label subcategory">${product.subcategory}</span>
+                    </div>
+                </div>
+            </a>
+        `).join('');
+    }
 }
 
 // Initialize when DOM is loaded
