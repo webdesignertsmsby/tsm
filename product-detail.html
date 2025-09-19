@@ -634,6 +634,71 @@ background-color: var(--surface-btn-primary-hover);
 }
 }
 
+/* Main Content */
+.main-content {
+  padding-top: 80px;
+  min-height: calc(100vh - 80px);
+}
+
+/* Breadcrumb Section */
+.breadcrumb-section {
+  padding: 40px 0;
+  background-color: var(--surface-background);
+  border-bottom: none;
+}
+
+.breadcrumb-nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.breadcrumb-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--separator);
+  border-radius: 50%;
+  background-color: var(--surface-background);
+  color: var(--text-high-emphasize);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.breadcrumb-back:hover {
+  background-color: var(--surface-card);
+  transform: translateX(-2px);
+}
+
+.breadcrumb-trail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
+}
+
+.breadcrumb-item {
+  color: var(--text-low-emphasize);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.breadcrumb-item:hover {
+  color: var(--brand-primary);
+}
+
+.breadcrumb-item.current {
+  color: var(--text-high-emphasize);
+  font-weight: 600;
+}
+
+.breadcrumb-separator {
+  color: var(--text-disabled);
+  font-size: 14px;
+}
+
 /* Footer Section */
 .footer {
   background-color: var(--surface-background);
@@ -822,8 +887,29 @@ background-color: var(--surface-btn-primary-hover);
   
 /* Tablet Styles */
 @media (max-width: 1024px) {
+  .main-content {
+    padding-top: 70px;
+  }
   
-  	.footer {
+  .breadcrumb-section {
+    padding: 30px 0;
+  }
+  
+  .breadcrumb-nav {
+    gap: 12px;
+  }
+  
+  .breadcrumb-back {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .breadcrumb-trail {
+    font-size: 14px;
+    gap: 10px;
+  }
+  
+  .footer {
     padding: 50px 0 25px;
     margin-top: 80px;
   }
@@ -866,6 +952,13 @@ background-color: var(--surface-btn-primary-hover);
   
 /* Mobile Styles */
 @media (max-width: 768px) {
+  .main-content {
+    padding-top: 60px;
+  }
+  
+  .breadcrumb-section {
+    padding: 20px 0;
+  }
   
   .footer {
     padding: 40px 0 20px;
@@ -908,6 +1001,14 @@ background-color: var(--surface-btn-primary-hover);
 }
 
 @media (max-width: 480px) {
+  .breadcrumb-back {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .breadcrumb-trail {
+    font-size: 13px;
+  }
   
   .footer {
     padding: 30px 0 15px;
