@@ -2760,7 +2760,38 @@ const productData = {
       category: "MIXER",
       link: "product-detail.html?id=1"
     }
+  ]
 };
+
+document.addEventListener('DOMContentLoaded', function() {
+  const productGrid = document.getElementById('productGrid');
+  const products = productData.mixer || [];
+
+  if (products.length === 0) {
+    productGrid.innerHTML = `
+      <div class="empty-state" style="grid-column: 1 / -1;">
+        <h3>No Products Found</h3>
+        <p>No products available in this category at the moment.</p>
+      </div>
+    `;
+    return;
+  }
+
+  productGrid.innerHTML = products.map(product => `
+    <a href="${product.link}" class="product-card">
+      <div class="product-image">
+        <img src="${product.image}" alt="${product.title}" loading="lazy">
+      </div>
+      <div class="product-content">
+        <h3 class="product-title">${product.title}</h3>
+        <div class="product-labels">
+          <span class="product-label category">${product.category}</span>
+        </div>
+      </div>
+    </a>
+  `).join('');
+});
+
 </script>
 </body>
 </html>
