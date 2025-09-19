@@ -14,7 +14,7 @@
 
 <meta charset='UTF-8'/>
 <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
-<title>Product 001</title>
+<title>Product Detail</title>
 <link
 href='https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=
 swap' rel='stylesheet'/>
@@ -634,66 +634,6 @@ background-color: var(--surface-btn-primary-hover);
 }
 }
 
-/* Breadcrumb Section */
-.breadcrumb-section {
-  padding: 40px 0;
-  background-color: var(--surface-background);
-  border-bottom: none;
-}
-
-.breadcrumb-nav {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.breadcrumb-back {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--separator);
-  border-radius: 50%;
-  background-color: var(--surface-background);
-  color: var(--text-high-emphasize);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.breadcrumb-back:hover {
-  background-color: var(--surface-card);
-  transform: translateX(-2px);
-}
-
-.breadcrumb-trail {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 16px;
-}
-
-.breadcrumb-item {
-  color: var(--text-low-emphasize);
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.breadcrumb-item:hover {
-  color: var(--brand-primary);
-}
-
-.breadcrumb-item.current {
-  color: var(--text-high-emphasize);
-  font-weight: 600;
-}
-
-.breadcrumb-separator {
-  color: var(--text-disabled);
-  font-size: 14px;
-}
-
-
 /* Footer Section */
 .footer {
   background-color: var(--surface-background);
@@ -882,25 +822,8 @@ background-color: var(--surface-btn-primary-hover);
   
 /* Tablet Styles */
 @media (max-width: 1024px) {
-  .breadcrumb-section {
-    padding: 30px 0;
-  }
   
-  .breadcrumb-nav {
-    gap: 12px;
-  }
-  
-  .breadcrumb-back {
-    width: 36px;
-    height: 36px;
-  }
-  
-  .breadcrumb-trail {
-    font-size: 14px;
-    gap: 10px;
-  }	
-  
-  .footer {
+  	.footer {
     padding: 50px 0 25px;
     margin-top: 80px;
   }
@@ -943,7 +866,8 @@ background-color: var(--surface-btn-primary-hover);
   
 /* Mobile Styles */
 @media (max-width: 768px) {
-  	.footer {
+  
+  .footer {
     padding: 40px 0 20px;
     margin-top: 60px;
   }
@@ -1024,7 +948,7 @@ max-width: 500px;
 </head>
 <body>
 <!-- Navigation -->
-<nav class="navbar transparent" id="navbar">
+<nav class="navbar solid" id="navbar">
 <div class="container">
 <div class="nav-content">
 <a href="index.html" class="logo">
@@ -1044,28 +968,28 @@ class="dropdown-arrow">▼</span></a>
 <div class="dropdown-category">
 <span class="dropdown-category-label">Packaging Machine</span>
 <div class="dropdown-item">
-<a href="powder.html">Powder</a>
+<a href="packaging-machine.html#powder">Powder</a>
 </div>
 <div class="dropdown-item">
-<a href="liquid.html">Liquid</a>
+<a href="packaging-machine.html#liquid">Liquid</a>
 </div>
 <div class="dropdown-item">
-<a href="granule-snack.html">Granule / Snack</a>
+<a href="packaging-machine.html#granule">Granule / Snack</a>
 </div>
 <div class="dropdown-item">
-<a href="horizontal-wrap-machine.html">Horizontal Wrap Machine</a>
+<a href="packaging-machine.html#horizontal">Horizontal Wrap Machine</a>
 </div>
 </div>
 <div class="dropdown-category">
 <span class="dropdown-category-label">Liquid Processing</span>
 <div class="dropdown-item">
-<a href="inline-filling-machine.html">Inline Filling Machine</a>
+<a href="liquid-processing.html#inline">Inline Filling Machine</a>
 </div>
 <div class="dropdown-item">
-<a href="rotary-filling-machine.html">Rotary Filling Machine</a>
+<a href="liquid-processing.html#rotary">Rotary Filling Machine</a>
 </div>
 <div class="dropdown-item">
-<a href="tanks.html">Tanks</a>
+<a href="liquid-processing.html#tanks">Tanks</a>
 </div>
 </div>
 <div class="dropdown-category">
@@ -1282,28 +1206,28 @@ stroke-linecap="round" stroke-linejoin="round"/>
 <div class="mobile-dropdown-category">
 <span class="mobile-dropdown-category-label">Packaging Machine</span>
 <div class="mobile-dropdown-item">
-<a href="powder.html">Powder</a>
+<a href="packaging-machine.html#powder">Powder</a>
 </div>
 <div class="mobile-dropdown-item">
-<a href="liquid.html">Liquid</a>
+<a href="packaging-machine.html#liquid">Liquid</a>
 </div>
 <div class="mobile-dropdown-item">
-<a href="granule-snack.html">Granule / Snack</a>
+<a href="packaging-machine.html#granule">Granule / Snack</a>
 </div>
 <div class="mobile-dropdown-item">
-<a href="horizontal-wrap-machine.html">Horizontal Wrap Machine</a>
+<a href="packaging-machine.html#horizontal">Horizontal Wrap Machine</a>
 </div>
 </div>
 <div class="mobile-dropdown-category">
 <span class="mobile-dropdown-category-label">Liquid Processing</span>
 <div class="mobile-dropdown-item">
-<a href="inline-filling-machine.html">Inline Filling Machine</a>
+<a href="liquid-processing.html#inline">Inline Filling Machine</a>
 </div>
 <div class="mobile-dropdown-item">
-<a href="rotary-filling-machine.html">Rotary Filling Machine</a>
+<a href="liquid-processing.html#rotary">Rotary Filling Machine</a>
 </div>
 <div class="mobile-dropdown-item">
-<a href="tanks.html">Tanks</a>
+<a href="liquid-processing.html#tanks">Tanks</a>
 </div>
 </div>
 <div class="mobile-dropdown-category">
@@ -2292,7 +2216,6 @@ stroke-linecap="round" stroke-linejoin="round"/>
 </footer>
   
 <script>
-
 // Desktop navbar hover behavior for Products dropdown
 const navbar = document.getElementById('navbar');
 const productsDropdown = document.querySelector('.nav-menu .dropdown');
