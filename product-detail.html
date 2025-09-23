@@ -1368,13 +1368,7 @@ stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-        <div class="breadcrumb-trail">
-          <a href="product-category.html" class="breadcrumb-item">Products</a>
-          <span class="breadcrumb-separator">></span>
-          <a href="packaging-machine.html" class="breadcrumb-item">Packaging Machine</a>
-          <span class="breadcrumb-separator">></span>
-          <span class="breadcrumb-item current">FP-AC-320</span>
-        </div>
+        <div class="breadcrumb-trail"></div>
       </nav>
     </div>
   </section>
@@ -2488,6 +2482,52 @@ mobileLangDropdown.querySelector('.dropdown-content').addEventListener('click',
 function(e) {
 e.stopPropagation();
 });
+
+const categoryMap = {
+  "Packaging Machine": { name: "Packaging Machine", link: "packaging-machine.html" },
+  "Liquid Processing": { name: "Liquid Processing", link: "liquid-processing.html" },
+  "Mixer": { name: "Mixer", link: "mixer.html" },
+  "Labeling": { name: "Labeling", link: "labeling.html" }
+};
+
+const productData = [
+  {
+    id: 1,
+    title: "Automatic FeasPack Small Auger System Packaging Machine (FP-AC-320)",
+    image: "https://i.imgur.com/EUyJnb3.png",
+    category: "PACKAGING MACHINE",
+    subcategory: "POWDER",
+  },
+  {
+    id: 2,
+    title: "Automatic FeasPack Jumbo Volumetric System Packaging Machine (FP-JAC-400)",
+    image: "https://i.imgur.com/WRYEon7.png",
+    category: "PACKAGING MACHINE",
+    subcategory: "POWDER",
+  }
+  // dst... semua produk
+];
+
+//dynamic breadcrumbs
+document.addEventListener("DOMContentLoaded", function() {
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get("id"));
+
+  const product = productData.find(p => p.id === id);
+  if (!product) return;
+
+  const categoryInfo = categoryMap[product.category] || { name: product.category, link: "product-category.html" };
+
+  const breadcrumbTrail = document.querySelector(".breadcrumb-trail");
+  breadcrumbTrail.innerHTML = `
+    <a href="product-category.html" class="breadcrumb-item">Products</a>
+    <span class="breadcrumb-separator">></span>
+    <a href="${categoryInfo.link}" class="breadcrumb-item">${categoryInfo.name}</a>
+    <span class="breadcrumb-separator">></span>
+    <span class="breadcrumb-item current">${product.title}</span>
+  `;
+});
+
 </script>
 </body>
 </html>
