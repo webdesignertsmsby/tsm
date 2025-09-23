@@ -2653,19 +2653,17 @@ const productData = [
     category: "Packaging Machine",
     subcategory: "Powder",
   }
-  // dst... semua produk
+  // dst...
 ];
 
-//dynamic breadcrumbs
 document.addEventListener("DOMContentLoaded", function() {
   const params = new URLSearchParams(window.location.search);
   const id = parseInt(params.get("id"));
-
   const product = productData.find(p => p.id === id);
   if (!product) return;
 
+  // --- Breadcrumb ---
   const categoryInfo = categoryMap[product.category] || { name: product.category, link: "product-category.html" };
-
   const breadcrumbTrail = document.querySelector(".breadcrumb-trail");
   breadcrumbTrail.innerHTML = `
     <a href="product-category.html" class="breadcrumb-item">Products</a>
@@ -2674,41 +2672,40 @@ document.addEventListener("DOMContentLoaded", function() {
     <span class="breadcrumb-separator">></span>
     <span class="breadcrumb-item current">${product.code}</span>
   `;
+
+  // --- Top Section ---
+  document.querySelector("#product-detail-top .product-image img").src = product.image;
+  document.querySelector("#product-detail-top .product-image img").alt = product.title;
+  document.querySelector("#product-detail-top .product-subcategory").textContent = product.subcategory || "";
+  document.querySelector("#product-detail-top .product-title").textContent = product.title;
+
+  // --- Suitable For ---
+  const suitableList = document.querySelector(".suitable-list");
+  suitableList.innerHTML = (product.suitableFor || []).map(item => `
+    <div class="suitable-item">
+      <img src="${item.icon}" alt="${item.name}">
+      <span>${item.name}</span>
+    </div>
+  `).join("");
+
+  // --- Packaging ---
+  const packagingList = document.querySelector(".packaging-list");
+  packagingList.innerHTML = (product.packaging || []).map(item => `
+    <div class="packaging-item">
+      <img src="${item.icon}" alt="${item.name}">
+      <span>${item.name}</span>
+    </div>
+  `).join("");
+
+  // --- Specs ---
+  const specsContainer = document.querySelector(".product-specs");
+  specsContainer.innerHTML = (product.specs || []).map(spec => `
+    <div class="spec-row">
+      <span>${spec.label}</span>
+      <span>${spec.value}</span>
+    </div>
+  `).join("");
 });
-
-// Dynamic top section
-document.querySelector("#product-detail-top .product-image img").src = product.image;
-document.querySelector("#product-detail-top .product-image img").alt = product.title;
-document.querySelector("#product-detail-top .product-subcategory").textContent = product.subcategory || "";
-document.querySelector("#product-detail-top .product-title").textContent = product.title;
-
-// Suitable For
-const suitableList = document.querySelector(".suitable-list");
-suitableList.innerHTML = (product.suitableFor || []).map(item => `
-  <div class="suitable-item">
-    <img src="${item.icon}" alt="${item.name}">
-    <span>${item.name}</span>
-  </div>
-`).join("");
-
-// Packaging
-const packagingList = document.querySelector(".packaging-list");
-packagingList.innerHTML = (product.packaging || []).map(item => `
-  <div class="packaging-item">
-    <img src="${item.icon}" alt="${item.name}">
-    <span>${item.name}</span>
-  </div>
-`).join("");
-
-// Specs
-const specsContainer = document.querySelector(".product-specs");
-specsContainer.innerHTML = (product.specs || []).map(spec => `
-  <div class="spec-row">
-    <span>${spec.label}</span>
-    <span>${spec.value}</span>
-  </div>
-`).join("");
-
 
 </script>
 </body>
