@@ -2494,6 +2494,7 @@ const productData = [
   {
     id: 1,
     title: "Automatic FeasPack Small Auger System Packaging Machine (FP-AC-320)",
+    code: "FP-AC-320",
     image: "https://i.imgur.com/EUyJnb3.png",
     category: "PACKAGING MACHINE",
     subcategory: "POWDER",
@@ -2501,6 +2502,7 @@ const productData = [
   {
     id: 2,
     title: "Automatic FeasPack Jumbo Volumetric System Packaging Machine (FP-JAC-400)",
+    code: "FP-JAC-400",
     image: "https://i.imgur.com/WRYEon7.png",
     category: "PACKAGING MACHINE",
     subcategory: "POWDER",
@@ -2524,7 +2526,7 @@ document.addEventListener("DOMContentLoaded", function() {
     <span class="breadcrumb-separator">></span>
     <a href="${categoryInfo.link}" class="breadcrumb-item">${categoryInfo.name}</a>
     <span class="breadcrumb-separator">></span>
-    <span class="breadcrumb-item current">${product.title}</span>
+    <span class="breadcrumb-item current">${product.code}</span>
   `;
 });
 
