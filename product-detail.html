@@ -2862,53 +2862,6 @@ maintenance: [
   // dst...
 ];
 
-  // Ambil ID produk dari URL, contoh: product-detail.html?id=1
-  const params = new URLSearchParams(window.location.search);
-  const productId = parseInt(params.get("id"), 10);
-
-  // Cari produk aktif
-  const currentProduct = productData.find(p => p.id === productId);
-
-  function renderSpecifications() {
-    const container = document.querySelector(".spec-list");
-    if (!container) return;
-
-    container.innerHTML = "";
-
-    if (!currentProduct || !currentProduct.specification) {
-      container.innerHTML = "<p>No specification data.</p>";
-      return;
-    }
-
-    currentProduct.specification.forEach(cat => {
-      const categoryEl = document.createElement("div");
-      categoryEl.classList.add("spec-category");
-
-      categoryEl.innerHTML = `
-        <div class="spec-category-header">
-          ${cat.category}
-          <span>+</span>
-        </div>
-        <div class="spec-category-body">
-          ${cat.items
-            .map(item => `<div class="spec-row"><span>${item.label}</span><span>${item.value}</span></div>`)
-            .join("")}
-        </div>
-      `;
-
-      container.appendChild(categoryEl);
-    });
-
-    // Accordion toggle
-    document.querySelectorAll(".spec-category-header").forEach(header => {
-      header.addEventListener("click", () => {
-        header.parentElement.classList.toggle("open");
-      });
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", renderSpecifications);
-
 document.addEventListener("DOMContentLoaded", function() {
   const params = new URLSearchParams(window.location.search);
   const id = parseInt(params.get("id"));
@@ -3011,53 +2964,6 @@ if (product.maintenance) {
     </tr>
   `).join("");
 }
-
-// Ambil ID dari URL, contoh: product-detail.html?id=1
-  const params = new URLSearchParams(window.location.search);
-  const productId = parseInt(params.get("id"), 10);
-
-  // Cari produk dari productData (yang sudah didefinisikan di file lain / global)
-  const currentProduct = productData.find(p => p.id === productId);
-
-  function renderSpecifications() {
-    const container = document.querySelector(".spec-list");
-    if (!container) return;
-
-    container.innerHTML = "";
-
-    if (!currentProduct || !currentProduct.specification) {
-      container.innerHTML = "<p>No specification data.</p>";
-      return;
-    }
-
-    currentProduct.specification.forEach(cat => {
-      const categoryEl = document.createElement("div");
-      categoryEl.classList.add("spec-category");
-
-      categoryEl.innerHTML = `
-        <div class="spec-category-header">
-          ${cat.category}
-          <span>+</span>
-        </div>
-        <div class="spec-category-body">
-          ${cat.items
-            .map(item => `<div class="spec-row"><span>${item.label}</span><span>${item.value}</span></div>`)
-            .join("")}
-        </div>
-      `;
-
-      container.appendChild(categoryEl);
-    });
-
-    // Accordion toggle
-    document.querySelectorAll(".spec-category-header").forEach(header => {
-      header.addEventListener("click", () => {
-        header.parentElement.classList.toggle("open");
-      });
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", renderSpecifications);
 
 </script>
 </body>
