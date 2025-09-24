@@ -2933,14 +2933,9 @@ const specList = document.querySelector(".spec-list");
 if (product.specification) {
   specList.innerHTML = product.specification.map(spec => `
     <div class="spec-category">
-      <div class="spec-category-header">
-        ${spec.category}
-        <span>+</span>
-      </div>
+      <div class="spec-category-header">${spec.category}</div>
       <div class="spec-category-body">
-        ${spec.items.map(i => `
-          <div class="spec-item"><strong>${i.label}</strong>: ${i.value}</div>
-        `).join("")}
+        ${spec.items.map(i => `<div><strong>${i.label}</strong>: ${i.value}</div>`).join("")}
       </div>
     </div>
   `).join("");
