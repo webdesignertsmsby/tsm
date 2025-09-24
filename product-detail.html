@@ -2965,6 +2965,47 @@ if (product.maintenance) {
   `).join("");
 }
 
+ // === Render Specification ===
+  function renderSpecifications(productData) {
+    const container = document.querySelector(".spec-list");
+    if (!container || !productData.specification) return;
+
+    container.innerHTML = "";
+
+    productData.specification.forEach(cat => {
+      const categoryEl = document.createElement("div");
+      categoryEl.classList.add("spec-category");
+
+      categoryEl.innerHTML = `
+        <div class="spec-category-header">
+          ${cat.category}
+          <span>+</span>
+        </div>
+        <div class="spec-category-body">
+          ${cat.specs
+            .map(s => `<div class="spec-row"><span>${s.key}</span><span>${s.value}</span></div>`)
+            .join("")}
+        </div>
+      `;
+
+      container.appendChild(categoryEl);
+    });
+
+    // Toggle accordion
+    document.querySelectorAll(".spec-category-header").forEach(header => {
+      header.addEventListener("click", () => {
+        header.parentElement.classList.toggle("open");
+      });
+    });
+  }
+
+  // Panggil function ini setelah productData sudah ada
+  document.addEventListener("DOMContentLoaded", () => {
+    if (typeof productData !== "undefined") {
+      renderSpecifications(productData);
+    }
+  });
+
 </script>
 </body>
 </html>
