@@ -799,6 +799,105 @@ background-color: var(--surface-btn-primary-hover);
   color: var(--text-high-emphasize, #111);
 }
 
+/* --- Tabs --- */
+.tabs-wrapper {
+  display: flex;
+  gap: 20px;
+  margin: 40px 0 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #555;
+  border-bottom: 3px solid transparent;
+  transition: 0.2s;
+}
+
+.tab-btn.active {
+  color: #000;
+  border-color: #e00000;
+}
+
+.tab-content .tab-panel {
+  display: none;
+  padding: 20px 0;
+}
+
+.tab-content .tab-panel.active {
+  display: block;
+}
+
+/* --- Specification (accordion) --- */
+.spec-list .spec-category {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.spec-category-header {
+  background: #f9f9f9;
+  padding: 14px 18px;
+  cursor: pointer;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.spec-category-body {
+  display: none;
+  padding: 14px 18px;
+  border-top: 1px solid #eee;
+}
+
+.spec-category.open .spec-category-body {
+  display: block;
+}
+
+/* --- Guidebook --- */
+.guidebook-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+.guidebook-info h3 { margin-bottom: 12px; }
+
+/* --- Maintenance --- */
+.maintenance-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.maintenance-table th,
+.maintenance-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  font-size: 14px;
+}
+.maintenance-table th {
+  background: #f4f4f4;
+  font-weight: 600;
+  text-align: left;
+}
+
+/* --- Warranty --- */
+.warranty-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+  
+.warranty-info h4 { margin-top: 20px;
+}
+
 /* Footer Section */
 .footer {
   background-color: var(--surface-background);
@@ -1065,6 +1164,11 @@ background-color: var(--surface-btn-primary-hover);
   }
   .product-info .product-title {
     font-size: 20px;
+  }
+
+  .guidebook-grid,
+  .warranty-grid {
+    grid-template-columns: 1fr;
   }
   
   .footer {
@@ -1506,6 +1610,83 @@ stroke-linecap="round" stroke-linejoin="round"/>
   </div>
 </section>
 </main>
+
+<!-- Product Detail Mid Section -->
+<section id="product-detail-mid" class="container">
+  <!-- Tabs Navigation -->
+  <div class="tabs-wrapper">
+    <button class="tab-btn active" data-tab="specification">Specification</button>
+    <button class="tab-btn" data-tab="guidebook">Guidebook</button>
+    <button class="tab-btn" data-tab="maintenance">Maintenance</button>
+    <button class="tab-btn" data-tab="warranty">Warranty</button>
+  </div>
+
+  <!-- Tabs Content -->
+  <div class="tab-content">
+    <!-- Specification -->
+    <div class="tab-panel active" data-tab="specification">
+      <div class="spec-list"></div>
+    </div>
+
+    <!-- Guidebook (static) -->
+    <div class="tab-panel" data-tab="guidebook">
+      <div class="guidebook-grid">
+        <div class="guidebook-info">
+          <h3>User Guidebook</h3>
+          <p>Master the operation of your machine with our comprehensive guidebook.  
+          You’ll find step-by-step setup instructions, operational tips, and safety guidelines.</p>
+          <a href="guidebook.pdf" class="btn btn-primary">Download Guidebook</a>
+        </div>
+        <div class="guidebook-cover">
+          <img src="images/manual-cover.png" alt="Guidebook Cover">
+        </div>
+      </div>
+    </div>
+
+    <!-- Maintenance -->
+    <div class="tab-panel" data-tab="maintenance">
+      <div class="maintenance-intro">
+        <h3>Maintenance & Care</h3>
+        <p>Follow these steps to ensure optimal performance and long-term durability.</p>
+      </div>
+      <table class="maintenance-table">
+        <thead>
+          <tr>
+            <th>Task</th>
+            <th>Frequency</th>
+            <th>Tools</th>
+          </tr>
+        </thead>
+        <tbody class="maintenance-body"></tbody>
+      </table>
+    </div>
+
+    <!-- Warranty (static) -->
+    <div class="tab-panel" data-tab="warranty">
+      <div class="warranty-grid">
+        <div class="warranty-info">
+          <h3>5-Year Warranty Protection</h3>
+          <p>Enjoy complete peace of mind with our 5-year warranty covering manufacturing defects and faulty components.</p>
+
+          <h4>Coverage</h4>
+          <ul>
+            <li>Manufacturing defects</li>
+            <li>Faulty components under normal use</li>
+          </ul>
+
+          <h4>Exclusions</h4>
+          <ul>
+            <li>Damage due to misuse or modification</li>
+            <li>Wear-and-tear parts (seals, belts, etc)</li>
+          </ul>
+        </div>
+        <div class="warranty-steps">
+          <img src="https://i.imgur.com/YIz0Ad2.png" alt="Warranty Process">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Footer Section -->
 <footer class="footer">
@@ -2643,7 +2824,30 @@ const productData = [
     specs: [
       { label: "Packaging Weight", value: "2 - 50 gr" },
       { label: "Filing Speed", value: "20 - 50 bags per minute" }
+    ],
+    specification: [
+  {
+    category: "Machine Dimensions & Weight",
+    items: [
+      { label: "Dimensions (L x W x H)", value: "950 x 700 x 1850 mm" },
+      { label: "Net Weight", value: "320 kg" },
+      { label: "Frame Material", value: "Stainless Steel 304" }
     ]
+  },
+  {
+    category: "Filling & Packaging",
+    items: [
+      { label: "Filling System", value: "Auger screw filling mechanism" },
+      { label: "Filling Accuracy", value: "±1%" },
+      { label: "Packaging Speed", value: "20–40 bags/min" }
+    ]
+  }
+],
+maintenance: [
+  { task: "Lubricate auger", frequency: "Weekly", tools: "Food grade oil" },
+  { task: "Clean hopper", frequency: "After use", tools: "Soft brush" },
+  { task: "Inspect sealing bar", frequency: "Monthly", tools: "Wrench set" }
+]
   },
   {
     id: 2,
@@ -2706,6 +2910,58 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
   `).join("");
 });
+
+// --- Tab switching ---
+const tabButtons = document.querySelectorAll("#product-detail-mid .tab-btn");
+const tabPanels = document.querySelectorAll("#product-detail-mid .tab-panel");
+
+tabButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const tab = btn.getAttribute("data-tab");
+    tabButtons.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    tabPanels.forEach(p => {
+      p.classList.toggle("active", p.getAttribute("data-tab") === tab);
+    });
+  });
+});
+
+// --- Specification accordion ---
+const specList = document.querySelector(".spec-list");
+if (product.specification) {
+  specList.innerHTML = product.specification.map(spec => `
+    <div class="spec-category">
+      <div class="spec-category-header">
+        ${spec.category}
+        <span>+</span>
+      </div>
+      <div class="spec-category-body">
+        ${spec.items.map(i => `
+          <div class="spec-item"><strong>${i.label}</strong>: ${i.value}</div>
+        `).join("")}
+      </div>
+    </div>
+  `).join("");
+
+  // add toggle
+  specList.querySelectorAll(".spec-category-header").forEach(header => {
+    header.addEventListener("click", () => {
+      header.parentElement.classList.toggle("open");
+    });
+  });
+}
+
+// --- Maintenance ---
+const maintenanceBody = document.querySelector(".maintenance-body");
+if (product.maintenance) {
+  maintenanceBody.innerHTML = product.maintenance.map(m => `
+    <tr>
+      <td>${m.task}</td>
+      <td>${m.frequency}</td>
+      <td>${m.tools}</td>
+    </tr>
+  `).join("");
+}
 
 </script>
 </body>
