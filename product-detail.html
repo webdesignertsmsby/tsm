@@ -2965,11 +2965,11 @@ if (product.maintenance) {
   `).join("");
 }
 
-  // Ambil id dari query string (?id=2)
+// Ambil ID dari URL, contoh: product-detail.html?id=1
   const params = new URLSearchParams(window.location.search);
   const productId = parseInt(params.get("id"), 10);
 
-  // Cari produk sesuai id
+  // Cari produk dari productData (yang sudah didefinisikan di file lain / global)
   const currentProduct = productData.find(p => p.id === productId);
 
   function renderSpecifications() {
@@ -2994,7 +2994,7 @@ if (product.maintenance) {
         </div>
         <div class="spec-category-body">
           ${cat.items
-            .map(s => `<div class="spec-row"><span>${s.label}</span><span>${s.value}</span></div>`)
+            .map(item => `<div class="spec-row"><span>${item.label}</span><span>${item.value}</span></div>`)
             .join("")}
         </div>
       `;
