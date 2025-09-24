@@ -2965,14 +2965,25 @@ if (product.maintenance) {
   `).join("");
 }
 
- // === Render Specification ===
-  function renderSpecifications(productData) {
+  // Ambil id dari query string (?id=2)
+  const params = new URLSearchParams(window.location.search);
+  const productId = parseInt(params.get("id"), 10);
+
+  // Cari produk sesuai id
+  const currentProduct = productData.find(p => p.id === productId);
+
+  function renderSpecifications() {
     const container = document.querySelector(".spec-list");
-    if (!container || !productData.specification) return;
+    if (!container) return;
 
     container.innerHTML = "";
 
-    productData.specification.forEach(cat => {
+    if (!currentProduct || !currentProduct.specification) {
+      container.innerHTML = "<p>No specification data.</p>";
+      return;
+    }
+
+    currentProduct.specification.forEach(cat => {
       const categoryEl = document.createElement("div");
       categoryEl.classList.add("spec-category");
 
@@ -2982,8 +2993,8 @@ if (product.maintenance) {
           <span>+</span>
         </div>
         <div class="spec-category-body">
-          ${cat.specs
-            .map(s => `<div class="spec-row"><span>${s.key}</span><span>${s.value}</span></div>`)
+          ${cat.items
+            .map(s => `<div class="spec-row"><span>${s.label}</span><span>${s.value}</span></div>`)
             .join("")}
         </div>
       `;
@@ -2991,7 +3002,7 @@ if (product.maintenance) {
       container.appendChild(categoryEl);
     });
 
-    // Toggle accordion
+    // Accordion toggle
     document.querySelectorAll(".spec-category-header").forEach(header => {
       header.addEventListener("click", () => {
         header.parentElement.classList.toggle("open");
@@ -2999,12 +3010,7 @@ if (product.maintenance) {
     });
   }
 
-  // Panggil function ini setelah productData sudah ada
-  document.addEventListener("DOMContentLoaded", () => {
-    if (typeof productData !== "undefined") {
-      renderSpecifications(productData);
-    }
-  });
+  document.addEventListener("DOMContentLoaded", renderSpecifications);
 
 </script>
 </body>
