@@ -2958,52 +2958,6 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
-    // --- Tab switching ---
-const tabButtons = document.querySelectorAll("#product-detail-mid .tab-btn");
-const tabPanels = document.querySelectorAll("#product-detail-mid .tab-panel");
-
-tabButtons.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const tab = btn.getAttribute("data-tab");
-    tabButtons.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    tabPanels.forEach(p => {
-      p.classList.toggle("active", p.getAttribute("data-tab") === tab);
-    });
-  });
-});
-
-// --- Specification accordion ---
-const specList = document.querySelector(".spec-list");
-if (product.specification) {
-  specList.innerHTML = product.specification.map(spec => `
-    <div class="spec-category">
-      <div class="spec-category-header">${spec.category}</div>
-      <div class="spec-category-body">
-        ${spec.items.map(i => `<div><strong>${i.label}</strong>: ${i.value}</div>`).join("")}
-      </div>
-    </div>
-  `).join("");
-
-  // add toggle
-  specList.querySelectorAll(".spec-category-header").forEach(header => {
-    header.addEventListener("click", () => {
-      header.parentElement.classList.toggle("open");
-    });
-  });
-}
-
-// --- Maintenance ---
-const maintenanceBody = document.querySelector(".maintenance-body");
-if (product.maintenance) {
-  maintenanceBody.innerHTML = product.maintenance.map(m => `
-    <tr>
-      <td>${m.task}</td>
-      <td>${m.frequency}</td>
-      <td>${m.tools}</td>
-    </tr>
-  `).join("");
-}
 
 </script>
 </body>
