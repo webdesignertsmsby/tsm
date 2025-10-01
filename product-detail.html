@@ -975,35 +975,37 @@ background-color: var(--surface-btn-primary-hover);
   justify-content: space-between;
   gap: 40px;
   margin: 20px 0 30px;
-  text-align: center;
 }
 
 .highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
   flex: 1;
+  text-align: left; /* supaya heading & text rata kiri */
 }
 
 .highlight-icon {
-  width: 48px;
-  height: 48px;
-  margin: 0 auto 12px;
-  color: var(--primary-color); 
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  color: var(--primary-color);
 }
 
 .highlight-icon svg {
   width: 100%;
   height: 100%;
 }
-  
+
 .highlight-item h6 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 6px;
+  margin: 0;
+  font-weight: 600;
 }
 
 .highlight-item p {
-  font-size: 14px;
-  color: var(--text-low-emphasize);
-  margin: 0;
+  margin: 4px 0 0;
+  font-size: 0.9rem;
+  color: #555;
 }
 
 .maintenance-table {
@@ -3164,9 +3166,6 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     });
   }
-
-
-
 
   // --- Maintenance ---
   const maintenanceBody = document.querySelector(".maintenance-body");
