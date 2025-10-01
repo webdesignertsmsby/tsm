@@ -934,7 +934,27 @@ background-color: var(--surface-btn-primary-hover);
   gap: 40px;
   align-items: center;
 }
-.guidebook-info h3 { margin-bottom: 12px; }
+  
+.guidebook-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* beri jarak antar elemen */
+}
+
+.guidebook-info h3 {
+  margin: 0;
+}
+
+.guidebook-info p {
+  margin: 0;
+  color: var(--text-low-emphasize);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.guidebook-info .btn {
+  align-self: flex-start; /* biar button nempel ke kiri */
+}
 
 /* --- Maintenance --- */
 .maintenance-table {
@@ -1710,13 +1730,13 @@ stroke-linecap="round" stroke-linejoin="round"/>
     <div class="tab-panel" data-tab="guidebook">
       <div class="guidebook-grid">
         <div class="guidebook-info">
-          <h3>User Guidebook</h3>
+          <div class="guidebook-cover">
+          <img src="https://i.imgur.com/32VUUhW.jpeg" alt="Guidebook Cover">
+          </div>
+          <h5>User Guidebook</h5>
           <p>Master the operation of your machine with our comprehensive guidebook.  
           You’ll find step-by-step setup instructions, operational tips, and safety guidelines.</p>
           <a href="guidebook.pdf" class="btn btn-primary">Download Guidebook</a>
-        </div>
-        <div class="guidebook-cover">
-          <img src="images/manual-cover.png" alt="Guidebook Cover">
         </div>
       </div>
     </div>
