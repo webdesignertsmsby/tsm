@@ -930,7 +930,7 @@ background-color: var(--surface-btn-primary-hover);
 /* --- Guidebook --- */
 .guidebook-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 40px;
   align-items: center;
 }
@@ -1273,7 +1273,13 @@ background-color: var(--surface-btn-primary-hover);
 
   .guidebook-grid,
   .warranty-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr; 
+  }
+  .guidebook-cover {
+    grid-column: 1; 
+  }
+  .guidebook-info {
+    grid-column: 2; 
   }
   
   .footer {
