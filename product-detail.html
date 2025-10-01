@@ -979,17 +979,17 @@ background-color: var(--surface-btn-primary-hover);
 
 .highlight-item {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-start; /* icon sejajar dengan heading */
   gap: 12px;
   flex: 1;
-  text-align: left; /* supaya heading & text rata kiri */
+  text-align: left;
 }
 
 .highlight-icon {
   flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  color: var(--primary-color);
+  width: 32px;
+  height: 32px;
+  margin-top: 4px; /* biar lebih pas vertikal dengan heading */
 }
 
 .highlight-icon svg {
@@ -997,13 +997,13 @@ background-color: var(--surface-btn-primary-hover);
   height: 100%;
 }
 
-.highlight-item h6 {
+.highlight-text h6 {
   margin: 0;
   font-weight: 600;
 }
 
-.highlight-item p {
-  margin: 4px 0 0;
+.highlight-text p {
+  margin: 2px 0 0;
   font-size: 0.9rem;
   color: #555;
 }
@@ -1815,8 +1815,10 @@ stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M10.667 29.3333L12.0003 24" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h6>Clean regularly</h6>
-        <p>maintain hygiene and prevent blockages</p>
+        <div class="highlight-text">
+          <h6>Clean regularly</h6>
+          <p>maintain hygiene and prevent blockages</p>
+        </div>
       </div>
     
       <div class="highlight-item">
@@ -1831,8 +1833,10 @@ stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M9.66602 6.66667V4" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h6>Check electrical wiring</h6>
-        <p>ensure safe and consistent operation</p>
+        <div class="highlight-text">
+            <h6>Check electrical wiring</h6>
+            <p>ensure safe and consistent operation</p>
+        </div>
       </div>
     
       <div class="highlight-item">
@@ -1847,9 +1851,10 @@ stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M11.334 18.6667H6.00065C4.52789 18.6667 3.33398 19.8607 3.33398 21.3334V26.6667C3.33398 28.1395 4.52789 29.3334 6.00065 29.3334H11.334C12.8067 29.3334 14.0007 28.1395 14.0007 26.6667V21.3334C14.0007 19.8607 12.8067 18.6667 11.334 18.6667Z" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
-        <h6>Replace worn parts</h6>
-        <p>before it affect machine performance.</p>
-      </div>
+        <div class="highlight-text">
+          <h6>Replace worn parts</h6>
+          <p>before it affect machine performance.</p>
+        </div>
     </div>
     
       <!-- Table -->
