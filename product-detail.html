@@ -3028,15 +3028,13 @@ if (product.specification && specList) {
     </div>
   `).join("");
 
-  // toggle accordion
+   // toggle accordion
   specList.querySelectorAll(".spec-category").forEach(cat => {
     const header = cat.querySelector(".spec-category-header");
-    const chevron = header.querySelector(".spec-chevron");
-
+  
     header.addEventListener("click", () => {
       const isOpen = cat.classList.toggle("open");
       header.setAttribute("aria-expanded", isOpen ? "true" : "false");
-      if (chevron) chevron.textContent = isOpen ? "▲" : "▼";
     });
   });
 }
