@@ -930,11 +930,15 @@ background-color: var(--surface-btn-primary-hover);
 /* --- Guidebook --- */
 .guidebook-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 40px;
   align-items: center;
 }
 
+.guidebook-cover {
+    grid-column: 1; 
+}
+  
 .guidebook-cover img {
   width: 100%;
   height: auto;
@@ -947,6 +951,7 @@ background-color: var(--surface-btn-primary-hover);
   display: flex;
   flex-direction: column;
   gap: 20px; /* beri jarak antar elemen */
+  grid-column: 2;
 }
 
 .guidebook-info h3 {
@@ -1273,13 +1278,7 @@ background-color: var(--surface-btn-primary-hover);
 
   .guidebook-grid,
   .warranty-grid {
-    grid-template-columns: 1fr 1fr; 
-  }
-  .guidebook-cover {
-    grid-column: 1; 
-  }
-  .guidebook-info {
-    grid-column: 2; 
+    grid-template-columns: 1fr; 
   }
   
   .footer {
@@ -1743,17 +1742,25 @@ stroke-linecap="round" stroke-linejoin="round"/>
     <!-- Guidebook (static) -->
     <div class="tab-panel" data-tab="guidebook">
       <div class="guidebook-grid">
-        <div class="guidebook-info">
-          <div class="guidebook-cover">
-          <img src="https://i.imgur.com/32VUUhW.jpeg" alt="Guidebook Cover">
-          </div>
-          <h5>User Guidebook</h5>
-          <p>Master the operation of your machine with our comprehensive guidebook.  
-          You’ll find step-by-step setup instructions, operational tips, and safety guidelines.</p>
-          <a href="guidebook.pdf" class="btn btn-primary">Download Guidebook</a>
+        
+        <!-- Cover image (kiri) -->
+        <div class="guidebook-cover">
+          <img src="https://i.imgur.com/your-guidebook.png" alt="Guidebook cover">
         </div>
+    
+        <!-- Text info (kanan) -->
+        <div class="guidebook-info">
+          <h3>User Guidebook</h3>
+          <p>
+            Master the operation of your machine with our comprehensive guidebook.
+            You’ll find step-by-step setup instructions, operational tips, and safety guidelines.
+          </p>
+          <a href="manual.pdf" class="btn-download">Download Guidebook</a>
+        </div>
+    
       </div>
     </div>
+
 
     <!-- Maintenance -->
     <div class="tab-panel" data-tab="maintenance">
