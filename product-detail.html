@@ -970,21 +970,40 @@ background-color: var(--surface-btn-primary-hover);
 }
 
 /* --- Maintenance --- */
-.maintenance-table {
+.maintenance-highlights {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin: 20px 0 30px;
+  text-align: center;
+}
+
+.highlight-item {
+  flex: 1;
+}
+
+.highlight-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 12px;
+  color: var(--primary-color); 
+}
+
+.highlight-icon svg {
   width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+  height: 100%;
 }
-.maintenance-table th,
-.maintenance-table td {
-  border: 1px solid #ddd;
-  padding: 10px;
+  
+.highlight-item h6 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.highlight-item p {
   font-size: 14px;
-}
-.maintenance-table th {
-  background: #f4f4f4;
-  font-weight: 600;
-  text-align: left;
+  color: var(--text-low-emphasize);
+  margin: 0;
 }
 
 /* --- Warranty --- */
@@ -1765,7 +1784,56 @@ stroke-linecap="round" stroke-linejoin="round"/>
     <!-- Maintenance -->
     <div class="tab-panel" data-tab="maintenance">
       <h2>Maintenance & Care</h2>
-      <p>Follow these steps to ensure optimal performance and long-term durability.</p>
+    
+    <!-- Maintenance Highlights -->
+    <div class="maintenance-highlights">
+      <div class="highlight-item">
+        <div class="highlight-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21.3333 29.3333L20 24" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M25.333 18.6534C25.6866 18.6534 26.0258 18.5129 26.2758 18.2629C26.5259 18.0128 26.6663 17.6737 26.6663 17.3201V16.0001C26.6663 15.2928 26.3854 14.6146 25.8853 14.1145C25.3852 13.6144 24.7069 13.3334 23.9997 13.3334H19.9997C19.6461 13.3334 19.3069 13.1929 19.0569 12.9429C18.8068 12.6928 18.6663 12.3537 18.6663 12.0001V5.33341C18.6663 4.62617 18.3854 3.94789 17.8853 3.4478C17.3852 2.9477 16.7069 2.66675 15.9997 2.66675C15.2924 2.66675 14.6142 2.9477 14.1141 3.4478C13.614 3.94789 13.333 4.62617 13.333 5.33341V12.0001C13.333 12.3537 13.1925 12.6928 12.9425 12.9429C12.6924 13.1929 12.3533 13.3334 11.9997 13.3334H7.99967C7.29243 13.3334 6.61415 13.6144 6.11406 14.1145C5.61396 14.6146 5.33301 15.2928 5.33301 16.0001V17.3201C5.33301 17.6737 5.47348 18.0128 5.72353 18.2629C5.97358 18.5129 6.31272 18.6534 6.66634 18.6534" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M6.66639 18.6667H25.3331L27.9637 27.6894C28.0107 27.8854 28.0126 28.0896 27.9693 28.2864C27.926 28.4833 27.8386 28.6678 27.7138 28.8261C27.5889 28.9843 27.4298 29.1122 27.2484 29.2C27.0669 29.2879 26.868 29.3335 26.6664 29.3334H5.33305C5.13148 29.3335 4.9325 29.2879 4.75109 29.2C4.56967 29.1122 4.41055 28.9843 4.28567 28.8261C4.1608 28.6678 4.07343 28.4833 4.03014 28.2864C3.98684 28.0896 3.98875 27.8854 4.03572 27.6894L6.66639 18.6667Z" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10.667 29.3333L12.0003 24" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h6>Clean regularly</h6>
+        <p>maintain hygiene and prevent blockages</p>
+      </div>
+    
+      <div class="highlight-item">
+        <div class="highlight-icon">
+          <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.9993 25.3334C22.6457 25.3334 22.3066 25.1929 22.0565 24.9429C21.8065 24.6928 21.666 24.3537 21.666 24.0001V21.3334C21.666 20.6262 21.947 19.9479 22.4471 19.4478C22.9472 18.9477 23.6254 18.6667 24.3327 18.6667H26.9993C27.7066 18.6667 28.3849 18.9477 28.885 19.4478C29.3851 19.9479 29.666 20.6262 29.666 21.3334V24.0001C29.666 24.3537 29.5255 24.6928 29.2755 24.9429C29.0254 25.1929 28.6863 25.3334 28.3327 25.3334H22.9993Z" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M23 27.9999V25.3333" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M25.6667 18.6667V8.66667C25.6667 7.42899 25.175 6.24201 24.2998 5.36684C23.4247 4.49167 22.2377 4 21 4C19.7623 4 18.5753 4.49167 17.7002 5.36684C16.825 6.24201 16.3333 7.42899 16.3333 8.66667V23.3333C16.3333 24.571 15.8417 25.758 14.9665 26.6332C14.0913 27.5083 12.9043 28 11.6667 28C10.429 28 9.24201 27.5083 8.36684 26.6332C7.49167 25.758 7 24.571 7 23.3333V13.3333" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M28.333 27.9999V25.3333" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4.33301 6.66667V4" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M5.66667 13.3334C4.95942 13.3334 4.28115 13.0525 3.78105 12.5524C3.28095 12.0523 3 11.374 3 10.6667V8.00008C3 7.64646 3.14048 7.30732 3.39052 7.05727C3.64057 6.80722 3.97971 6.66675 4.33333 6.66675H9.66667C10.0203 6.66675 10.3594 6.80722 10.6095 7.05727C10.8595 7.30732 11 7.64646 11 8.00008V10.6667C11 11.374 10.719 12.0523 10.219 12.5524C9.71885 13.0525 9.04058 13.3334 8.33333 13.3334H5.66667Z" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M9.66602 6.66667V4" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h6>Check electrical wiring</h6>
+        <p>ensure safe and consistent operation</p>
+      </div>
+    
+      <div class="highlight-item">
+        <div class="highlight-icon">
+          <svg width="33" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M19.334 5.33341C19.334 4.62617 19.6149 3.94789 20.115 3.4478C20.6151 2.9477 21.2934 2.66675 22.0007 2.66675" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22.0007 13.3334C21.2934 13.3334 20.6151 13.0525 20.115 12.5524C19.6149 12.0523 19.334 11.374 19.334 10.6667" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M27.334 2.66675C28.0412 2.66675 28.7195 2.9477 29.2196 3.4478C29.7197 3.94789 30.0007 4.62617 30.0007 5.33341" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M30.0007 10.6667C30.0007 11.374 29.7197 12.0523 29.2196 12.5524C28.7195 13.0525 28.0412 13.3334 27.334 13.3334" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4.66699 9.33325L8.66699 13.3333L12.667 9.33325" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8.66699 13.3334V6.66675C8.66699 5.60588 9.08842 4.58847 9.83857 3.83832C10.5887 3.08818 11.6061 2.66675 12.667 2.66675H14.0003" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M11.334 18.6667H6.00065C4.52789 18.6667 3.33398 19.8607 3.33398 21.3334V26.6667C3.33398 28.1395 4.52789 29.3334 6.00065 29.3334H11.334C12.8067 29.3334 14.0007 28.1395 14.0007 26.6667V21.3334C14.0007 19.8607 12.8067 18.6667 11.334 18.6667Z" stroke="#0D0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h6>Replace worn parts</h6>
+        <p>before it affect machine performance.</p>
+      </div>
+    </div>
+    
+      <!-- Table -->
       <table class="maintenance-table">
         <thead>
           <tr>
@@ -1774,9 +1842,10 @@ stroke-linecap="round" stroke-linejoin="round"/>
             <th>Tools</th>
           </tr>
         </thead>
-        <tbody class="maintenance-body"></tbody> 
+        <tbody class="maintenance-body"></tbody>
       </table>
     </div>
+
 
     <!-- Warranty (static) -->
     <div class="tab-panel" data-tab="warranty">
