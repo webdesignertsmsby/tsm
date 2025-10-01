@@ -863,7 +863,7 @@ background-color: var(--surface-btn-primary-hover);
 
 /* chevron on the right */
 .spec-category-header .spec-chevron {
-  font-size: 14px; 
+  font-size: 16px; 
   line-height: 1;
   color: var(--text-low-emphasize, #666);
   transition: transform .2s ease, color .18s ease;
@@ -3002,42 +3002,42 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // --- Specification accordion ---
-const specList = document.querySelector(".spec-list");
-if (product.specification && specList) {
-
-  specList.innerHTML = product.specification.map(spec => `
-    <div class="spec-category">
-      <div class="spec-category-header" role="button" aria-expanded="false">
-        <div class="spec-title">${spec.category}</div>
-        <span class="spec-chevron">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-      </div>
-      <div class="spec-category-body">
-        <div class="spec-table">
-          ${spec.items.map(i => `
-            <div class="spec-row">
-              <div class="spec-name">${i.label}</div>
-              <div class="spec-value">${i.value}</div>
-            </div>
-          `).join("")}
+  const specList = document.querySelector(".spec-list");
+  if (product.specification && specList) {
+  
+    specList.innerHTML = product.specification.map(spec => `
+      <div class="spec-category">
+        <div class="spec-category-header" role="button" aria-expanded="false">
+          <div class="spec-title">${spec.category}</div>
+          <span class="spec-chevron">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+        <div class="spec-category-body">
+          <div class="spec-table">
+            ${spec.items.map(i => `
+              <div class="spec-row">
+                <div class="spec-name">${i.label}</div>
+                <div class="spec-value">${i.value}</div>
+              </div>
+            `).join("")}
+          </div>
         </div>
       </div>
-    </div>
-  `).join("");
-
-   // toggle accordion
-  specList.querySelectorAll(".spec-category").forEach(cat => {
-    const header = cat.querySelector(".spec-category-header");
+    `).join("");
   
-    header.addEventListener("click", () => {
-      const isOpen = cat.classList.toggle("open");
-      header.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    // toggle accordion
+    specList.querySelectorAll(".spec-category").forEach(cat => {
+      const header = cat.querySelector(".spec-category-header");
+      header.addEventListener("click", () => {
+        const isOpen = cat.classList.toggle("open");
+        header.setAttribute("aria-expanded", isOpen ? "true" : "false");
+      });
     });
-  });
-}
+  }
+
 
 
 
