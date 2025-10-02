@@ -1591,6 +1591,31 @@ display: none;
 font-size: 48px;
 max-width: 500px;
 }
+
+  .guidebook-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center;  /* gambar buku center */
+    gap: 24px;
+  }
+
+  .guidebook-cover {
+    order: 1; /* buku dulu */
+    text-align: center;
+  }
+
+  .guidebook-text {
+    order: 2; /* teks di bawah */
+  }
+
+  .guidebook-cover img {
+    display: block !important;
+    width: 100% !important;
+    max-width: 420px !important; /* biar tidak terlalu besar */
+    height: auto !important;
+    margin: 0 auto;
+  }
+  
 }
 
 </style>
