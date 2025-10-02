@@ -1595,23 +1595,24 @@ max-width: 500px;
   .guidebook-grid {
     display: flex !important;
     flex-direction: column !important;
-    align-items: center;  /* gambar buku center */
+    align-items: center;
     gap: 24px;
   }
 
   .guidebook-cover {
-    order: 1; /* buku dulu */
+    order: -1 !important; /* paksa cover selalu di atas */
     text-align: center;
+    width: 100%;
   }
 
   .guidebook-text {
-    order: 2; /* teks di bawah */
+    order: 0 !important;
   }
 
   .guidebook-cover img {
     display: block !important;
     width: 100% !important;
-    max-width: 420px !important; /* biar tidak terlalu besar */
+    max-width: 420px !important;
     height: auto !important;
     margin: 0 auto;
   }
