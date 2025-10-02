@@ -1032,7 +1032,7 @@ background-color: var(--surface-btn-primary-hover);
 /* --- Warranty --- */
 .warranty-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr auto 1fr; 
   gap: 40px;
   align-items: start;
 }
@@ -1042,7 +1042,58 @@ background-color: var(--surface-btn-primary-hover);
 }
   
 .warranty-info h6 {
-  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 0 8px;
+}
+
+.warranty-info ul {
+  margin: 0 0 16px 28px; 
+  padding: 0;
+  list-style: disc;
+}
+
+.warranty-badge img {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.warranty-steps ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.warranty-steps li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 30px;
+  position: relative;
+}
+
+.warranty-steps li:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 40px;
+  height: calc(100% - 40px);
+  width: 2px;
+  background: #0a2d6d;
+}
+
+.step-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #0a2d6d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
 /* Footer Section */
@@ -1881,39 +1932,122 @@ stroke-linecap="round" stroke-linejoin="round"/>
     </div>
 
 
-    <!-- Warranty (static) -->
     <div class="tab-panel" data-tab="warranty">
       <div class="warranty-grid">
+    
+        <!-- Kiri -->
         <div class="warranty-info">
           <h5>5-Year Warranty Protection</h5>
-          <p>Enjoy complete peace of mind with our 5-year warranty covering manufacturing defects and faulty components.</p>
-          <h6>
-            <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M26.6663 17.8333C26.6663 24.4999 21.9997 27.8333 16.453 29.7666C16.1626 29.865 15.8471 29.8603 15.5597 29.7533C9.99967 27.8333 5.33301 24.4999 5.33301 17.8333V8.49995C5.33301 8.14633 5.47348 7.80719 5.72353 7.55714C5.97358 7.30709 6.31272 7.16662 6.66634 7.16662C9.33301 7.16662 12.6663 5.56662 14.9863 3.53995C15.2688 3.29861 15.6281 3.16602 15.9997 3.16602C16.3712 3.16602 16.7305 3.29861 17.013 3.53995C19.3463 5.57995 22.6663 7.16662 25.333 7.16662C25.6866 7.16662 26.0258 7.30709 26.2758 7.55714C26.5259 7.80719 26.6663 8.14633 26.6663 8.49995V17.8333Z" stroke="#012060" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M12 16.4999L14.6667 19.1666L20 13.8333" stroke="#012060" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Coverage
-          </h6>
-          <ul>
-            <li>Manufacturing defects</li>
-            <li>Faulty components under normal use</li>
-          </ul>
-
-          <h6>
-            <svg width="32" height="33" viewBox="0 0 32 33" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2.66699 3.16675L29.3337 29.8334" stroke="#FE0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M11.1338 4.08677C13.548 3.14387 16.1846 2.92501 18.7212 3.45696C21.2578 3.98892 23.5843 5.24862 25.4163 7.08198C27.2482 8.91534 28.5061 11.2429 29.0361 13.7799C29.5661 16.3169 29.3452 18.9533 28.4005 21.3668" stroke="#FE0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M25.4396 25.9401C24.1999 27.1797 22.7282 28.1631 21.1085 28.834C19.4888 29.5049 17.7528 29.8502 15.9996 29.8502C14.2464 29.8502 12.5104 29.5049 10.8907 28.834C9.27098 28.1631 7.79927 27.1797 6.55959 25.9401C5.31991 24.7004 4.33654 23.2287 3.66564 21.609C2.99473 19.9892 2.64941 18.2532 2.64941 16.5001C2.64941 14.7469 2.99473 13.0109 3.66564 11.3912C4.33654 9.77145 5.31991 8.29974 6.55959 7.06006" stroke="#FE0000" stroke-width="2.66667" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            Exclusion
-          </h6>
-          <ul>
-            <li>Damage due to misuse or modification</li>
-            <li>Wear-and-tear parts (seals, belts, etc)</li>
-          </ul>
+          <p>
+            Enjoy complete peace of mind with our 5-year warranty covering manufacturing defects
+            and faulty components under normal use, ensuring long-term reliability for your Packaging Machine.
+          </p>
+    
+          <div class="warranty-section">
+            <h6>
+              <!-- Shield SVG -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+              Coverage
+            </h6>
+            <ul>
+              <li>Manufacturing defects</li>
+              <li>Faulty components under normal use</li>
+            </ul>
+          </div>
+    
+          <div class="warranty-section">
+            <h6>
+              <!-- Ban SVG -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" 
+                   viewBox="0 0 24 24" fill="none" stroke="currentColor" 
+                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/>
+              </svg>
+              Exclusions
+            </h6>
+            <ul>
+              <li>Damage due to misuse or modification</li>
+              <li>Wear-and-tear parts (seals, belts, etc)</li>
+            </ul>
+          </div>
         </div>
+    
+        <!-- Tengah -->
+        <div class="warranty-badge">
+          <img src="https://i.imgur.com/YIz0Ad2.png" alt="Warranty Badge">
+        </div>
+    
+        <!-- Kanan -->
         <div class="warranty-steps">
-          <img src="https://i.imgur.com/7Ma70D8.png" alt="Warranty Process">
+          <h4>How to Claim Warranty</h4>
+          <ul>
+            <li>
+              <div class="step-icon">
+                <!-- Headset SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
+                     viewBox="0 0 24 24" fill="none" stroke="white" 
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M12 1a10 10 0 0 0-10 10v5a2 2 0 0 0 2 2h1v-7H4a8 
+                           8 0 0 1 16 0h-1v7h1a2 2 0 0 0 2-2v-5A10 10 0 0 0 12 1z"/>
+                  <path d="M8 21h8"/>
+                </svg>
+              </div>
+              <p>Contact support via email/phone</p>
+            </li>
+            <li>
+              <div class="step-icon">
+                <!-- ID Card SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
+                     viewBox="0 0 24 24" fill="none" stroke="white" 
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="16" rx="2" ry="2"/>
+                  <line x1="7" y1="8" x2="17" y2="8"/>
+                  <line x1="7" y1="12" x2="13" y2="12"/>
+                  <line x1="7" y1="16" x2="10" y2="16"/>
+                </svg>
+              </div>
+              <p>Provide purchase proof &amp; machine serial number</p>
+            </li>
+            <li>
+              <div class="step-icon">
+                <!-- Gear SVG -->
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" 
+                     viewBox="0 0 24 24" fill="none" stroke="white" 
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 
+                           2 0 1 1-2.83 2.83l-.06-.06a1.65 
+                           1.65 0 0 0-1.82-.33 1.65 
+                           1.65 0 0 0-1 1.51V22a2 
+                           2 0 0 1-4 0v-.09a1.65 
+                           1.65 0 0 0-1-1.51 1.65 
+                           1.65 0 0 0-1.82.33l-.06.06a2 
+                           2 0 1 1-2.83-2.83l.06-.06a1.65 
+                           1.65 0 0 0 .33-1.82 1.65 
+                           1.65 0 0 0-1.51-1H2a2 
+                           2 0 0 1 0-4h.09a1.65 
+                           1.65 0 0 0 1.51-1 1.65 
+                           1.65 0 0 0-.33-1.82l-.06-.06a2 
+                           2 0 1 1 2.83-2.83l.06.06a1.65 
+                           1.65 0 0 0 1.82.33h.09a1.65 
+                           1.65 0 0 0 1-1.51V2a2 
+                           2 0 0 1 4 0v.09c0 .66.39 1.26 1 
+                           1.51h.09a1.65 1.65 0 0 0 
+                           1.82-.33l.06-.06a2 2 0 1 
+                           1 2.83 2.83l-.06.06c-.39.39-.51.97-.33 
+                           1.82v.09c.25.61.85 1 1.51 
+                           1H22a2 2 0 0 1 0 4h-.09c-.66 
+                           0-1.26.39-1.51 1z"/>
+                </svg>
+              </div>
+              <p>Ship unit/parts to authorized service center</p>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
