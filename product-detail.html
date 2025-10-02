@@ -1034,7 +1034,7 @@ background-color: var(--surface-btn-primary-hover);
   display: grid;
   grid-template-columns: 1fr max-content 1fr; 
   column-gap: 80px; 
-  align-items: center;
+  align-items: center; 
 }
 
 .warranty-info {
@@ -1044,21 +1044,38 @@ background-color: var(--surface-btn-primary-hover);
 .warranty-info h6 {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin: 16px 0 8px;
+  gap: 10px;
+  margin: 18px 0 8px;
 }
 
 .warranty-info ul {
-  margin: 0 0 16px 28px; 
+  margin: 0 0 20px 28px;
   padding: 0;
   list-style: disc;
 }
 
 .warranty-badge img {
-  max-width: 200px;
+  max-width: 220px;
   height: auto;
   display: block;
   margin: 0 auto;
+}
+
+.warranty-steps {
+  position: relative; 
+  padding-left: 0;
+}
+
+.warranty-steps::before {
+  content: "";
+  position: absolute;
+  left: 16px;   
+  top: 16px;    
+  bottom: 16px;  
+  width: 2px;
+  background: #0a2d6d;
+  z-index: 1;    
+  border-radius: 1px;
 }
 
 .warranty-steps ul {
@@ -1070,30 +1087,33 @@ background-color: var(--surface-btn-primary-hover);
 .warranty-steps li {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   margin-bottom: 40px;
-  position: relative;
-}
-
-.warranty-steps li:not(:last-child)::after {
-  content: "";
-  position: absolute;
-  left: 16px;   
-  top: 36px;   
-  height: calc(100% - 36px);
-  width: 2px;
-  background: #0a2d6d;
+  position: relative; 
+  z-index: 2; 
 }
 
 .step-icon {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background: #0a2d6d;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  position: relative;
+  z-index: 3; 
+}
+
+.warranty-steps li p {
+  margin: 0;
+  font-weight: 600;
+  color: var(--text-high-emphasize);
+}
+
+.warranty-steps li:last-child {
+  margin-bottom: 0;
 }
 
 /* Footer Section */
@@ -1374,10 +1394,21 @@ background-color: var(--surface-btn-primary-hover);
     gap: 12px; padding: 12px 0; font-size: 14px; grid-template-columns: 1fr 1fr;
   }
 
-  .guidebook-grid,
-  .warranty-grid {
+  .guidebook-grid {
     grid-template-columns: 1fr; 
   }
+
+  .warranty-grid {
+    grid-template-columns: 1fr; /* kiri -> badge -> kanan */
+    row-gap: 24px;
+  }
+
+  .warranty-steps::before {
+    left: 12px;
+    top: 12px;
+    bottom: 12px;
+  }
+
   
   .footer {
     padding: 40px 0 20px;
@@ -1984,7 +2015,7 @@ stroke-linecap="round" stroke-linejoin="round"/>
     
         <!-- Kanan -->
         <div class="warranty-steps">
-          <h4>How to Claim Warranty</h4>
+          <h5>How to Claim Warranty</h5>
           <ul>
             <li>
               <div class="step-icon">
