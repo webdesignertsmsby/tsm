@@ -1062,36 +1062,45 @@ background-color: var(--surface-btn-primary-hover);
 }
 
 .warranty-steps {
-  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center; 
+  height: 100%; 
 }
 
-.warranty-steps::before {
-  content: "";
-  position: absolute;
-  left: 18px;   
-  top: 50%;   
-  transform: translateY(-50%); 
-  height: 100%; 
-  width: 2px;
-  background: #0a2d6d;
-  z-index: 1;
+.warranty-steps h5 {
+  margin: 0 0 24px 0;
 }
+
 .warranty-steps ul {
+  position: relative;
+  flex: 1; 
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
+.warranty-steps ul::before {
+  content: "";
+  position: absolute;
+  left: 18px;  
+  top: 18px;   
+  bottom: 18px; 
+  width: 2px;
+  background: #0a2d6d;
+  z-index: 1;
+}
+
 .warranty-steps li {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   margin-bottom: 40px;
-  position: relative; 
+  position: relative;
   z-index: 2; 
+}
+
+.warranty-steps li:last-child {
+  margin-bottom: 0;
 }
 
 .step-icon {
@@ -1103,18 +1112,19 @@ background-color: var(--surface-btn-primary-hover);
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  position: relative;
   z-index: 3; 
+}
+
+.step-icon svg {
+  fill: #fff;
+  width: 18px;
+  height: 18px;
 }
 
 .warranty-steps li p {
   margin: 0;
   font-weight: 600;
   color: var(--text-high-emphasize);
-}
-
-.warranty-steps li:last-child {
-  margin-bottom: 0;
 }
 
 /* Footer Section */
