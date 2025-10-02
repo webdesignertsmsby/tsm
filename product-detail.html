@@ -1034,7 +1034,7 @@ background-color: var(--surface-btn-primary-hover);
   display: grid;
   grid-template-columns: 1fr max-content 1fr;
   column-gap: 80px;
-  align-items: stretch; 
+  align-items: center;
 }
 
 .warranty-info {
@@ -1073,18 +1073,22 @@ background-color: var(--surface-btn-primary-hover);
 
 .warranty-steps ul {
   position: relative;
-  flex: 1; 
+  flex: 1;
   list-style: none;
   margin: 0;
   padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* <-- bagi rata steps */
 }
 
 .warranty-steps ul::before {
   content: "";
   position: absolute;
-  left: 18px;  
-  top: 18px;   
-  bottom: 18px; 
+  left: 18px;
+  top: 18px;
+  bottom: 18px;
   width: 2px;
   background: #0a2d6d;
   z-index: 1;
@@ -1094,9 +1098,8 @@ background-color: var(--surface-btn-primary-hover);
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 40px;
   position: relative;
-  z-index: 2; 
+  z-index: 2;
 }
 
 .warranty-steps li:last-child {
