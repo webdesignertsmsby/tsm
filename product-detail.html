@@ -1338,6 +1338,18 @@ background-color: var(--surface-btn-primary-hover);
     font-size: 14px;
     gap: 10px;
   }
+
+  #product-detail-top {
+    margin-bottom: 40px; 
+  }
+  #product-detail-mid {
+    margin-top: 0; 
+  }
+
+  .warranty-grid {
+    grid-template-columns: 1fr; 
+    row-gap: 32px;
+  }
   
   .footer {
     padding: 50px 0 25px;
@@ -1411,17 +1423,27 @@ background-color: var(--surface-btn-primary-hover);
     grid-template-columns: 1fr; 
   }
 
+  .guidebook-cover img {
+    max-width: 100%;  /* hilangkan batas 450px */
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   .warranty-grid {
     grid-template-columns: 1fr; /* kiri -> badge -> kanan */
     row-gap: 24px;
   }
 
-  .warranty-steps::before {
-    left: 12px;
-    top: 12px;
-    bottom: 12px;
+  .warranty-steps ul::before {
+    top: 0;
+    bottom: 0;
+    left: 16px; 
   }
 
+  .warranty-steps ul {
+    gap: 40px; 
+  }
   
   .footer {
     padding: 40px 0 20px;
