@@ -1032,9 +1032,9 @@ background-color: var(--surface-btn-primary-hover);
 /* --- Warranty --- */
 .warranty-grid {
   display: grid;
-  grid-template-columns: 1fr max-content 1fr; 
-  column-gap: 80px; 
-  align-items: center; 
+  grid-template-columns: 1fr max-content 1fr;
+  column-gap: 80px;
+  align-items: stretch; 
 }
 
 .warranty-info {
@@ -1062,20 +1062,24 @@ background-color: var(--surface-btn-primary-hover);
 }
 
 .warranty-steps {
-  position: relative; 
-  padding-left: 0;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
 }
 
 .warranty-steps::before {
   content: "";
   position: absolute;
-  left: 16px;   
-  top: 16px;    
-  bottom: 16px;  
+  left: 18px;  
+  top: 36px;
+  bottom: 36px
+  transform: translateY(-50%);
+  height: auto; 
   width: 2px;
   background: #0a2d6d;
-  z-index: 1;    
-  border-radius: 1px;
+  z-index: 1;
+  transform: none;
 }
 
 .warranty-steps ul {
