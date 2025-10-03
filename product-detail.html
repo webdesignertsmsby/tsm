@@ -1483,6 +1483,29 @@ background-color: var(--surface-btn-primary-hover);
     gap: 12px; padding: 12px 0; font-size: 14px; grid-template-columns: 1fr 1fr;
   }
 
+  .tabs-wrapper {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    white-space: nowrap;
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+
+    width: 100vw;            /* full layar */
+    margin-left: -20px;      /* geser keluar padding kiri */
+    padding-left: 20px;      /* balikin isi biar ga mepet */
+    border-bottom: 1px solid #ddd; /* garis full */
+  }
+
+  .tabs-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab-btn {
+    flex: 0 0 auto;
+    padding: 12px 20px;
+  }
+
   .guidebook-grid {
     grid-template-columns: 1fr; 
   }
@@ -1493,15 +1516,25 @@ background-color: var(--surface-btn-primary-hover);
     height: auto !important;
   }
 
+  .maintenance-highlights {
+    display: flex;
+    flex-direction: column; /* ubah jadi vertikal */
+    gap: 16px; /* kasih jarak antar highlight */
+  }
+
+  .maintenance-highlights .highlight {
+    width: 100%; /* biar full lebar */
+  }
+
   .warranty-grid {
     grid-template-columns: 1fr; /* kiri -> badge -> kanan */
     row-gap: 24px;
   }
 
   .warranty-steps ul::before {
-    top: 0;
-    bottom: 0;
-    left: 16px; 
+    top: 20;
+    bottom: 20;
+    left: 18px; 
   }
 
   .warranty-steps ul {
