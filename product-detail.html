@@ -1486,16 +1486,19 @@ background-color: var(--surface-btn-primary-hover);
   .tabs-wrapper {
     display: flex;
     gap: 20px;
-    border-bottom: 1px solid #ddd;
     overflow-x: auto;
     white-space: nowrap;
     justify-content: flex-start;
-    -webkit-overflow-scrolling: touch; /* smooth scroll di iOS */
-    width: 100%; 
+    -webkit-overflow-scrolling: touch;
+
+    width: 100vw;            /* full layar */
+    margin-left: -20px;      /* geser keluar padding kiri */
+    padding-left: 20px;      /* balikin isi biar ga mepet */
+    border-bottom: 1px solid #ddd; /* garis full */
   }
 
   .tabs-wrapper::-webkit-scrollbar {
-    display: none; 
+    display: none;
   }
 
   .tab-btn {
