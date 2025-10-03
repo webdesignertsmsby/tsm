@@ -1129,6 +1129,80 @@ background-color: var(--surface-btn-primary-hover);
   color: var(--text-high-emphasize);
 }
 
+.related-products {
+  margin: 60px auto;
+  padding: 0 20px;
+  max-width: 1200px;
+}
+
+.related-products h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.related-carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.4s ease;
+}
+
+.carousel-item {
+  flex: 0 0 300px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.carousel-item img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.carousel-item-content {
+  padding: 15px;
+}
+
+.carousel-item-content h3 {
+  font-size: 1rem;
+  margin: 0 0 10px;
+}
+
+.carousel-item-content p {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 2;
+}
+
+.carousel-btn.prev {
+  left: -20px;
+}
+
+.carousel-btn.next {
+  right: -20px;
+}
+
+
 /* Footer Section */
 .footer {
   background-color: var(--surface-background);
@@ -2239,6 +2313,15 @@ stroke-linecap="round" stroke-linejoin="round"/>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="related-products">
+  <h3>Related Product</h3>
+  <div class="related-carousel">
+    <button class="carousel-btn prev">&#10094;</button>
+    <div class="carousel-track"></div>
+    <button class="carousel-btn next">&#10095;</button>
   </div>
 </section>
 
@@ -3529,6 +3612,50 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
+
+  // Render Related Products
+const track = document.querySelector('.carousel-track');
+if (track) {
+  productData.slice(0, 10).forEach(product => {  // ambil max 10 produk
+    const item = document.createElement('div');
+    item.classList.add('carousel-item');
+    item.innerHTML = `
+      <img src="${product.image}" alt="${product.title}">
+      <div class="carousel-item-content">
+        <h3>${product.title}</h3>
+        <p>${product.category} • ${product.subcategory}</p>
+      </div>
+    `;
+    track.appendChild(item);
+  });
+
+  // Carousel Scroll Logic
+  let index = 0;
+  const items = document.querySelectorAll('.carousel-item');
+  const prevBtn = document.querySelector('.carousel-btn.prev');
+  const nextBtn = document.querySelector('.carousel-btn.next');
+
+  function updateCarousel() {
+    const itemWidth = items[0].offsetWidth + 20; // item width + gap
+    track.style.transform = `translateX(${-index * itemWidth}px)`;
+  }
+
+  prevBtn.addEventListener('click', () => {
+    if (index > 0) {
+      index--;
+      updateCarousel();
+    }
+  });
+
+  nextBtn.addEventListener('click', () => {
+    if (index < items.length - 1) {
+      index++;
+      updateCarousel();
+    }
+  });
+}
+
+  
 
 </script>
 </body>
