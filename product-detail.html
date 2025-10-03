@@ -1516,6 +1516,16 @@ background-color: var(--surface-btn-primary-hover);
     height: auto !important;
   }
 
+  .maintenance-highlights {
+    display: flex;
+    flex-direction: column; /* ubah jadi vertikal */
+    gap: 16px; /* kasih jarak antar highlight */
+  }
+
+  .maintenance-highlights .highlight {
+    width: 100%; /* biar full lebar */
+  }
+
   .warranty-grid {
     grid-template-columns: 1fr; /* kiri -> badge -> kanan */
     row-gap: 24px;
