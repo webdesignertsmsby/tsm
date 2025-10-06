@@ -1211,9 +1211,16 @@ background-color: var(--surface-btn-primary-hover);
 
 /* title */
 .bot-product-card h3 {
+  
   font-size: 22px;
   font-weight: 700;
   color: var(--text-high-emphasize);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;     /* jumlah baris maksimum */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
   margin: 0;
   line-height: 1.2;
   text-decoration: none; /* remove underline */
@@ -1237,7 +1244,7 @@ background-color: var(--surface-btn-primary-hover);
 
 .bot-product-tag {
   font-size: 13px;
-  font-weight: 700;
+  font-weight: 400;
   text-transform: uppercase;
   padding: 8px 14px;
   border-radius: 10px;
