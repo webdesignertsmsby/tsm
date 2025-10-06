@@ -1129,6 +1129,70 @@ background-color: var(--surface-btn-primary-hover);
   color: var(--text-high-emphasize);
 }
 
+/* Bottom Part*/
+.bot-featured-products {
+  padding: 60px 0;
+  background-color: rgba(229, 232, 239, 0.2);
+}
+
+.bot-featured-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.bot-featured-header h2 {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.bot-carousel-container {
+  overflow-x: hidden;
+  width: 100%;
+  padding-bottom: 18px;
+}
+
+.bot-carousel-track {
+  display: flex;
+  gap: 30px;
+  transition: transform 0.7s ease-in-out;
+}
+
+.bot-product-card {
+  flex: 0 0 calc(33.333% - 20px);
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.bot-product-card:hover {
+  transform: translateY(-4px);
+}
+
+.bot-product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.bot-product-info {
+  padding: 15px;
+}
+
+.bot-product-info h3 {
+  font-size: 1rem;
+  margin: 0 0 10px;
+}
+
+.bot-product-info p {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0;
+}
+
 /* Footer Section */
 .footer {
   background-color: var(--surface-background);
@@ -1408,6 +1472,10 @@ background-color: var(--surface-btn-primary-hover);
 
   /* Make sure step icons stay above the line */
   .step-icon { z-index: 3; }
+
+  .bot-product-card {
+    flex: 0 0 calc(50% - 15px);
+  }
   
   .footer {
     padding: 50px 0 25px;
@@ -1539,6 +1607,13 @@ background-color: var(--surface-btn-primary-hover);
 
   .warranty-steps ul {
     gap: 40px; 
+  }
+
+  .bot-product-card {
+    flex: 0 0 100%;
+  }
+  .bot-carousel-track {
+    gap: 16px;
   }
   
   .footer {
@@ -2241,6 +2316,27 @@ stroke-linecap="round" stroke-linejoin="round"/>
     </div>
   </div>
 </section>
+
+  <!-- =======================
+     Bottom Featured Products
+     ======================= -->
+<section class="bot-featured-products">
+  <div class="container">
+    <div class="bot-featured-header">
+      <h2>Featured Products</h2>
+      <p class="body-regular">Check out other products you may like</p>
+    </div>
+
+    <div class="bot-featured-carousel">
+      <div class="bot-carousel-container">
+        <div class="bot-carousel-track" id="botFeaturedTrack">
+          <!-- product cards akan diisi via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- Footer Section -->
 <footer class="footer">
@@ -3529,6 +3625,35 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 
 });
+
+  // =======================
+// Bottom Featured Products
+// =======================
+
+// Pilih produk dari productData berdasarkan ID
+const featuredIds = [1, 2, 3, 5, 7]; // <<== EDIT di sini untuk pilih produk by id
+const botTrack = document.getElementById('botFeaturedTrack');
+
+if (botTrack) {
+  featuredIds.forEach(id => {
+    const product = productData.find(p => p.id === id);
+    if (product) {
+      const card = document.createElement('div');
+      card.classList.add('bot-product-card');
+      card.innerHTML = `
+        <a href="#">
+          <img src="${product.image}" alt="${product.title}">
+          <div class="bot-product-info">
+            <h3>${product.title}</h3>
+            <p>${product.category} • ${product.subcategory}</p>
+          </div>
+        </a>
+      `;
+      botTrack.appendChild(card);
+    }
+  });
+}
+
 
 </script>
 </body>
