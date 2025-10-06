@@ -1129,7 +1129,7 @@ background-color: var(--surface-btn-primary-hover);
   color: var(--text-high-emphasize);
 }
 
-/* Bottom Part*/
+/* Bottom Part */
 .bot-featured-products {
   padding: 60px 0;
   background-color: rgba(229, 232, 239, 0.2);
@@ -1145,8 +1145,10 @@ background-color: var(--surface-btn-primary-hover);
 .bot-featured-header h2 {
   font-size: 1.8rem;
   font-weight: 700;
+  color: var(--text-high-emphasize);
 }
 
+/* carousel container */
 .bot-carousel-container {
   overflow-x: hidden;
   width: 100%;
@@ -1157,61 +1159,96 @@ background-color: var(--surface-btn-primary-hover);
   display: flex;
   gap: 30px;
   transition: transform 0.7s ease-in-out;
+  align-items: stretch; /* make cards equal height */
 }
 
-/* Product Card */
+/* Product Card (3 per row on desktop) */
 .bot-product-card {
+  flex: 0 0 calc(33.333% - 20px);
+  max-width: calc(33.333% - 20px);
   background: #fff;
   border-radius: 20px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.06);
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Hover */
 .bot-product-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.12);
 }
 
-/* Gambar produk */
-.bot-product-card img {
-  width: 100%;
-  height: 260px; 
-  object-fit: contain;
+/* image wrapper to control height & centering */
+.bot-image-wrap {
+  height: 360px;            /* bigger image area */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: #fafafa;
+  padding: 24px 12px 0 12px;
 }
 
-/* Judul produk */
+.bot-image-wrap img {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* product info area */
+.bot-product-info {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: auto; /* push info to bottom so image area stays fixed height */
+}
+
+/* title */
 .bot-product-card h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--brand-secondary, #1b3c88); 
-  margin: 1rem 1rem 0.5rem 1rem;
-  text-decoration: none;
-  line-height: 1.4;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-high-emphasize);
+  margin: 0;
+  line-height: 1.2;
+  text-decoration: none; /* remove underline */
 }
 
-/* Label kategori */
+/* make sure anchor doesn't force link color/underline */
+.bot-product-card a {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  height: 100%;
+}
+
+/* badges */
 .bot-product-tags {
   display: flex;
+  gap: 10px;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  padding: 0 1rem 1rem 1rem;
+  margin-top: 6px;
 }
 
 .bot-product-tag {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   text-transform: uppercase;
-  padding: 6px 14px;
-  border-radius: 8px;
-  background: #fceaea; /* default: soft pink */
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: #fceaea; /* soft pink */
   color: #b23b3b;
+  display: inline-block;
 }
 
 .bot-product-tag.secondary {
-  background: #e7ecf7;
-  color: #1b3c88;
+  background: #e7ecf7; /* soft blue */
+  color: var(--brand-secondary, #1b3c88);
 }
 
 /* Footer Section */
@@ -1496,7 +1533,11 @@ background-color: var(--surface-btn-primary-hover);
 
   .bot-product-card {
     flex: 0 0 calc(50% - 15px);
+    max-width: calc(50% - 15px);
   }
+  .bot-image-wrap { height: 320px; }
+  .bot-product-info { padding: 20px; }
+  .bot-product-card h3 { font-size: 20px; }
   
   .footer {
     padding: 50px 0 25px;
@@ -1630,16 +1671,17 @@ background-color: var(--surface-btn-primary-hover);
     gap: 40px; 
   }
 
-  .bot-product-card img {
-    height: 220px;
+  .bot-product-card {
+    flex: 0 0 100%;
+    max-width: 100%;
   }
-  .bot-featured h2 {
-    font-size: 1.5rem;
-  }
-  
   .bot-carousel-track {
-    gap: 16px;
+    gap: 20px;
   }
+  .bot-image-wrap { height: 220px; padding-top: 12px; }
+  .bot-product-info { padding: 16px; gap: 8px; }
+  .bot-product-card h3 { font-size: 18px; }
+  .bot-product-tag { padding: 6px 10px; font-size: 12px; border-radius: 8px; }
   
   .footer {
     padding: 40px 0 20px;
