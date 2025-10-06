@@ -3709,10 +3709,15 @@ if (botTrack) {
       card.classList.add('bot-product-card');
       card.innerHTML = `
         <a href="#">
-          <img src="${product.image}" alt="${product.title}">
+          <div class="bot-image-wrap">
+            <img src="${product.image}" alt="${product.title}">
+          </div>
           <div class="bot-product-info">
             <h3>${product.title}</h3>
-            <p>${product.category} • ${product.subcategory}</p>
+            <div class="bot-product-tags">
+              <span class="bot-product-tag">${product.category}</span>
+              <span class="bot-product-tag secondary">${product.subcategory}</span>
+            </div>
           </div>
         </a>
       `;
