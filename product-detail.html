@@ -1266,6 +1266,69 @@ background-color: var(--surface-btn-primary-hover);
   color: var(--brand-secondary, #1b3c88);
 }
 
+/* --- CTA Section --- */
+.bot-cta {
+  position: relative;
+  background-image: url('placeholder-bg.jpg'); /* Replace later */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--text-invert);
+  padding: 80px 0;
+}
+
+.bot-cta::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45); /* dark overlay */
+  z-index: 1;
+}
+
+.bot-cta-overlay {
+  position: relative;
+  z-index: 2;
+}
+
+.bot-cta-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.bot-cta-text {
+  max-width: 70%;
+}
+
+.bot-cta-text h2 {
+  font-size: 42px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: #fff;
+}
+
+.bot-cta-text p {
+  font-size: 18px;
+  color: #f2f2f2;
+  line-height: 1.6;
+}
+
+.bot-cta .btn-primary {
+  background-color: var(--brand-primary);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 16px;
+  padding: 14px 32px;
+  transition: all 0.3s ease;
+}
+
+.bot-cta .btn-primary:hover {
+  background-color: var(--surface-btn-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
 /* Footer Section */
 .footer {
   background-color: var(--surface-background);
@@ -1697,6 +1760,32 @@ background-color: var(--surface-btn-primary-hover);
   .bot-product-info { padding: 16px; gap: 8px; }
   .bot-product-card h3 { font-size: 18px; }
   .bot-product-tag { padding: 6px 10px; font-size: 12px; border-radius: 8px; }
+
+    .bot-cta {
+    padding: 60px 20px;
+    text-align: center;
+  }
+
+  .bot-cta-content {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .bot-cta-text {
+    max-width: 100%;
+  }
+
+  .bot-cta-text h2 {
+    font-size: 32px;
+  }
+
+  .bot-cta-text p {
+    font-size: 16px;
+  }
+
+  .bot-cta .btn-primary {
+    padding: 12px 28px;
+  }
   
   .footer {
     padding: 40px 0 20px;
@@ -2419,6 +2508,18 @@ stroke-linecap="round" stroke-linejoin="round"/>
   </div>
 </section>
 
+  <!-- CTA Section -->
+<section class="bot-cta">
+  <div class="bot-cta-overlay">
+    <div class="container bot-cta-content">
+      <div class="bot-cta-text">
+        <h2>Still Have Questions?</h2>
+        <p>Reach out to us for clarifications, tailored advice, or to discuss how the machine can fit into your production line.</p>
+      </div>
+      <a href="contact.html" class="btn btn-primary">CONTACT US</a>
+    </div>
+  </div>
+</section>
 
 <!-- Footer Section -->
 <footer class="footer">
