@@ -1159,38 +1159,59 @@ background-color: var(--surface-btn-primary-hover);
   transition: transform 0.7s ease-in-out;
 }
 
+/* Product Card */
 .bot-product-card {
-  flex: 0 0 calc(33.333% - 20px);
   background: #fff;
-  border-radius: 16px;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
   overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .bot-product-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
+/* Gambar produk */
 .bot-product-card img {
   width: 100%;
-  height: 200px;
-  object-fit: cover;
+  height: 260px; 
+  object-fit: contain;
+  background: #fafafa;
 }
 
-.bot-product-info {
-  padding: 15px;
-}
-
-.bot-product-info h3 {
+/* Judul produk */
+.bot-product-card h3 {
   font-size: 1rem;
-  margin: 0 0 10px;
+  font-weight: 600;
+  color: var(--brand-secondary, #1b3c88); 
+  margin: 1rem 1rem 0.5rem 1rem;
+  text-decoration: none;
+  line-height: 1.4;
 }
 
-.bot-product-info p {
-  font-size: 0.875rem;
-  color: #666;
-  margin: 0;
+/* Label kategori */
+.bot-product-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0 1rem 1rem 1rem;
+}
+
+.bot-product-tag {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: 8px;
+  background: #fceaea; /* default: soft pink */
+  color: #b23b3b;
+}
+
+.bot-product-tag.secondary {
+  background: #e7ecf7;
+  color: #1b3c88;
 }
 
 /* Footer Section */
@@ -1609,9 +1630,13 @@ background-color: var(--surface-btn-primary-hover);
     gap: 40px; 
   }
 
-  .bot-product-card {
-    flex: 0 0 100%;
+  .bot-product-card img {
+    height: 220px;
   }
+  .bot-featured h2 {
+    font-size: 1.5rem;
+  }
+  
   .bot-carousel-track {
     gap: 16px;
   }
