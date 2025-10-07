@@ -674,6 +674,73 @@ background-color: var(--surface-btn-primary-hover);
   object-fit: cover;
 }
 
+/* Vision & Mission Section */
+.vision-mission-section {
+  padding: 80px 10%;
+}
+
+.vision-mission-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.vision-card, .mission-card {
+  border-radius: 20px;
+  padding: 40px;
+}
+
+.vision-card {
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.vision-img {
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 20px;
+}
+
+.vision-text h3 {
+  font-size: 1.4rem;
+  color: #111;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.quote-mark {
+  color: #0a2d6d;
+  font-size: 1.6rem;
+  margin-right: 6px;
+}
+
+.highlight-red {
+  color: #e00000;
+}
+
+.vision-text p {
+  color: #333;
+  line-height: 1.6;
+}
+
+.mission-card {
+  background: #0a2d6d;
+  color: #fff;
+  border-radius: 20px;
+}
+
+.mission-card h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.mission-card p {
+  line-height: 1.6;
+  font-weight: 400;
+}
+
 /* Footer Section */
 .footer {
   background-color: var(--surface-background);
@@ -915,6 +982,18 @@ background-color: var(--surface-btn-primary-hover);
   .about-subtext {
     font-size: 0.95rem;
     margin-bottom: 32px;
+  }
+
+  .vision-mission-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .vision-card, .mission-card {
+    padding: 30px;
+  }
+
+  .mission-card {
+    margin-top: 20px;
   }
   
   .footer {
@@ -1321,6 +1400,39 @@ stroke-linecap="round" stroke-linejoin="round"/>
     </div>
   </div>
 </section>
+
+  <!-- Vision & Mission Section -->
+<section class="vision-mission-section">
+  <div class="vision-mission-grid">
+
+    <!-- Left: Vision -->
+    <div class="vision-card">
+      <img src="images/feaspack-logo.jpg" alt="Feaspack Logo" class="vision-img">
+      <div class="vision-text">
+        <h3><span class="quote-mark">❝</span> Vision</h3>
+        <p>
+          Total solutions for machines that deliver maximum efficiency for various industries 
+          by providing <span class="highlight-red">fast</span>, 
+          <span class="highlight-red">easy</span>, 
+          <span class="highlight-red">accurate</span>, 
+          and <span class="highlight-red">saving money</span> packaging and manufacturing machines 
+          to the market.
+        </p>
+      </div>
+    </div>
+
+    <!-- Right: Mission -->
+    <div class="mission-card">
+      <h3>Mission</h3>
+      <p>
+        Total solutions for all your packaging and manufacturing needs and desires, providing 
+        the right machines as a long-term investment for customers.
+      </p>
+    </div>
+
+  </div>
+</section>
+
 
 
 <!-- Footer Section -->
