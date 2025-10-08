@@ -701,11 +701,10 @@ background-color: var(--surface-btn-primary-hover);
 
 .vision-img {
   width: 100%;
-  height: 360px;              
-  object-fit: cover;       
-  display: block;
+  aspect-ratio: 2 / 1;     
+  object-fit: cover;
   border-radius: 16px;
-  margin-bottom: 20px;
+  display: block;
 }
 
 .vision-text {
@@ -740,6 +739,10 @@ background-color: var(--surface-btn-primary-hover);
   background: #0a2d6d;
   color: #fff;
   border-radius: 20px;
+  height: 100%;             
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
 }
 
 .mission-card h3 {
