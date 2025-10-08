@@ -812,6 +812,21 @@ background-color: var(--surface-btn-primary-hover);
   background-color: var(--secondary-40);
 }
 
+.journey-item {
+  position: relative;
+}
+
+.journey-item:last-child::after {
+  content: "";
+  position: absolute;
+  left: 51px; 
+  top: 0;
+  bottom: auto; 
+  height: calc(50% - 20px); /* sesuaikan agar garis berhenti sebelum icon */
+  width: 2px;
+  background: transparent; 
+}
+
 .timeline-item {
   position: relative;
   padding-left: 40px;
