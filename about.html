@@ -796,81 +796,68 @@ background-color: var(--surface-btn-primary-hover);
 
 /* === TIMELINE (RIGHT SIDE) === */
 .journey-right {
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
-  margin-left: 2rem;
-  padding-left: 2rem;
-}
-
-/* Vertical line */
-.timeline-line {
-  position: absolute;
-  left: 36px;
-  top: 24px;
-  bottom: 24px;
-  width: 3px;
-  background: #001f60;
-}
-
-/* Timeline item wrapper */
-.timeline-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
   position: relative;
-}
-
-/* Timeline icon */
-.timeline-icon {
-  flex-shrink: 0;
-  width: 40px;
-  height: 40px;
-  background: #fff; 
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  left: -2px; 
-  top: 0;
-  transform: translateY(0);
-  z-index: 2;
-}
-
-/* Year + content */
-.timeline-year {
-  color: #e00000;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.timeline-content {
-  margin-left: 2.5rem;
-}
-
-.timeline-content h6 {
-  font-weight: 700;
-  color: #111;
-  margin-bottom: 6px;
-}
-
-.timeline-content p {
-  color: #555;
-  line-height: 1.6;
+  padding-left: 40px;
 }
 
 .journey-right::before {
   content: "";
   position: absolute;
-  left: 30px;
-  top: 50px; 
-  bottom: 50px; 
+  left: 20px;
+  top: 0;
+  bottom: 0;
   width: 2px;
-  background-color: #0a2d6d;
-  z-index: 0;
+  background-color: var(--secondary-40);
 }
+
+.timeline-item {
+  position: relative;
+  padding-left: 40px;
+  margin-bottom: 60px;
+}
+
+.timeline-icon {
+  position: absolute;
+  left: -4px;
+  top: 0;
+  background-color: #fff;
+  border: 3px solid var(--secondary-40);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timeline-icon svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--secondary-40);
+}
+
+.timeline-year {
+  color: var(--primary-40);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+}
+
+.timeline-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 8px;
+}
+
+.timeline-desc {
+  color: #444;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
 
 /* Footer Section */
 .footer {
@@ -1139,21 +1126,22 @@ background-color: var(--surface-btn-primary-hover);
   }
 
   .journey-right {
-    margin-left: 1.2rem;
-    padding-left: 1.5rem;
+    padding-left: 20px;
   }
-  .timeline-line {
-    left: 12px;
+  .journey-right::before {
+    left: 10px;
   }
-
+  .timeline-item {
+    padding-left: 32px;
+    margin-bottom: 40px;
+  }
   .timeline-icon {
-    width: 30px;
-    height: 30px;
-    left: -18px;
+    width: 26px;
+    height: 26px;
   }
-  
-  .timeline-content {
-    margin-left: 2rem;
+  .timeline-icon svg {
+    width: 14px;
+    height: 14px;
   }
   
   .footer {
@@ -1605,61 +1593,58 @@ stroke-linecap="round" stroke-linejoin="round"/>
 
     <!-- RIGHT: Timeline -->
     <div class="journey-right">
-      <div class="timeline-line"></div>
-    
-      <div class="timeline-item">
-        <div class="timeline-icon">
-          <!-- Ganti SVG berikut dengan ikon milikmu -->
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#001f60" viewBox="0 0 24 24">
-            <path d="M3 13h2v-2H3v2zm4 0h2v-2H7v2zm4 0h2v-2h-2v2zm8-10H5c-1.1 0-2 .9-2 2v3h18V5c0-1.1-.9-2-2-2zm2 6H3v9c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-9z"/>
-          </svg>
-        </div>
-        <div class="timeline-content">
-          <div class="timeline-year">2011</div>
-          <h6>Founded</h6>
-          <p>Established in Jakarta to serve the growing demand for industrial machinery in Indonesia.</p>
-        </div>
-      </div>
-    
-      <div class="timeline-item">
-        <div class="timeline-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#001f60" viewBox="0 0 24 24">
-            <path d="M3 13h2v-2H3v2zm4 0h2v-2H7v2zm4 0h2v-2h-2v2zm8-10H5c-1.1 0-2 .9-2 2v3h18V5c0-1.1-.9-2-2-2zm2 6H3v9c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2v-9z"/>
-          </svg>
-        </div>
-        <div class="timeline-content">
-          <div class="timeline-year">2018</div>
-          <h6>Surabaya Office</h6>
-          <p>Expanded operations by opening an office in Surabaya to reach more customers in East Java.</p>
-        </div>
-      </div>
-    
-      <div class="timeline-item">
-        <div class="timeline-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#001f60" viewBox="0 0 24 24">
-            <path d="M12 2L15.09 8H21l-4.91 3.58L17.18 18 12 14.47 6.82 18l1.09-6.42L3 8h5.91z"/>
-          </svg>
-        </div>
-        <div class="timeline-content">
-          <div class="timeline-year">2022</div>
-          <h6>Industry Award</h6>
-          <p>Recognized with a prestigious award for innovation and excellence in manufacturing solutions.</p>
-        </div>
-      </div>
-    
-      <div class="timeline-item">
-        <div class="timeline-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#001f60" viewBox="0 0 24 24">
-            <path d="M12 2C8.13 2 5 5.13 5 9c0 3.31 2.69 6 6 6s6-2.69 6-6c0-3.87-3.13-7-6-7zm-1 13H7v7h2v-5h2v5h2v-7h-2z"/>
-          </svg>
-        </div>
-        <div class="timeline-content">
-          <div class="timeline-year">2025</div>
-          <h6>200+ Customers Nationwide</h6>
-          <p>Proudly serving more than 200 customers from Sabang to Merauke, providing solutions across multiple industries.</p>
-        </div>
-      </div>
+
+  <div class="timeline-item">
+    <div class="timeline-icon">
+      <!-- SVG Icon: Founded -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#012060" d="M4 22V10l8-8l8 8v12h-6v-6H10v6H4Z"/></svg>
     </div>
+    <p class="timeline-year">2011</p>
+    <h4 class="timeline-title">Founded</h4>
+    <p class="timeline-desc">
+      Established in Jakarta to serve the growing demand for industrial machinery in Indonesia.
+    </p>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-icon">
+      <!-- SVG Icon: Office -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#012060" d="M4 22V10l8-8l8 8v12h-6v-6H10v6H4Z"/></svg>
+    </div>
+    <p class="timeline-year">2018</p>
+    <h4 class="timeline-title">Surabaya Office</h4>
+    <p class="timeline-desc">
+      Expanded operations by opening an office in Surabaya to reach more customers in East Java.
+    </p>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-icon">
+      <!-- SVG Icon: Award -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#012060" d="M12 2a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m-7 19v-2a6 6 0 0 1 12 0v2H5Z"/></svg>
+    </div>
+    <p class="timeline-year">2022</p>
+    <h4 class="timeline-title">Industry Award</h4>
+    <p class="timeline-desc">
+      Recognized with a prestigious award for innovation and excellence in manufacturing solutions.
+    </p>
+  </div>
+
+  <div class="timeline-item">
+    <div class="timeline-icon">
+      <!-- SVG Icon: Customers -->
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#012060" d="M12 12a5 5 0 1 1 5-5a5 5 0 0 1-5 5m0 2c-5.33 0-8 2.67-8 4v2h16v-2c0-1.33-2.67-4-8-4Z"/></svg>
+    </div>
+    <p class="timeline-year">2025</p>
+    <h4 class="timeline-title">200+ Customers Nationwide</h4>
+    <p class="timeline-desc">
+      Proudly serving more than 200 customers from Sabang to Merauke, providing solutions across multiple industries.
+    </p>
+  </div>
+
+</div>
+
+    
   </div>
 </section>
 
