@@ -762,6 +762,79 @@ background-color: var(--surface-btn-primary-hover);
   font-weight: 400;
 }
 
+  /* OUR JOURNEY SECTION */
+.journey-section {
+  padding: 100px 10%;
+}
+
+.journey-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  gap: 60px;
+}
+
+.journey-left h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 12px;
+}
+
+.journey-left p {
+  color: #555;
+  margin-bottom: 40px;
+  line-height: 1.6;
+}
+
+.journey-map img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+/* RIGHT TIMELINE */
+.journey-right {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  border-left: 3px solid #001f60;
+  padding-left: 30px;
+}
+
+.timeline-item {
+  position: relative;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -38px;
+  top: 5px;
+  width: 16px;
+  height: 16px;
+  background-color: #001f60;
+  border-radius: 50%;
+}
+
+.timeline-year {
+  color: #e00000;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.timeline-item h3 {
+  font-weight: 700;
+  color: #111;
+  margin-bottom: 6px;
+}
+
+.timeline-item p {
+  color: #555;
+  line-height: 1.6;
+}
+
 /* Footer Section */
 .footer {
   background-color: var(--surface-background);
@@ -1021,6 +1094,23 @@ background-color: var(--surface-btn-primary-hover);
 
   .mission-card {
     .mission-card { margin-top: 18px; justify-content: flex-start; }
+  }
+
+  .journey-container {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .journey-right {
+    border-left: none;
+    border-top: 3px solid #001f60;
+    padding-left: 0;
+    padding-top: 40px;
+  }
+
+  .timeline-item::before {
+    left: 0;
+    top: -28px;
   }
   
   .footer {
@@ -1456,11 +1546,45 @@ stroke-linecap="round" stroke-linejoin="round"/>
         the right machines as a long-term investment for customers.
       </p>
     </div>
-
   </div>
 </section>
 
+  <section class="journey-section">
+  <div class="journey-container">
+    <!-- LEFT: Map & Info -->
+    <div class="journey-left">
+      <h2>Our Journey</h2>
+      <p>We have grown into a trusted name in the industrial machinery industry. Our expansion reflects our dedication to quality, customer trust, and continuous innovation.</p>
+      <div class="journey-map">
+        <img src="images/map-placeholder.jpg" alt="" />
+      </div>
+    </div>
 
+    <!-- RIGHT: Timeline -->
+    <div class="journey-right">
+      <div class="timeline-item">
+        <div class="timeline-year">2011</div>
+        <h3>Founded</h3>
+        <p>Established in Jakarta to serve the growing demand for industrial machinery in Indonesia.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2018</div>
+        <h3>Surabaya Office</h3>
+        <p>Expanded operations by opening an office in Surabaya to reach more customers in East Java.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2022</div>
+        <h3>Industry Award</h3>
+        <p>Recognized with a prestigious award for innovation and excellence in manufacturing solutions.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">2025</div>
+        <h3>200+ Customers Nationwide</h3>
+        <p>Proudly serving more than 200 customers from Sabang to Merauke, providing solutions across multiple industries.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Footer Section -->
 <footer class="footer">
