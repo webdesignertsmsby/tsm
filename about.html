@@ -859,8 +859,9 @@ background-color: var(--surface-btn-primary-hover);
 .order-layout {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: auto auto;
+  grid-template-rows: repeat(4, auto); 
   gap: 24px;
+  align-items: start;
 }
 
 .order-card {
@@ -895,34 +896,34 @@ background-color: var(--surface-btn-primary-hover);
 }
 
 /* GRID SPAN RULES */
-.discussion {
-  grid-row: 1 / 2;
+.discussion {      
+  grid-row: 1 / span 2;
   grid-column: 1 / 2;
 }
 
-.quotation {
+.quotation {        
   grid-row: 1 / 2;
   grid-column: 2 / 3;
 }
 
-.negotiation {
+.negotiation {     
   grid-row: 2 / 3;
   grid-column: 2 / 3;
-  margin-top: -10px; /* kasih sedikit overlap jika mau lebih rapat */
+  margin-top: 0;
 }
 
-.confirmed {
+.confirmed {       
   grid-row: 3 / 4;
   grid-column: 1 / 2;
 }
 
-.delivery {
+.delivery {         
   grid-row: 4 / 5;
   grid-column: 1 / 2;
-  margin-top: -10px;
+  margin-top: 0;
 }
 
-.installation {
+.installation {   
   grid-row: 3 / span 2;
   grid-column: 2 / 3;
 }
