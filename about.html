@@ -892,14 +892,19 @@ background-color: var(--surface-btn-primary-hover);
 }*/
 .order-grid {
   display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 kolom utama */
+  grid-template-rows: auto auto; /* 2 baris utama */
+  gap: 32px; /* jarak antar blok besar */
   grid-template-areas:
-    "card-1 card-2"
-    "card-1 card-3"
-    "card-4 card-6"
-    "card-5 card-6";
-  gap: 24px 32px; /* ⬅️ tambahkan jarak horizontal & vertical antar card */
-  align-items: stretch;
+    "card-1 card-2-3"
+    "card-4-5 card-6";
 }
+
+/* area grid */
+.card-1 { grid-area: card-1; }
+.card-2-3 { grid-area: card-2-3; }
+.card-4-5 { grid-area: card-4-5; }
+.card-6 { grid-area: card-6; }
 
 .order-card {
   background: #fff;
