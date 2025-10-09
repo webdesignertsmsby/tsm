@@ -855,131 +855,76 @@ background-color: var(--surface-btn-primary-hover);
   font-size: 1rem;
 }
 
-  /* --- Order Process --- */
-.order-process {
-  background: #f6f8fc;
-  padding: 80px 20px;
-}
-
-.order-process .container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.order-process .section-title {
-  text-align: center;
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-  color: #111;
-}
-
-.order-process .section-subtitle {
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto 60px;
-  color: #444;
-  line-height: 1.6;
-  font-size: 0.95rem;
-}
-
-/* --- Grid Layout --- */
-/*.order-grid {
+/* ==== ORDER PROCESS NEW LAYOUT ==== */
+.order-layout {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto auto;
-  gap: 25px;
-}*/
-.order-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr; /* 2 kolom utama */
-  grid-template-rows: auto auto; /* 2 baris utama */
-  gap: 32px; /* jarak antar blok besar */
-  grid-template-areas:
-    "card-1 card-2-3"
-    "card-4-5 card-6";
+  gap: 24px;
 }
-
-/* area grid */
-.card-1 { grid-area: card-1; }
-.card-2-3 { grid-area: card-2-3; }
-.card-4-5 { grid-area: card-4-5; }
-.card-6 { grid-area: card-6; }
 
 .order-card {
   background: #fff;
-  border-radius: 14px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-}
-
-/* --- Layout positions --- */
-.card-1 {
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
-}
-
-.card-2 {
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-  align-self: start;
-}
-
-.card-3 {
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
-  align-self: end;
-  margin-top: 230px; /* jarak agar di bawah card 2 */
-}
-
-.card-4 {
-  grid-column: 1 / 2;
-  grid-row: 2 / 3;
-  align-self: start;
-}
-
-.card-5 {
-  grid-column: 1 / 2;
-  grid-row: 2 / 3;
-  align-self: end;
-  margin-top: 230px;
-}
-
-.card-6 {
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
-}
-
-/* --- Image --- */
-.order-img {
-  width: 100%;
-  height: 220px;
-  overflow: hidden;
-}
-
-.order-img img {
-  width: 100%;
   height: 100%;
-  object-fit: cover;
+}
+
+.order-card img {
+  width: 100%;
+  height: auto;
   display: block;
 }
 
-.order-text {
-  padding: 25px;
+.order-content {
+  padding: 20px;
 }
 
-.order-text h3 {
-  font-size: 1.2rem;
+.order-content h4 {
   font-weight: 700;
   margin-bottom: 8px;
-  color: #111;
 }
 
-.order-text p {
-  color: #555;
+.order-content p {
+  color: #444;
+  font-size: 15px;
   line-height: 1.6;
+}
+
+/* GRID SPAN RULES */
+.discussion {
+  grid-row: 1 / 2;
+  grid-column: 1 / 2;
+}
+
+.quotation {
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+}
+
+.negotiation {
+  grid-row: 2 / 3;
+  grid-column: 2 / 3;
+  margin-top: -10px; /* kasih sedikit overlap jika mau lebih rapat */
+}
+
+.confirmed {
+  grid-row: 3 / 4;
+  grid-column: 1 / 2;
+}
+
+.delivery {
+  grid-row: 4 / 5;
+  grid-column: 1 / 2;
+  margin-top: -10px;
+}
+
+.installation {
+  grid-row: 3 / span 2;
+  grid-column: 2 / 3;
 }
 
 /* Footer Section */
@@ -1269,11 +1214,17 @@ background-color: var(--surface-btn-primary-hover);
     height: 14px;
   }
 
-  .order-grid {
+  .order-layout {
     grid-template-columns: 1fr;
   }
-  
-  .order-card {
+
+  .quotation,
+  .negotiation,
+  .confirmed,
+  .delivery,
+  .installation {
+    grid-row: auto;
+    grid-column: auto;
     margin-top: 0;
   }
   
@@ -1812,76 +1763,63 @@ stroke-linecap="round" stroke-linejoin="round"/>
   </div>
 </section>
 
-  <section class="order-process">
+ <section class="order-process">
   <div class="container">
-    <h2 class="section-title">How to Order?</h2>
-    <p class="section-subtitle">
-      We make the ordering process simple, transparent, and efficient. From initial consultation to installation, our team ensures a smooth experience every step of the way.
+    <h2>How to Order?</h2>
+    <p class="subtitle">
+      We make the ordering process simple, transparent, and efficient. From initial consultation
+      to installation, our team ensures a smooth experience every step of the way.
     </p>
 
-    <div class="order-grid">
-      <!-- 1 -->
-      <div class="order-card card-1">
-        <div class="order-img">
-          <img src="https://via.placeholder.com/600x400" alt="Discussion of Needs">
-        </div>
-        <div class="order-text">
-          <h3>Discussion of Needs</h3>
+    <div class="order-layout">
+      <!-- KIRI ATAS -->
+      <div class="order-card discussion">
+        <img src="https://via.placeholder.com/800x400" alt="Discussion of Needs">
+        <div class="order-content">
+          <h4>Discussion of Needs</h4>
           <p>We listen and analyze your requirements to recommend the best solution.</p>
         </div>
       </div>
 
-      <!-- 2 -->
-      <div class="order-card card-2">
-        <div class="order-img">
-          <img src="https://via.placeholder.com/600x400" alt="Quotation">
-        </div>
-        <div class="order-text">
-          <h3>Quotation</h3>
+      <!-- KANAN ATAS -->
+      <div class="order-card quotation">
+        <img src="https://via.placeholder.com/800x400" alt="Quotation">
+        <div class="order-content">
+          <h4>Quotation</h4>
           <p>Get a detailed and transparent quotation tailored to your needs.</p>
         </div>
       </div>
 
-      <!-- 3 -->
-      <div class="order-card card-3">
-        <div class="order-img">
-          <img src="https://via.placeholder.com/600x400" alt="Negotiation">
-        </div>
-        <div class="order-text">
-          <h3>Negotiation</h3>
+      <div class="order-card negotiation">
+        <img src="https://via.placeholder.com/800x400" alt="Negotiation">
+        <div class="order-content">
+          <h4>Negotiation</h4>
           <p>Flexible terms to ensure the best deal for your business.</p>
         </div>
       </div>
 
-      <!-- 4 -->
-      <div class="order-card card-4">
-        <div class="order-img">
-          <img src="https://via.placeholder.com/600x400" alt="Order Confirmed">
-        </div>
-        <div class="order-text">
-          <h3>Order Confirmed</h3>
+      <!-- KIRI BAWAH -->
+      <div class="order-card confirmed">
+        <img src="https://via.placeholder.com/800x400" alt="Order Confirmed">
+        <div class="order-content">
+          <h4>Order Confirmed</h4>
           <p>Once confirmed, we prepare your order with precision and care.</p>
         </div>
       </div>
 
-      <!-- 5 -->
-      <div class="order-card card-5">
-        <div class="order-img">
-          <img src="https://via.placeholder.com/600x400" alt="Delivery">
-        </div>
-        <div class="order-text">
-          <h3>Delivery</h3>
+      <div class="order-card delivery">
+        <img src="https://via.placeholder.com/800x400" alt="Delivery">
+        <div class="order-content">
+          <h4>Delivery</h4>
           <p>Timely and safe delivery to your location.</p>
         </div>
       </div>
 
-      <!-- 6 -->
-      <div class="order-card card-6">
-        <div class="order-img">
-          <img src="https://via.placeholder.com/600x400" alt="Installation, Commissioning, Training">
-        </div>
-        <div class="order-text">
-          <h3>Installation, Commissioning, Training</h3>
+      <!-- KANAN BAWAH -->
+      <div class="order-card installation">
+        <img src="https://via.placeholder.com/800x400" alt="Installation, Commissioning, Training">
+        <div class="order-content">
+          <h4>Installation, Commissioning, Training</h4>
           <p>Our team provides setup, testing, and training to ensure smooth operation for your staff.</p>
         </div>
       </div>
