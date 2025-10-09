@@ -884,11 +884,21 @@ background-color: var(--surface-btn-primary-hover);
 }
 
 /* --- Grid Layout --- */
-.order-grid {
+/*.order-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto auto;
   gap: 25px;
+}*/
+.order-grid {
+  display: grid;
+  grid-template-areas:
+    "card-1 card-2"
+    "card-1 card-3"
+    "card-4 card-6"
+    "card-5 card-6";
+  gap: 24px 32px; /* ⬅️ tambahkan jarak horizontal & vertical antar card */
+  align-items: stretch;
 }
 
 .order-card {
