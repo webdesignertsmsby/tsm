@@ -899,6 +899,37 @@ background-color: var(--surface-btn-primary-hover);
   display: block;
 }
 
+  /* Card kecil (2 kolom horizontal: image - text) */
+.order-card.quotation,
+.order-card.negotiation,
+.order-card.confirmed,
+.order-card.delivery {
+  flex-direction: row; /* horizontal layout */
+  align-items: stretch;
+}
+
+.order-card.quotation img,
+.order-card.negotiation img,
+.order-card.confirmed img,
+.order-card.delivery img {
+  width: 45%; /* gambar di sisi kiri */
+  height: auto;
+  object-fit: cover;
+}
+
+.order-card.quotation .order-content,
+.order-card.negotiation .order-content,
+.order-card.confirmed .order-content,
+.order-card.delivery .order-content {
+  width: 55%;
+  padding: 24px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
 .order-content {
   padding: 28px 24px 32px;
   text-align: left;
