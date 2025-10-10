@@ -856,12 +856,31 @@ background-color: var(--surface-btn-primary-hover);
 }
 
 /* ==== ORDER PROCESS NEW LAYOUT ==== */
+.order-process {
+  background-color: #f4f6fb;
+  text-align: center;
+  padding: 100px 20px 120px; /* beri napas lebih di atas & bawah */
+}
+
+.order-process h2 {
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.order-process .subtitle {
+  max-width: 720px;
+  margin: 0 auto 70px;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.7;
+}
+  
 .order-layout {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(4, auto); 
-  gap: 24px;
-  align-items: start;
+  gap: 32px 40px;
+  align-items: stretch;
 }
 
 .order-card {
@@ -881,18 +900,19 @@ background-color: var(--surface-btn-primary-hover);
 }
 
 .order-content {
-  padding: 20px;
+  padding: 28px 24px 32px;
+  text-align: left;
 }
 
 .order-content h4 {
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .order-content p {
   color: #444;
   font-size: 15px;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
 /* GRID SPAN RULES */
@@ -1215,8 +1235,17 @@ background-color: var(--surface-btn-primary-hover);
     height: 14px;
   }
 
+  .order-process {
+    padding: 60px 16px 80px;
+  }
+
   .order-layout {
     grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .order-content {
+    padding: 20px 18px 24px;
   }
 
   .quotation,
