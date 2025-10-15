@@ -1049,7 +1049,8 @@ background-color: var(--surface-btn-primary-hover);
 .commitment-card {
   background: #f7f7f7;
   border-radius: 12px;
-  padding: 22px;
+  padding: 0px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: flex-start; 
@@ -1058,6 +1059,15 @@ background-color: var(--surface-btn-primary-hover);
   height: 100%;
   min-height: 150px;
   box-sizing: border-box;
+}
+
+.commitment-card img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0;      
+  margin: 0;               
+  padding: 0;           
 }
 
 .commitment-card .commitment-icon,
@@ -1108,6 +1118,7 @@ background-color: var(--surface-btn-primary-hover);
 .commitment-right p {
   line-height: 1.6;
   margin-bottom: 20px;
+  margin-top: 16px
 }
 
 .commitment-right img {
@@ -1142,6 +1153,11 @@ background-color: var(--surface-btn-primary-hover);
   justify-content: center;
 }
 
+.commitment-card .card-content {
+  padding: 24px;           
+} 
+
+  
 /* Footer Section */
 .footer {
   background-color: var(--surface-background);
