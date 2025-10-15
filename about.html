@@ -1161,10 +1161,19 @@ background-color: var(--surface-btn-primary-hover);
   padding: 24px;
 }
 
-.commitment-right > h4,
-.commitment-right > p {
-  padding: 0 24px 24px 24px; 
-  margin: 0;                 
+.commitment-right *:not(img) {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
+}
+
+/* Jika mau ada jarak vertikal sedikit */
+.commitment-right 43 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.commitment-right p {
+  margin-bottom: 24px;
 }
 
 .commitment-right img {
