@@ -979,6 +979,104 @@ background-color: var(--surface-btn-primary-hover);
   grid-column: 2 / 3;
 }
 
+/* ==== OUR COMMITMENT SECTION ==== */
+.commitment-section {
+  padding: 100px 20px;
+  background: #fff;
+  text-align: center;
+}
+
+.commitment-section h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.commitment-subtitle {
+  color: #555;
+  font-size: 15px;
+  max-width: 700px;
+  margin: 0 auto 70px;
+  line-height: 1.6;
+}
+
+.commitment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: start;
+}
+
+.commitment-left {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.commitment-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.commitment-card {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  text-align: left;
+  gap: 0;
+}
+
+.commitment-card.large {
+  justify-content: space-between;
+}
+
+.commitment-card.large img {
+  width: 50%;
+  object-fit: cover;
+  height: 100%;
+}
+
+.commitment-card.large .commitment-content {
+  padding: 32px;
+  flex: 1;
+}
+
+.commitment-card.large.vertical {
+  flex-direction: column;
+}
+
+.commitment-card.large.vertical img {
+  width: 100%;
+  height: 250px;
+  border-radius: 0 0 16px 16px;
+}
+
+.commitment-card.small {
+  padding: 24px;
+  gap: 16px;
+}
+
+.commitment-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.commitment-card h4 {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.commitment-card p {
+  font-size: 0.9rem;
+  color: #444;
+  line-height: 1.6;
+}
+
 /* Footer Section */
 .footer {
   background-color: var(--surface-background);
@@ -1287,6 +1385,10 @@ background-color: var(--surface-btn-primary-hover);
     grid-row: auto;
     grid-column: auto;
     margin-top: 0;
+  }
+
+  .commitment-grid {
+    grid-template-columns: 1fr;
   }
   
   .footer {
@@ -1882,6 +1984,78 @@ stroke-linecap="round" stroke-linejoin="round"/>
         <div class="order-content">
           <h6>Installation, Commissioning, Training</h6>
           <p>Our team provides setup, testing, and training to ensure smooth operation for your staff.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- OUR COMMITMENT SECTION -->
+<section class="commitment-section">
+  <div class="container">
+    <h2>Our Commitment Beyond Delivery</h2>
+    <p class="commitment-subtitle">
+      We believe in long-term partnerships. That’s why we provide comprehensive after-sales services 
+      to ensure your machines run smoothly for years to come.
+    </p>
+
+    <div class="commitment-grid">
+      <!-- LEFT SIDE -->
+      <div class="commitment-left">
+        <!-- 24/7 Call Services -->
+        <div class="commitment-card large">
+          <div class="commitment-content">
+            <h4>Free 24/7 Call Services</h4>
+            <p>Our support line is always open to assist you anytime, anywhere.</p>
+          </div>
+          <img src="https://via.placeholder.com/500x300" alt="24/7 Call Services">
+        </div>
+
+        <!-- Warranty + Spare Parts -->
+        <div class="commitment-bottom">
+          <!-- Warranty -->
+          <div class="commitment-card small">
+            <div class="commitment-icon">
+              <!-- Checkmark Badge SVG -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0D1B2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 1l3 5.2 5.8.8-4.2 4.1 1 5.9L12 15.8 6.4 17l1-5.9L3.2 7l5.8-.8L12 1z"></path>
+                <polyline points="9 12 11 14 15 10"></polyline>
+              </svg>
+            </div>
+            <div>
+              <h4>Up to 5 Years Service Warranty</h4>
+              <p>We guarantee reliable service support for up to 5 years.</p>
+            </div>
+          </div>
+
+          <!-- Spare Parts -->
+          <div class="commitment-card small">
+            <div class="commitment-icon">
+              <!-- Gear SVG -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0D1B2A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+            </div>
+            <div>
+              <h4>Spare Parts Supply</h4>
+              <p>Genuine spare parts available for all supported machines.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE -->
+      <div class="commitment-right">
+        <div class="commitment-card large vertical">
+          <div class="commitment-content">
+            <h4>On-Site Technician Availability</h4>
+            <p>
+              For Jabodetabek and Surabaya, technicians can arrive within 1×24 hours. 
+              For other regions, within 3×24 hours.
+            </p>
+          </div>
+          <img src="https://via.placeholder.com/500x300" alt="Technician Availability">
         </div>
       </div>
     </div>
