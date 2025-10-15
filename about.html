@@ -979,94 +979,6 @@ background-color: var(--surface-btn-primary-hover);
   grid-column: 2 / 3;
 }
 
-/* ==== OUR COMMITMENT SECTION ==== */
-.commitment-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 40px;
-  align-items: stretch; 
-}
-
-.commitment-left,
-.commitment-right {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-  height: 100%; 
-}
-
-.commitment-card.large {
-  display: flex;
-  flex-direction: row;
-  align-items: stretch;
-  height: 100%;
-  overflow: hidden;
-}
-
-.commitment-card.large img {
-  width: 50%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.commitment-right .commitment-card.large.vertical {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-}
-
-.commitment-right .commitment-card.large.vertical img {
-  width: 100%;
-  height: 50%;
-  object-fit: cover;
-  display: block;
-  border-radius: 0 0 16px 16px;
-}
-
-.commitment-bottom {
-  display: flex;
-  gap: 24px;
-  width: 100%;
-  align-items: stretch;
-}
-
-.commitment-card.small {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; 
-  text-align: left;        
-  padding: 20px;
-  gap: 12px;
-  flex: 1;                 
-  min-height: 140px;       
-}
-
-.commitment-card.small .commitment-icon {
-  margin: 0 0 8px 0;
-  width: auto;
-  height: auto;
-  display: block;
-}
-
-.commitment-card.small > div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-  
-.commitment-card h4 {
-  font-weight: 700;
-  margin: 0 0 8px;
-}
-
-.commitment-card p {
-  margin: 0;
-  color: #444;
-  line-height: 1.6;
-}
-
 /* Footer Section */
 .footer {
   background-color: var(--surface-background);
@@ -1375,31 +1287,6 @@ background-color: var(--surface-btn-primary-hover);
     grid-row: auto;
     grid-column: auto;
     margin-top: 0;
-  }
-
-  .commitment-grid {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-
-  .commitment-card.large {
-    flex-direction: column;
-  }
-
-  .commitment-card.large img,
-  .commitment-right .commitment-card.large.vertical img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-
-  .commitment-bottom {
-    flex-direction: column;
-  }
-
-  .commitment-card.small {
-    align-items: flex-start;
-    text-align: left;
   }
   
   .footer {
