@@ -1016,7 +1016,7 @@ background-color: var(--surface-btn-primary-hover);
 
 .commitment-top {
   display: flex;
-  flex-direction: row-reverse; 
+  flex-direction: row;
   background: #fff;
   border: 1px solid var(--separator);
   border-radius: 12px;
@@ -1115,6 +1115,28 @@ background-color: var(--surface-btn-primary-hover);
   height: 260px; 
   object-fit: cover;
   border-radius: 12px;
+}
+
+ /* Move image to the right for the Free 24/7 Call Services card */
+.commitment-top {
+  flex-direction: row; /* default row (text left, image right) */
+}
+
+.commitment-top img {
+  order: 2; /* force image to appear after text */
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0 12px 12px 0;
+}
+
+.commitment-top .commitment-content {
+  order: 1;
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 /* Footer Section */
