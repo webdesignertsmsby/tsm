@@ -1016,16 +1016,16 @@ background-color: var(--surface-btn-primary-hover);
 
 .commitment-top {
   display: flex;
-  background: #f7f7f7;
+  flex-direction: row-reverse; 
+  background: #fff;
+  border: 1px solid var(--separator);
   border-radius: 12px;
   overflow: hidden;
-  height: 100%;
-  align-items: stretch;
 }
 
 .commitment-top .commitment-content {
-  width: 50%;
-  padding: 36px 32px;
+  flex: 1;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1036,7 +1036,7 @@ background-color: var(--surface-btn-primary-hover);
   width: 50%;
   height: 100%;
   object-fit: cover;
-  display: block;
+  border-radius: 0 12px 12px 0;
 }
 
 /* bottom-left two smaller cards */
@@ -1432,8 +1432,15 @@ background-color: var(--surface-btn-primary-hover);
     gap: 20px;
   }
   .commitment-top {
-    flex-direction: column;
+    flex-direction: column; /* revert to normal for mobile */
   }
+
+  .commitment-top img {
+    width: 100%;
+    height: auto;
+    border-radius: 0 0 12px 12px;
+  }
+    
   .commitment-top .commitment-content,
   .commitment-top img {
     width: 100%;
