@@ -1000,9 +1000,11 @@ background-color: var(--surface-btn-primary-hover);
 .commitment-top,
 .commitment-card,
 .commitment-right .commitment-inner {
-  background: #fff; /* ubah semua jadi putih */
-  border: 1px solid var(--separator); /* gunakan token separator */
+  background-color: #ffffff !important; /* force pure white */
+  border: 1px solid var(--separator);
   border-radius: 12px;
+  box-shadow: none; /* optional: remove subtle shadow */
+  color: #000; /* ensure readable text */
 }
 
 .commitment-left {
