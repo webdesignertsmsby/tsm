@@ -1117,20 +1117,23 @@ background-color: var(--surface-btn-primary-hover);
   border-radius: 12px;
 }
 
- /* Move image to the right for the Free 24/7 Call Services card */
-.commitment-top {
-  flex-direction: row; /* default row (text left, image right) */
+/* === Force 'Free 24/7 Call Services' image to appear on the right === */
+.commitment-left .commitment-card.large {
+  display: flex;
+  flex-direction: row; /* place content and image side by side */
+  align-items: stretch;
+  overflow: hidden;
 }
 
-.commitment-top img {
-  order: 2; /* force image to appear after text */
+.commitment-left .commitment-card.large img {
+  order: 2; /* move image after text */
   width: 50%;
   height: 100%;
   object-fit: cover;
   border-radius: 0 12px 12px 0;
 }
 
-.commitment-top .commitment-content {
+.commitment-left .commitment-card.large > :not(img) {
   order: 1;
   flex: 1;
   padding: 2rem;
@@ -1473,6 +1476,16 @@ background-color: var(--surface-btn-primary-hover);
   }
   .commitment-right img {
     height: auto;
+  }
+
+  .commitment-left .commitment-card.large {
+    flex-direction: column;
+  }
+
+  .commitment-left .commitment-card.large img {
+    width: 100%;
+    height: auto;
+    border-radius: 0 0 12px 12px;
   }
   
   .footer {
