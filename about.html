@@ -1004,7 +1004,7 @@ background-color: var(--surface-btn-primary-hover);
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .commitment-left {
@@ -1012,6 +1012,14 @@ background-color: var(--surface-btn-primary-hover);
   flex-direction: column;
   gap: 32px;
 }
+
+.commitment-left,
+.commitment-right {
+  display: flex;
+  flex-direction: column;
+  height: 100%; 
+}
+
 
 .commitment-bottom {
   display: grid;
@@ -1056,13 +1064,21 @@ background-color: var(--surface-btn-primary-hover);
 }
 
 .commitment-card.small {
-  padding: 24px;
-  gap: 16px;
+  flex-direction: column;     
+  align-items: center;       
+  text-align: center;
+  margin-bottom: 12px;
 }
 
 .commitment-icon {
   font-size: 24px;
   flex-shrink: 0;
+  margin-bottom: 12px;
+}
+
+.commitment-card.small .commitment-icon svg {
+  width: 40px;                  /* sedikit lebih besar */
+  height: 40px;
 }
 
 .commitment-card h4 {
