@@ -980,115 +980,89 @@ background-color: var(--surface-btn-primary-hover);
 }
 
 /* ==== OUR COMMITMENT SECTION ==== */
-.commitment-section {
-  padding: 100px 20px;
-  background: #fff;
-  text-align: center;
-}
-
-.commitment-section h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-
-.commitment-subtitle {
-  color: #555;
-  font-size: 15px;
-  max-width: 700px;
-  margin: 0 auto 70px;
-  line-height: 1.6;
-}
-
 .commitment-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 40px;
-  align-items: stretch;
-}
-
-.commitment-left {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
+  align-items: stretch; 
 }
 
 .commitment-left,
 .commitment-right {
   display: flex;
   flex-direction: column;
+  gap: 32px;
   height: 100%; 
 }
 
-
-.commitment-bottom {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-}
-
-.commitment-card {
-  background: #fff;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.06);
-  display: flex;
-  align-items: center;
-  text-align: left;
-  gap: 0;
-}
-
 .commitment-card.large {
-  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  height: 100%;
+  overflow: hidden;
 }
 
 .commitment-card.large img {
   width: 50%;
+  height: 100%;
   object-fit: cover;
+  display: block;
+}
+
+.commitment-right .commitment-card.large.vertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   height: 100%;
 }
 
-.commitment-card.large .commitment-content {
-  padding: 32px;
-  flex: 1;
-}
-
-.commitment-card.large.vertical {
-  flex-direction: column;
-}
-
-.commitment-card.large.vertical img {
+.commitment-right .commitment-card.large.vertical img {
   width: 100%;
-  height: 250px;
+  height: 50%;
+  object-fit: cover;
+  display: block;
   border-radius: 0 0 16px 16px;
 }
 
+.commitment-bottom {
+  display: flex;
+  gap: 24px;
+  width: 100%;
+  align-items: stretch;
+}
+
 .commitment-card.small {
-  flex-direction: column;     
-  align-items: center;       
-  text-align: center;
-  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; 
+  text-align: left;        
+  padding: 20px;
+  gap: 12px;
+  flex: 1;                 
+  min-height: 140px;       
 }
 
-.commitment-icon {
-  font-size: 24px;
-  flex-shrink: 0;
-  margin-bottom: 12px;
+.commitment-card.small .commitment-icon {
+  margin: 0 0 8px 0;
+  width: auto;
+  height: auto;
+  display: block;
 }
 
-.commitment-card.small .commitment-icon svg {
-  width: 40px;                  /* sedikit lebih besar */
-  height: 40px;
+.commitment-card.small > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-
+  
 .commitment-card h4 {
   font-weight: 700;
-  font-size: 1rem;
-  margin-bottom: 6px;
+  margin: 0 0 8px;
 }
 
 .commitment-card p {
-  font-size: 0.9rem;
+  margin: 0;
   color: #444;
   line-height: 1.6;
 }
@@ -1405,6 +1379,27 @@ background-color: var(--surface-btn-primary-hover);
 
   .commitment-grid {
     grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .commitment-card.large {
+    flex-direction: column;
+  }
+
+  .commitment-card.large img,
+  .commitment-right .commitment-card.large.vertical img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .commitment-bottom {
+    flex-direction: column;
+  }
+
+  .commitment-card.small {
+    align-items: flex-start;
+    text-align: left;
   }
   
   .footer {
