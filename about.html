@@ -1450,6 +1450,27 @@ background-color: var(--surface-btn-primary-hover);
   
 /* Tablet Styles */
 @media (max-width: 1024px) {
+  .journey-right::before {
+    height: calc(100% - 60px);
+    left: 25px;
+  }
+
+   .commitment-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .commitment-left,
+  .commitment-right {
+    width: 100%;
+  }
+
+  .warranty-left h2 {
+    max-width: 100%;
+    width: 100%;
+    text-align: center; /* optional biar rapi di tengah */
+  }
   
   .footer {
     padding: 50px 0 25px;
@@ -1497,6 +1518,10 @@ background-color: var(--surface-btn-primary-hover);
   .about-section {
     padding: 60px 16px;
   }
+
+  .about-hero {
+    margin-top: 60px; 
+  }
   .about-title {
     font-size: 1.8rem;
   }
@@ -1532,10 +1557,16 @@ background-color: var(--surface-btn-primary-hover);
     padding-left: 20px;
   }
   .journey-right::before {
-    top: 40px;
-    bottom: 60px;
-    left: 24px;
+    height: calc(100% - 60px);
+    left: 25px;
   }
+
+    .journey-right::before {
+    height: calc(100% - 80px);
+    left: 20px; /* geser lebih kiri */
+  }
+
+  
   .timeline-item {
     padding-left: 32px;
     margin-bottom: 40px;
@@ -1572,6 +1603,15 @@ background-color: var(--surface-btn-primary-hover);
     margin-top: 0;
   }
 
+  .commitment-section {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .commitment-section h2 {
+    font-size: 1.75rem;
+  }
+
   .commitment-grid {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -1594,6 +1634,11 @@ background-color: var(--surface-btn-primary-hover);
   .commitment-bottom {
     grid-template-columns: 1fr;
   }
+
+  .commitment-right {
+    margin-top: 24px;
+  }
+  
   .commitment-right img {
     height: auto;
   }
