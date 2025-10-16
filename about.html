@@ -1633,7 +1633,6 @@ background-color: var(--surface-btn-primary-hover);
 
   .commitment-right {
     margin-top: 32px !important;
-    padding-top: 24px !important;
   }
   .commitment-right .commitment-inner {
     margin-top: 16px !important;
@@ -1645,12 +1644,20 @@ background-color: var(--surface-btn-primary-hover);
 
   .commitment-left .commitment-card.large {
     flex-direction: column;
+    margin-top: 24px !important;   /* space above the large card */
+    margin-bottom: 0 !important;   /* keep bottom unchanged */
+    padding-top: 0 !important;     /* don't add extra inner top padding */
   }
 
   .commitment-left .commitment-card.large img {
     width: 100%;
     height: auto;
     border-radius: 0 0 12px 12px;
+  }
+
+  /* Optional extra: ensure the stacked large card's content doesn't add extra top spacing */
+  .commitment-left .commitment-card.large > :not(img) {
+    margin-top: 0 !important;
   }
 
   .warranty-container {
