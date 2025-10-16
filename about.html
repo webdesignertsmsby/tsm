@@ -1475,10 +1475,20 @@ background-color: var(--surface-btn-primary-hover);
     margin-top: 32px !important;
   }
 
-  .warranty-left h2 {
-    max-width: 100%;
-    width: 100%;
-    text-align: center; /* optional biar rapi di tengah */
+  .warranty-container {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px; /* keep spacing consistent */
+  }
+
+  .warranty-left {
+    flex: 1.2 !important; /* make left side 20% wider than default */
+    max-width: 55% !important; /* gives heading more width */
+  }
+
+  .warranty-right {
+    flex: 0.8 !important; /* adjust right side to stay balanced */
+    max-width: 45% !important;
   }
   
   .footer {
