@@ -1190,6 +1190,76 @@ background-color: var(--surface-btn-primary-hover);
   object-fit: cover;
   border-radius: 0 0 16px 16px;
 }
+
+/* ========== WARRANTY SECTION ========== */
+.warranty-section {
+  position: relative;
+  width: 100%;
+  background-color: #002366;
+  color: #ffffff;
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+.warranty-bg {
+  position: absolute;
+  left: 100px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 420px;
+  height: 420px;
+  background: url("images/warranty-badge.svg") no-repeat center/contain;
+  opacity: 0.12;
+  z-index: 1;
+}
+
+.warranty-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 48px;
+}
+
+.warranty-left h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  max-width: 400px;
+}
+
+.warranty-right {
+  max-width: 600px;
+}
+
+.warranty-desc {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  color: #dce3f5;
+}
+
+.warranty-years .warranty-subtitle {
+  font-size: 1.25rem;
+  color: #dce3f5;
+  margin-bottom: 8px;
+}
+
+.warranty-years h3 {
+  font-size: 3rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.warranty-note {
+  font-size: 1rem;
+  color: #dce3f5;
+}
   
 /* Footer Section */
 .footer {
@@ -1535,6 +1605,29 @@ background-color: var(--surface-btn-primary-hover);
     width: 100%;
     height: auto;
     border-radius: 0 0 12px 12px;
+  }
+
+    .warranty-container {
+    flex-direction: column;
+    text-align: center;
+    gap: 32px;
+  }
+
+  .warranty-bg {
+    left: 50%;
+    top: 20%;
+    transform: translate(-50%, -20%);
+    width: 300px;
+    height: 300px;
+    opacity: 0.1;
+  }
+
+  .warranty-left h2 {
+    max-width: 100%;
+  }
+
+  .warranty-right {
+    max-width: 100%;
   }
   
   .footer {
@@ -2208,6 +2301,33 @@ stroke-linecap="round" stroke-linejoin="round"/>
           </div>
           <img src="https://i.imgur.com/tMgLLiu.png" alt="Technician Availability">
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- Warranty Section -->
+<section class="warranty-section">
+  <div class="warranty-bg"></div>
+
+  <div class="warranty-container">
+    <div class="warranty-left">
+      <h2>Warranty You Can Trust</h2>
+    </div>
+
+    <div class="warranty-right">
+      <p class="warranty-desc">
+        We are confident in the quality and durability of our machines.
+        That’s why we provide a long-term warranty to ensure our customers
+        feel secure with every purchase.
+      </p>
+
+      <div class="warranty-years">
+        <p class="warranty-subtitle">Up to</p>
+        <h3><span>5 Years</span></h3>
+        <p class="warranty-note">
+          Enjoy peace of mind with service warranty coverage of up to 5 years.
+        </p>
       </div>
     </div>
   </div>
