@@ -1559,6 +1559,32 @@ background-color: var(--surface-btn-primary-hover);
     left: 22px !important;    /* slightly align the line better */
   }
 
+  .journey-timeline {
+    position: relative;
+    margin-left: 28px; /* geser seluruh garis sedikit ke kanan */
+  }
+
+  .journey-timeline::before {
+    content: "";
+    position: absolute;
+    left: 6px; /* geser garis lebih ke kanan */
+    top: 20px; /* mulai sedikit di bawah icon pertama */
+    bottom: 80px; /* berhenti sebelum icon terakhir */
+    width: 2px;
+    background-color: #0e1d56;
+  }
+
+  .journey-item {
+    position: relative;
+    padding-left: 40px; /* sesuaikan dengan posisi garis */
+    margin-bottom: 40px;
+  }
+
+  .journey-icon {
+    position: absolute;
+    left: -6px; /* geser icon biar sejajar dengan garis */
+    top: 0;
+  }
   
   .timeline-item {
     padding-left: 32px;
