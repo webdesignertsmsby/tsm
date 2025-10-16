@@ -1555,8 +1555,9 @@ background-color: var(--surface-btn-primary-hover);
   }
 
   .journey-right::before {
-    bottom: 60px !important;  /* reduce the bottom so line stops higher */
-    left: 22px !important;    /* slightly align the line better */
+    height: calc(100% - 110px) !important; /* trims the line to stop at last icon */
+    bottom: 55px !important; /* prevents overshoot */
+    left: 27px !important; /* centers line with icon */
   }
   
   .timeline-item {
@@ -1566,6 +1567,7 @@ background-color: var(--surface-btn-primary-hover);
   .timeline-icon {
     width: 26px;
     height: 26px;
+    left: 12px !important; /* aligns icons to the new center line */
   }
   .timeline-icon svg {
     width: 14px;
