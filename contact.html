@@ -944,21 +944,11 @@ background-color: var(--surface-btn-primary-hover);
   
 /* Tablet Styles */
 @media (max-width: 1024px) {
-  .contact-content {
-    flex-direction: column;
-  }
-
-  .contact-left, .contact-right {
-    width: 100%;
-  }
-
-  .contact-right {
-    margin-top: 32px;
-  }
-
-  .contact-header h2 {
-    font-size: 2rem;
-  }
+  .contact-content { flex-direction:column; }
+  .contact-left, .contact-right { width:100%; }
+  .contact-right { margin-top:24px; }
+  /* keep contact-info as 2x2 */
+  .contact-info { grid-template-columns: repeat(2, 1fr); gap:16px 20px; }
   
   .footer {
     padding: 50px 0 25px;
@@ -1003,17 +993,12 @@ background-color: var(--surface-btn-primary-hover);
   
 /* Mobile Styles */
 @media (max-width: 768px) {
-  .contact-section {
-    padding: 60px 16px;
-  }
-
-  .contact-header h2 {
-    font-size: 1.8rem;
-  }
-
-  .btn-submit {
-    width: 100%;
-  }
+  .contact-section { padding: 40px 16px; margin-top:40px; }
+  .contact-header h2 { font-size:1.6rem; }
+  .btn-submit { width:100%; display:block; }
+  .contact-info { grid-template-columns: repeat(2, 1fr); gap:12px 12px; }
+  /* ensure the social row remains single line; if viewport too narrow it will overflow horizontally (keeps horizontal requirement) */
+  .social { overflow-x:auto; -webkit-overflow-scrolling: touch; }
   
   .footer {
     padding: 40px 0 20px;
@@ -2608,6 +2593,12 @@ closeMobileLangDropdown();
 mobileLangDropdown.querySelector('.dropdown-content').addEventListener('click',
 function(e) {
 e.stopPropagation();
+});
+
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  alert('Thank you — your message was sent (demo).');
+  this.reset();
 });
 </script>
 </body>
