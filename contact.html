@@ -634,126 +634,126 @@ background-color: var(--surface-btn-primary-hover);
 }
 }
 
-/* Contact Section */
+/* contact section base */
 .contact-section {
   padding: 80px 0;
+  margin-top: 60px; /* user requested "add margin top" */
+  font-family: 'Open Sans', sans-serif;
 }
 
-.contact-header {
-  text-align: center;
-  margin-bottom: 50px;
-}
+/* header */
+.contact-header { text-align: center; margin-bottom: 40px; }
+.contact-header h2 { font-size: 2.2rem; margin-bottom: 10px; font-weight:700; }
+.contact-header p { max-width: 720px; margin: 0 auto; color: #333; line-height:1.6; }
 
-.contact-header h2 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-}
+/* layout */
+.contact-content { display:flex; gap:40px; align-items:flex-start; flex-wrap:wrap; }
+.contact-left, .contact-right { flex:1; min-width:320px; }
 
-.contact-header p {
-  max-width: 680px;
-  margin: 0 auto;
-  color: #333;
-  line-height: 1.6;
-}
-
-/* Layout */
-.contact-content {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 40px;
-}
-
-.contact-left, .contact-right {
-  flex: 1;
-  min-width: 320px;
-}
-
-/* Form */
-.contact-form label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: 600;
-}
-
+/* form */
+.contact-form label { display:block; margin-bottom:8px; font-weight:600; color: #111; }
 .contact-form input,
 .contact-form textarea {
-  width: 100%;
-  padding: 12px 16px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 20px;
+  width:100%;
+  padding:12px 16px;
+  border:1px solid #e2e2e2;
+  border-radius:8px;
+  margin-bottom:18px;
+  font-size:1rem;
+  line-height:1.6;
+  font-family: 'Open Sans', sans-serif; /* ensure same font */
+  color: #111;
+  box-sizing:border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #fff;
+}
+
+/* specifically ensure textarea matches input exactly */
+.contact-form textarea {
+  font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
-}
-
-.btn-submit {
-  background-color: #fe0000;
-  color: #fff;
-  border: none;
-  padding: 12px 24px;
-  border-radius: 6px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-submit:hover {
-  background-color: #c70000;
-}
-
-/* Info */
-.info-item {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 24px;
-}
-
-.info-icon {
-  width: 26px;
-  height: 26px;
-  color: #fe0000;
-  margin-right: 12px;
-  flex-shrink: 0;
-}
-
-.info-item h4 {
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.info-item p {
-  color: #333;
   line-height: 1.6;
+  min-height:120px;
+  resize: vertical;
 }
 
-/* Social */
+/* submit */
+.btn-submit {
+  background:#fe0000;
+  color:#fff;
+  border:none;
+  padding:12px 26px;
+  border-radius:999px;
+  font-weight:700;
+  cursor:pointer;
+}
+.btn-submit:hover { background:#c70000; }
+
+/* contact info grid: 2x2 on all breakpoints (desktop + mobile per request) */
+.contact-info {
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:20px 32px;
+}
+
+/* each info card vertical: icon -> title -> text */
+.info-item {
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start; /* left align */
+  text-align:left;
+  padding: 6px 0;
+}
+.info-icon {
+  width:36px;
+  height:36px;
+  color: #fe0000;
+  margin-bottom:10px;
+  flex-shrink:0;
+}
+
+/* title and paragraph */
+.info-item h4 {
+  margin:0 0 6px 0;
+  font-size:1rem;
+  font-weight:700;
+  color:#0d0d0d;
+}
+.info-item p {
+  margin:0;
+  color:#333;
+  line-height:1.6;
+  font-size:0.95rem;
+}
+
+/* SOCIAL row: strictly horizontal, no-wrap */
 .social {
-  margin-top: 30px;
+  display:flex;
+  align-items:center;
+  gap:18px;
+  margin-top:28px;
+  flex-wrap:nowrap;      /* enforce single horizontal row */
+  justify-content:flex-start;
 }
 
-.social span {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
+/* follow label */
+.social-follow { font-weight:600; color:#111; }
 
-.social-icons {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
+/* icons area */
+.social-icons { display:flex; gap:12px; align-items:center; }
 
-.social-icons img {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-  transition: transform 0.2s ease;
-}
+/* social icon anchor and svg */
+.social-link { display:inline-flex; align-items:center; justify-content:center; text-decoration:none; }
+.social-icon { width:26px; height:26px; color:#fe0000; transition: transform .15s ease, color .15s ease; }
+.social-link:hover .social-icon { transform:scale(1.1); color:#c70000; }
 
-.social-icons img:hover {
-  transform: scale(1.1);
+/* Feaspack branding on the right of the icons */
+.social-brand-link {
+  font-weight:600;
+  color:#0d0d0d;
+  text-decoration: none;
 }
 
 /* Footer Section */
