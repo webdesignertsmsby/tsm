@@ -3924,35 +3924,42 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-// ======================
+// =====================
 // Render Related Products
-// ======================
+// =====================
 
-// Assume 'product' is the currently selected product (you already have this logic)
-const relatedContainer = document.getElementById('botFeaturedTrack');
+const relatedContainer = document.getElementById("botFeaturedTrack");
 
-if (product && relatedContainer) {
+if (product && relatedContainer && product.relatedProducts) {
   const relatedItems = product.relatedProducts
     .map(id => productData.find(p => p.id === id))
-    .filter(Boolean); // filter out undefined if ID not found
+    .filter(Boolean);
 
-  relatedContainer.innerHTML = relatedItems.map(p => `
-    <div class="bot-product-card">
-      <a href="product-detail.html?id=${p.id}">
-        <div class="bot-image-wrap">
-          <img src="${p.image}" alt="${p.title}">
-        </div>
-        <div class="bot-product-info">
-          <h3>${p.title}</h3>
-          <div class="bot-product-tags">
-            <span class="bot-product-tag">${p.category}</span>
-            <span class="bot-product-tag secondary">${p.subcategory}</span>
+  if (relatedItems.length > 0) {
+    relatedContainer.innerHTML = relatedItems.map(p => `
+      <div class="bot-product-card">
+        <a href="product-detail.html?id=${p.id}">
+          <div class="bot-image-wrap">
+            <img src="${p.image}" alt="${p.title}">
           </div>
-        </div>
-      </a>
-    </div>
-  `).join('');
+          <div class="bot-product-info">
+            <h3>${p.title}</h3>
+            <div class="bot-product-tags">
+              <span class="bot-product-tag">${p.category}</span>
+              <span class="bot-product-tag secondary">${p.subcategory}</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    `).join('');
+  } else {
+    // Hide the section if no related items
+    document.querySelector(".bot-featured-products").style.display = "none";
+  }
+} else {
+  document.querySelector(".bot-featured-products").style.display = "none";
 }
+
 
 
 
