@@ -3694,7 +3694,8 @@ const productData = [
 ],
 maintenance: [
   { task: "", frequency: "", tools: "" }
-]
+],
+    relatedProducts: [5, 8, 9]
   },
   {
     id: 5,
@@ -3734,7 +3735,8 @@ maintenance: [
       { label: "Film thickness", value: "0.04 - 0.08mm" },
       { label: "Packaging Materials", value: "Laminate Plastic Film (OPP/CPP.OPP/CE.MST/PE)" },
       { label: "Packaging Speed", value: "10 - 70 bag per minute" }
-    ]
+    ],
+    relatedProducts: [1, 8, 9]
   },
   {
     category: "Power and Control System",
@@ -3800,7 +3802,8 @@ maintenance: [
 ],
 maintenance: [
   { task: "", frequency: "", tools: "" }
-]
+],
+    relatedProducts: [1, 5, 9]
   }
   // dst...
 ];
@@ -3921,38 +3924,36 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-  // =======================
-// Bottom Featured Products
-// =======================
+// ======================
+// Render Related Products
+// ======================
 
-// Pilih produk dari productData berdasarkan ID
-const featuredIds = [2, 3, 4]; // <<== EDIT di sini untuk pilih produk by id
-const botTrack = document.getElementById('botFeaturedTrack');
+// Assume 'product' is the currently selected product (you already have this logic)
+const relatedContainer = document.getElementById('botFeaturedTrack');
 
-if (botTrack) {
-  featuredIds.forEach(id => {
-    const product = productData.find(p => p.id === id);
-    if (product) {
-      const card = document.createElement('div');
-      card.classList.add('bot-product-card');
-      card.innerHTML = `
-        <a href="#">
-          <div class="bot-image-wrap">
-            <img src="${product.image}" alt="${product.title}">
+if (product && relatedContainer) {
+  const relatedItems = product.relatedProducts
+    .map(id => productData.find(p => p.id === id))
+    .filter(Boolean); // filter out undefined if ID not found
+
+  relatedContainer.innerHTML = relatedItems.map(p => `
+    <div class="bot-product-card">
+      <a href="product-detail.html?id=${p.id}">
+        <div class="bot-image-wrap">
+          <img src="${p.image}" alt="${p.title}">
+        </div>
+        <div class="bot-product-info">
+          <h3>${p.title}</h3>
+          <div class="bot-product-tags">
+            <span class="bot-product-tag">${p.category}</span>
+            <span class="bot-product-tag secondary">${p.subcategory}</span>
           </div>
-          <div class="bot-product-info">
-            <h3>${product.title}</h3>
-            <div class="bot-product-tags">
-              <span class="bot-product-tag">${product.category}</span>
-              <span class="bot-product-tag secondary">${product.subcategory}</span>
-            </div>
-          </div>
-        </a>
-      `;
-      botTrack.appendChild(card);
-    }
-  });
+        </div>
+      </a>
+    </div>
+  `).join('');
 }
+
 
 
 </script>
