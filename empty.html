@@ -735,70 +735,51 @@ background-color: var(--surface-btn-primary-hover);
   transition: transform 0.3s ease;
 }
 
-.empty-discover .bot-product-info {
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-grow: 1;
-}
-
 .empty-discover .bot-product-info h3 {
-  font-size: 14px;
-  line-height: 1.4;
-  color: var(--text-primary);
-  margin-bottom: 8px;
-}
-
-.empty-discover .bot-product-tags {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.empty-discover .bot-product-tag {
-  display: inline-block;
-  padding: 6px 12px;
-  font-size: 12px;
-  border-radius: 12px;
-  background: var(--surface-background, #f5f5f5);
-  color: var(--text-secondary, #555);
-}
-
-.empty-discover .bot-product-tag.secondary {
-  background: rgba(0, 0, 0, 0.05);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-high-emphasize);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;     /* jumlah baris maksimum */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  margin: 0;
+  line-height: 1.2;
+  text-decoration: none; /* remove underline */
 }
 
   /* Style container for tags */
 .empty-discover .bot-product-tags {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap;
+  margin-top: 6px;
 }
 
 /* Category tag */
 .empty-discover .bot-product-tag {
+  font-size: 13px;
+  font-weight: 400;
+  text-transform: uppercase;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: #fceaea; /* soft pink */
+  color: #b23b3b;
   display: inline-block;
-  padding: 6px 12px;
-  font-size: 12px;
-  font-weight: 500;
-  border-radius: 12px;
-  background: rgba(0, 0, 0, 0.05);  /* light background for category */
-  color: var(--text-secondary, #555);
 }
-
+  
 /* Subcategory tag */
 .empty-discover .bot-product-tag.secondary {
-  background: rgba(0, 0, 0, 0.1);   /* slightly darker background for subcategory */
-  color: var(--text-primary, #333);
+  background: #e7ecf7; /* soft blue */
+  color: var(--brand-secondary, #1b3c88);
 }
 
 /* Remove underline from all text links under .empty-discover */
 .empty-discover a {
   text-decoration: none;
 }
-
-
 
   /* Footer Section */
 .footer {
