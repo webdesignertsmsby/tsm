@@ -1223,9 +1223,9 @@ background-color: var(--surface-btn-primary-hover);
 }
 
 /* title */
-.bot-product-card h3 {
+.bot-product-card .bot-product-info h3 {
   
-  font-size: 22px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--text-high-emphasize);
   display: -webkit-box;
@@ -3940,7 +3940,7 @@ if (product && relatedContainer && product.relatedProducts) {
             <img src="${p.image}" alt="${p.title}">
           </div>
           <div class="bot-product-info">
-            <h6>${p.title}</h6>
+            <h3>${p.title}</h3>
             <div class="bot-product-tags">
               <span class="bot-product-tag">${p.category}</span>
               <span class="bot-product-tag secondary">${p.subcategory}</span>
