@@ -693,6 +693,8 @@ background-color: var(--surface-btn-primary-hover);
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 24px;
+  text-decoration: none;       /* remove underline */
+  border: none;                /* ensure no decorative underline */
 }
 
 .empty-discover-grid {
@@ -767,11 +769,30 @@ background-color: var(--surface-btn-primary-hover);
   background: rgba(0, 0, 0, 0.05);
 }
 
-.empty-discover h3,
-.empty-discover h3 a {
-  text-decoration: none !important; /* remove underline */
-  color: inherit;
+  /* Style container for tags */
+.empty-discover .bot-product-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
 }
+
+/* Category tag */
+.empty-discover .bot-product-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.05);  /* light background for category */
+  color: var(--text-secondary, #555);
+}
+
+/* Subcategory tag */
+.empty-discover .bot-product-tag.secondary {
+  background: rgba(0, 0, 0, 0.1);   /* slightly darker background for subcategory */
+  color: var(--text-primary, #333);
+}
+
 
   /* Footer Section */
 .footer {
