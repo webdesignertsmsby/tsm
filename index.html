@@ -3002,7 +3002,7 @@ stroke-linecap="round" stroke-linejoin="round"/>
     <div class="video-wrapper" id="videoWrapper">
       <!-- Thumbnail -->
       <div class="video-thumbnail" id="videoThumbnail"
-        style="background-image: url('https://img.youtube.com/vi/954B1_N8pCw/maxresdefault.jpg');">
+        style="background-image: url('https://img.youtube.com/vi/954B1_N8pCw/hqdefault.jpg');">
         <div class="video-overlay">
           <div class="video-play-button" id="playButton">
             <svg viewBox="0 0 24 24">
@@ -4602,20 +4602,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }); 
 
-document.addEventListener("DOMContentLoaded", function () {
-  const thumbnail = document.getElementById("videoThumbnail");
-  const iframe = document.getElementById("videoIframe");
-
-  thumbnail.addEventListener("click", function () {
-    thumbnail.style.display = "none";
-    iframe.style.display = "block";
-
-    // tambahkan autoplay
-    const src = iframe.getAttribute("src");
-    if (!src.includes("autoplay=1")) {
-      iframe.src = src + (src.includes("?") ? "&" : "?") + "autoplay=1";
-    }
-  });
 });
   
 </script>
