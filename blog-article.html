@@ -704,18 +704,41 @@ background-color: var(--surface-btn-primary-hover);
 }
 
 /* Title + Meta */
+/* Article Header */
+.article-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
 .article-title {
   font-size: 36px;
   font-weight: 700;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .article-meta {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  margin-bottom: 30px;
+  align-items: center;
+  max-width: 400px;
+  margin: 0 auto 40px;
+}
+
+.article-date {
+  font-size: 16px;
+  color: var(--text-low-emphasize);
+}
+
+.article-share a {
+  color: var(--text-high-emphasize);
+  margin-left: 12px;
+  font-size: 18px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.article-share a:hover {
+  color: var(--brand-primary);
 }
 
 .article-date {
@@ -1094,6 +1117,10 @@ background-color: var(--surface-btn-primary-hover);
   }
   .article-title {
     font-size: 28px;
+  }
+  .article-meta {
+    flex-direction: column;
+    gap: 12px;
   }
   .article-content {
     padding: 0 16px;
@@ -1478,27 +1505,19 @@ stroke-linecap="round" stroke-linejoin="round"/>
   </div>
 </section>
 
-    <!-- Title -->
-    <h1 class="article-title" id="articleTitle"></h1>
-
-    <!-- Date + Share -->
-    <div class="article-meta">
-      <p class="article-date" id="articleDate"></p>
-      <div class="article-share">
-        <a id="shareLink" title="Copy link">
-          <i class="fa-solid fa-link"></i>
-        </a>
-        <a id="shareLinkedIn" title="Share on LinkedIn" target="_blank">
-          <i class="fa-brands fa-linkedin-in"></i>
-        </a>
-        <a id="shareX" title="Share on X" target="_blank">
-          <i class="fa-brands fa-x-twitter"></i>
-        </a>
-        <a id="shareFacebook" title="Share on Facebook" target="_blank">
-          <i class="fa-brands fa-facebook-f"></i>
-        </a>
-      </div>
+    <!-- Article Header -->
+<div class="article-header">
+  <h1 class="article-title" id="articleTitle"></h1>
+  <div class="article-meta">
+    <p class="article-date" id="articleDate"></p>
+    <div class="article-share">
+      <a id="shareLink" title="Copy link"><i class="fa-solid fa-link"></i></a>
+      <a id="shareLinkedIn" title="Share on LinkedIn" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+      <a id="shareX" title="Share on X" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+      <a id="shareFacebook" title="Share on Facebook" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
     </div>
+  </div>
+</div>
 
     <!-- Hero Image -->
     <div class="article-hero">
