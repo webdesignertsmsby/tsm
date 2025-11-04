@@ -640,6 +640,155 @@ background-color: var(--surface-btn-primary-hover);
 }
 }
 
+/* Article Section */
+.article-section {
+  padding: 120px 0 80px;
+}
+
+.article-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-high-emphasize);
+  font-weight: 500;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.back-btn:hover {
+  opacity: 0.7;
+}
+
+.article-nav svg {
+  width: 18px;
+  height: 18px;
+}
+
+.breadcrumb {
+  color: var(--text-low-emphasize);
+  font-size: 14px;
+}
+.breadcrumb a {
+  color: var(--text-low-emphasize);
+  text-decoration: none;
+}
+.breadcrumb span {
+  margin: 0 5px;
+}
+
+/* Title + Meta */
+.article-title {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.article-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+}
+
+.article-date {
+  font-size: 16px;
+  color: var(--text-low-emphasize);
+}
+
+.article-share a {
+  color: var(--text-high-emphasize);
+  margin-left: 12px;
+  font-size: 18px;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.article-share a:hover {
+  color: var(--brand-primary);
+}
+
+/* Hero Image */
+.article-hero img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 40px;
+}
+
+/* Content */
+.article-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.article-content h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 40px 0 15px;
+}
+
+.article-content p {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--text-high-emphasize);
+  margin-bottom: 20px;
+}
+
+.article-content img {
+  width: 100%;
+  border-radius: 12px;
+  margin: 30px 0 8px;
+}
+
+.article-content .caption {
+  text-align: center;
+  font-size: 14px;
+  color: var(--text-low-emphasize);
+  margin-bottom: 30px;
+}
+
+.article-content blockquote {
+  font-size: 18px;
+  font-style: italic;
+  color: var(--text-high-emphasize);
+  border-left: 4px solid var(--brand-primary);
+  padding-left: 20px;
+  margin: 40px 0;
+}
+
+/* Share bottom */
+.article-share-bottom {
+  margin-top: 60px;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.article-share-bottom p {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Related posts */
+.related-section {
+  padding: 80px 0;
+  background-color: var(--surface-background);
+}
+
+.related-section h2 {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+  
 /* Footer Section */
 .footer {
   background-color: var(--surface-background);
@@ -912,6 +1061,22 @@ background-color: var(--surface-btn-primary-hover);
 }
 
 @media (max-width: 480px) {
+  .article-title {
+    font-size: 28px;
+  }
+  .article-content {
+    padding: 0 16px;
+  }
+  .article-share a {
+    font-size: 16px;
+  }
+  .article-hero img {
+    border-radius: 10px;
+  }
+  .related-section h2 {
+    font-size: 24px;
+  }
+  
   .footer {
     padding: 30px 0 15px;
   }
@@ -1258,6 +1423,84 @@ stroke-linecap="round" stroke-linejoin="round"/>
 <a href="contact.html" class="mobile-contact-btn">CONTACT US</a>
 </div>
 </div>
+
+<!-- Blog Article Section -->
+<section class="article-section" id="articleSection">
+  <div class="container">
+
+    <!-- Back button & breadcrumb -->
+    <div class="article-nav">
+      <a href="blog.html" class="back-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        </svg>
+        Back
+      </a>
+      <div class="breadcrumb">
+        <a href="blog.html">Blog</a> <span>/</span> <span>Article</span>
+      </div>
+    </div>
+
+    <!-- Title -->
+    <h1 class="article-title" id="articleTitle"></h1>
+
+    <!-- Date + Share -->
+    <div class="article-meta">
+      <p class="article-date" id="articleDate"></p>
+      <div class="article-share">
+        <a id="shareLink" title="Copy link">
+          <i class="fa-solid fa-link"></i>
+        </a>
+        <a id="shareLinkedIn" title="Share on LinkedIn" target="_blank">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a id="shareX" title="Share on X" target="_blank">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a id="shareFacebook" title="Share on Facebook" target="_blank">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Hero Image -->
+    <div class="article-hero">
+      <img id="articleHero" alt="">
+    </div>
+
+    <!-- Main Content -->
+    <div class="article-content" id="articleContent"></div>
+
+    <!-- Share post (bottom) -->
+    <div class="article-share-bottom">
+      <p>Share this post</p>
+      <div class="article-share">
+        <a id="shareLinkBottom" title="Copy link">
+          <i class="fa-solid fa-link"></i>
+        </a>
+        <a id="shareLinkedInBottom" target="_blank">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a id="shareXBottom" target="_blank">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a id="shareFacebookBottom" target="_blank">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Related Posts -->
+<section class="related-section">
+  <div class="container">
+    <h2>Related posts</h2>
+    <div class="blog-grid" id="relatedGrid"></div>
+  </div>
+</section>
+
 
 <!-- Footer Section -->
 <footer class="footer">
@@ -2367,6 +2610,117 @@ mobileLangDropdown.querySelector('.dropdown-content').addEventListener('click',
 function(e) {
 e.stopPropagation();
 });
+
+const blogArticles = [
+    {
+      id: 1,
+      title: "Blog title heading will go here",
+      date: "8 Aug 2025",
+      heroImg: "https://i.imgur.com/X7zO7fl.jpeg",
+      content: `
+        <h3>Introduction</h3>
+        <p>Mi tincidunt elit, id iaculis ligula...</p>
+        <img src="https://i.imgur.com/X7zO7fl.jpeg" alt="">
+        <p class="caption">Image caption goes here</p>
+        <p>Dolor enim eu tortor urna sed duis nulla. Aliquam vestibulum, nulla odio nisl vitae...</p>
+        <blockquote>"Ipsum sit mattis nulla quam nulla. Gravida id gravida ac enim mauris id."</blockquote>
+        <h3>Conclusion</h3>
+        <p>Morbi sodales imperdiet in ipsum, adipiscing elit dui lectus...</p>
+      `
+    },
+    {
+      id: 2,
+      title: "Another sample article",
+      date: "10 Aug 2025",
+      heroImg: "https://i.imgur.com/2pN0uFK.jpeg",
+      content: `
+        <h3>Overview</h3>
+        <p>Lorem ipsum dolor sit amet...</p>
+      `
+    }
+  ];
+
+  const relatedPosts = [
+    {
+      id: 1,
+      img: "https://i.imgur.com/X7zO7fl.jpeg",
+      date: "8 Aug 2025",
+      title: "Blog title heading will go here",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    },
+    {
+      id: 2,
+      img: "https://i.imgur.com/2pN0uFK.jpeg",
+      date: "8 Aug 2025",
+      title: "Blog title heading will go here",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    },
+    {
+      id: 3,
+      img: "https://i.imgur.com/sWMSByt.jpeg",
+      date: "8 Aug 2025",
+      title: "Blog title heading will go here",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    }
+  ];
+
+  // Get article ID from URL
+  const params = new URLSearchParams(window.location.search);
+  const id = parseInt(params.get("id"));
+  const article = blogArticles.find(a => a.id === id);
+
+  if (article) {
+    document.getElementById("articleTitle").textContent = article.title;
+    document.getElementById("articleDate").textContent = article.date;
+    document.getElementById("articleHero").src = article.heroImg;
+    document.getElementById("articleContent").innerHTML = article.content;
+  }
+
+  // Share links
+  const currentUrl = window.location.href;
+  const encodedUrl = encodeURIComponent(currentUrl);
+  const shareLinkedIn = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}`;
+  const shareX = `https://twitter.com/intent/tweet?url=${encodedUrl}`;
+  const shareFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+
+  document.getElementById("shareLinkedIn").href = shareLinkedIn;
+  document.getElementById("shareLinkedInBottom").href = shareLinkedIn;
+  document.getElementById("shareX").href = shareX;
+  document.getElementById("shareXBottom").href = shareX;
+  document.getElementById("shareFacebook").href = shareFacebook;
+  document.getElementById("shareFacebookBottom").href = shareFacebook;
+
+  // Copy link logic
+  const copyLinks = [document.getElementById("shareLink"), document.getElementById("shareLinkBottom")];
+  copyLinks.forEach(btn => {
+    btn.addEventListener("click", () => {
+      navigator.clipboard.writeText(currentUrl);
+      alert("Link copied to clipboard!");
+    });
+  });
+
+  // Render related posts
+  const relatedGrid = document.getElementById("relatedGrid");
+  relatedPosts.forEach(post => {
+    const card = document.createElement("div");
+    card.className = "blog-card";
+    card.innerHTML = `
+      <img src="${post.img}" alt="${post.title}" class="blog-card-image">
+      <div class="blog-card-content">
+        <p class="blog-card-date">${post.date}</p>
+        <h3 class="blog-card-title">${post.title}</h3>
+        <p class="blog-card-desc">${post.desc}</p>
+        <a href="blog-article.html?id=${post.id}" class="blog-read-more">
+          Read more
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    `;
+    relatedGrid.appendChild(card);
+  });
+
 </script>
 </body>
 </html>
