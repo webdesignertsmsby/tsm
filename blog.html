@@ -640,6 +640,104 @@ background-color: var(--surface-btn-primary-hover);
 }
 }
 
+/* Blog Section */
+.blog-section {
+  padding: 100px 0 60px;
+  background-color: var(--surface-background);
+}
+
+.blog-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.blog-header h2 {
+  font-size: 40px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.blog-header p {
+  font-size: 18px;
+  color: var(--text-low-emphasize);
+}
+
+/* Blog Grid */
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+/* Blog Card */
+.blog-card {
+  background: var(--neutral-0);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+.blog-card-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.blog-card-content {
+  padding: 20px 24px 30px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.blog-card-date {
+  font-size: 14px;
+  color: var(--text-low-emphasize);
+  margin-bottom: 8px;
+}
+
+.blog-card-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text-high-emphasize);
+  margin-bottom: 10px;
+}
+
+.blog-card-desc {
+  font-size: 15px;
+  color: var(--text-low-emphasize);
+  flex-grow: 1;
+  margin-bottom: 20px;
+}
+
+.blog-read-more {
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--brand-primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.3s ease;
+}
+
+.blog-read-more:hover {
+  color: var(--primary-50);
+}
+
+.blog-read-more svg {
+  width: 14px;
+  height: 14px;
+}
+  
 /* Footer Section */
 .footer {
   background-color: var(--surface-background);
@@ -828,7 +926,16 @@ background-color: var(--surface-btn-primary-hover);
   
 /* Tablet Styles */
 @media (max-width: 1024px) {
-  	.footer {
+  .blog-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+
+  .blog-card-content {
+    padding: 18px;
+  }
+  
+  .footer {
     padding: 50px 0 25px;
     margin-top: 80px;
   }
@@ -871,6 +978,19 @@ background-color: var(--surface-btn-primary-hover);
   
 /* Mobile Styles */
 @media (max-width: 768px) {
+  .blog-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .blog-header h2 {
+    font-size: 32px;
+  }
+
+  .blog-header p {
+    font-size: 16px;
+  }
+  
   .footer {
     padding: 40px 0 20px;
     margin-top: 60px;
@@ -1258,6 +1378,18 @@ stroke-linecap="round" stroke-linejoin="round"/>
 <a href="contact.html" class="mobile-contact-btn">CONTACT US</a>
 </div>
 </div>
+
+<!-- Blog Section -->
+<section class="blog-section" id="blogSection">
+  <div class="container">
+    <div class="blog-header">
+      <h2>Latest Articles & Insights</h2>
+      <p>Stay updated with Feaspack. Featuring machine technology news, production tips, and industry trends.</p>
+    </div>
+    <div class="blog-grid" id="blogGrid"></div>
+  </div>
+</section>
+
 
 <!-- Footer Section -->
 <footer class="footer">
@@ -2367,6 +2499,75 @@ mobileLangDropdown.querySelector('.dropdown-content').addEventListener('click',
 function(e) {
 e.stopPropagation();
 });
+
+  const blogPosts = [
+    {
+      id: 1,
+      img: "https://i.imgur.com/X7zO7fl.jpeg",
+      date: "8 Aug 2025",
+      title: "Blog title heading will go here",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    },
+    {
+      id: 2,
+      img: "https://i.imgur.com/2pN0uFK.jpeg",
+      date: "8 Aug 2025",
+      title: "Blog title heading will go here",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    },
+    {
+      id: 3,
+      img: "https://i.imgur.com/sWMSByt.jpeg",
+      date: "8 Aug 2025",
+      title: "Blog title heading will go here",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    },
+    {
+      id: 4,
+      img: "https://i.imgur.com/X7zO7fl.jpeg",
+      date: "8 Aug 2025",
+      title: "Blog title heading will go here",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    },
+    {
+      id: 5,
+      img: "https://i.imgur.com/2pN0uFK.jpeg",
+      date: "8 Aug 2025",
+      title: "Blog title heading will go here",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    },
+    {
+      id: 6,
+      img: "https://i.imgur.com/sWMSByt.jpeg",
+      date: "8 Aug 2025",
+      title: "Blog title heading will go here",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+    },
+  ];
+
+  const blogGrid = document.getElementById("blogGrid");
+
+  blogPosts.forEach(post => {
+    const card = document.createElement("div");
+    card.className = "blog-card";
+
+    card.innerHTML = `
+      <img src="${post.img}" alt="${post.title}" class="blog-card-image">
+      <div class="blog-card-content">
+        <p class="blog-card-date">${post.date}</p>
+        <h3 class="blog-card-title">${post.title}</h3>
+        <p class="blog-card-desc">${post.desc}</p>
+        <a href="blog-article.html?id=${post.id}" class="blog-read-more">
+          Read more
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    `;
+
+    blogGrid.appendChild(card);
+  });
 </script>
 </body>
 </html>
