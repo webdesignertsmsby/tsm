@@ -645,42 +645,62 @@ background-color: var(--surface-btn-primary-hover);
   padding: 120px 0 80px;
 }
 
-.article-nav {
+.breadcrumb-section {
+  padding: 40px 0;
+  background-color: var(--surface-background);
+  border-bottom: none;
+}
+
+.breadcrumb-nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 30px;
+  gap: 16px;
 }
 
-.back-btn {
-  display: inline-flex;
+.breadcrumb-back {
+  display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--separator);
+  border-radius: 50%;
+  background-color: var(--surface-background);
   color: var(--text-high-emphasize);
-  font-weight: 500;
-  text-decoration: none;
-  transition: opacity 0.3s ease;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.back-btn:hover {
-  opacity: 0.7;
+.breadcrumb-back:hover {
+  background-color: var(--surface-card);
+  transform: translateX(-2px);
 }
 
-.article-nav svg {
-  width: 18px;
-  height: 18px;
+.breadcrumb-trail {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 16px;
 }
 
-.breadcrumb {
+.breadcrumb-item {
   color: var(--text-low-emphasize);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.breadcrumb-item:hover {
+  color: var(--brand-primary);
+}
+
+.breadcrumb-item.current {
+  color: var(--text-high-emphasize);
+  font-weight: 600;
+}
+
+.breadcrumb-separator {
+  color: var(--text-disabled);
   font-size: 14px;
-}
-.breadcrumb a {
-  color: var(--text-low-emphasize);
-  text-decoration: none;
-}
-.breadcrumb span {
-  margin: 0 5px;
 }
 
 /* Title + Meta */
@@ -1061,6 +1081,17 @@ background-color: var(--surface-btn-primary-hover);
 }
 
 @media (max-width: 480px) {
+  .breadcrumb-section {
+    padding: 20px 0;
+  }
+  .breadcrumb-back {
+    width: 36px;
+    height: 36px;
+  }
+  .breadcrumb-trail {
+    font-size: 14px;
+    gap: 10px;
+  }
   .article-title {
     font-size: 28px;
   }
@@ -1429,17 +1460,23 @@ stroke-linecap="round" stroke-linejoin="round"/>
   <div class="container">
 
     <!-- Back button & breadcrumb -->
-    <div class="article-nav">
-      <a href="blog.html" class="back-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+    <section class="breadcrumb-section">
+  <div class="container">
+    <nav class="breadcrumb-nav">
+      <button onclick="history.back()" class="breadcrumb-back" aria-label="Back">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M19 12H5M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         </svg>
-        Back
-      </a>
-      <div class="breadcrumb">
-        <a href="blog.html">Blog</a> <span>/</span> <span>Article</span>
+      </button>
+
+      <div class="breadcrumb-trail">
+        <a href="blog.html" class="breadcrumb-item">Blog</a>
+        <span class="breadcrumb-separator">></span>
+        <span class="breadcrumb-item current">Article</span>
       </div>
-    </div>
+    </nav>
+  </div>
+</section>
 
     <!-- Title -->
     <h1 class="article-title" id="articleTitle"></h1>
