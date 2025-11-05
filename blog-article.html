@@ -2682,6 +2682,29 @@ const blogArticles = [
     });
   });
 
+   // Get article ID or slug from URL
+  const params = new URLSearchParams(window.location.search);
+  const articleId = parseInt(params.get("id"), 10) || 1;
+
+  // Find matching article
+  const article = blogArticles.find(a => a.id === articleId);
+
+  if (article) {
+    // Set document <title> (browser tab)
+    document.title = article.title;
+
+    // Update page header (the H1)
+    const titleEl = document.getElementById("articleTitle");
+    if (titleEl) titleEl.textContent = article.title;
+
+    // Update breadcrumb
+    const breadcrumbEl = document.querySelector(".breadcrumb-item.current");
+    if (breadcrumbEl) breadcrumbEl.textContent = article.title;
+  } else {
+    // Fallback: if not found
+    document.title = "Article Not Found";
+  }
+
 
 </script>
 </body>
