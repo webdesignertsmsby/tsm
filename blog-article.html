@@ -797,6 +797,7 @@ background-color: var(--surface-btn-primary-hover);
   margin-bottom: 10px;
 }
 
+/* --- Related Posts Section --- */
 .related-posts-section {
   padding: 80px 0;
   background-color: var(--surface-background);
@@ -809,12 +810,13 @@ background-color: var(--surface-btn-primary-hover);
   text-align: left;
 }
 
-.related-grid {
+.blog-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
 }
 
+/* --- Blog Card --- */
 .blog-card {
   background: var(--surface-card);
   border-radius: 12px;
@@ -830,28 +832,28 @@ background-color: var(--surface-btn-primary-hover);
 .blog-card-image {
   width: 100%;
   aspect-ratio: 16 / 9;
-  background-size: cover;
-  background-position: center;
+  object-fit: cover;
+  display: block;
 }
 
 .blog-card-content {
   padding: 20px;
 }
 
-.blog-card-content .blog-date {
+.blog-card-date {
   font-size: 14px;
   color: var(--text-low-emphasize);
   margin-bottom: 6px;
 }
 
-.blog-card-content .blog-title {
+.blog-card-title {
   font-size: 18px;
   font-weight: 600;
   color: var(--text-high-emphasize);
   margin-bottom: 10px;
 }
 
-.blog-card-content .blog-desc {
+.blog-card-desc {
   font-size: 15px;
   color: var(--text-low-emphasize);
   display: -webkit-box;
@@ -860,13 +862,20 @@ background-color: var(--surface-btn-primary-hover);
   overflow: hidden;
 }
 
-.blog-card-content .blog-readmore {
+.blog-read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
   color: var(--brand-primary);
   font-weight: 500;
   font-size: 15px;
-  display: inline-block;
-  margin-top: 10px;
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.blog-read-more:hover {
+  color: var(--brand-primary-dark, #0060df);
 }
   
 /* Footer Section */
@@ -1164,8 +1173,8 @@ background-color: var(--surface-btn-primary-hover);
   .article-hero img {
     border-radius: 10px;
   }
-  .related-section h2 {
-    font-size: 24px;
+  .blog-grid {
+    grid-template-columns: 1fr;
   }
   
   .footer {
@@ -2778,9 +2787,20 @@ const blogArticles = [
   });
 
   document.addEventListener("DOMContentLoaded", () => {
-  // Render related posts
+  // --- Render Related Posts ---
+function renderRelatedPosts() {
   const relatedGrid = document.getElementById("relatedGrid");
   if (!relatedGrid) return;
+
+  // Clear any existing cards
+  relatedGrid.innerHTML = "";
+
+  // If you already have a relatedPosts array, we’ll use that.
+  // Otherwise, show placeholder message.
+  if (!Array.isArray(relatedPosts) || relatedPosts.length === 0) {
+    relatedGrid.innerHTML = `<p class="no-related">No related posts available.</p>`;
+    return;
+  }
 
   relatedPosts.forEach(post => {
     const card = document.createElement("div");
@@ -2801,6 +2821,10 @@ const blogArticles = [
     `;
     relatedGrid.appendChild(card);
   });
+}
+
+// Call the function after article content loads
+renderRelatedPosts();
 });
 
 
