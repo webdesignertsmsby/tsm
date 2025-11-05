@@ -2561,7 +2561,7 @@ e.stopPropagation();
   blogPosts.forEach(post => {
     const card = document.createElement("div");
     card.className = "blog-card";
-
+    card.href = `blog-article.html?id=${post.id}`;
     card.innerHTML = `
       <img src="${post.img}" alt="${post.title}" class="blog-card-image">
       <div class="blog-card-content">
