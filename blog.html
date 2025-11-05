@@ -2562,20 +2562,28 @@ e.stopPropagation();
   const blogGrid = document.getElementById("blogGrid");
 
   blogPosts.forEach(post => {
-  const card = document.createElement("a");
+  const card = document.createElement("div");
   card.className = "blog-card";
-  card.href = `blog-article.html?id=${post.id}`;
+
   card.innerHTML = `
+    <a href="blog-article.html?id=${post.id}">
     <img src="${post.img}" alt="${post.title}" class="blog-card-image">
     <div class="blog-card-content">
       <p class="blog-card-date">${post.date}</p>
       <h3 class="blog-card-title">${post.title}</h3>
       <p class="blog-card-desc">${post.desc}</p>
+      <div class="blog-read-more">
+        Read more
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
     </div>
+    </a>
   `;
 
   blogGrid.appendChild(card);
 });
+
 
 
     blogGrid.appendChild(card);
