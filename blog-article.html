@@ -2657,52 +2657,35 @@ const blogArticles = [
     document.getElementById("articleDate").textContent = article.date;
     document.getElementById("articleHero").src = article.heroImg;
     document.getElementById("articleContent").innerHTML = article.content;
-  }
-
-  // Share links
-  const currentUrl = window.location.href;
-  const encodedUrl = encodeURIComponent(currentUrl);
-  const shareLinkedIn = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}`;
-  const shareX = `https://twitter.com/intent/tweet?url=${encodedUrl}`;
-  const shareFacebook = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
-
-  document.getElementById("shareLinkedIn").href = shareLinkedIn;
-  document.getElementById("shareLinkedInBottom").href = shareLinkedIn;
-  document.getElementById("shareX").href = shareX;
-  document.getElementById("shareXBottom").href = shareX;
-  document.getElementById("shareFacebook").href = shareFacebook;
-  document.getElementById("shareFacebookBottom").href = shareFacebook;
-
-  // Copy link logic
-  const copyLinks = [document.getElementById("shareLink"), document.getElementById("shareLinkBottom")];
-  copyLinks.forEach(btn => {
-    btn.addEventListener("click", () => {
-      navigator.clipboard.writeText(currentUrl);
-      alert("Link copied to clipboard!");
-    });
-  });
-
-   // Get article ID or slug from URL
-  const params = new URLSearchParams(window.location.search);
-  const articleId = parseInt(params.get("id"), 10) || 1;
-
-  // Find matching article
-  const article = blogArticles.find(a => a.id === articleId);
-
-  if (article) {
-    // Set document <title> (browser tab)
+    // Update title (browser tab)
     document.title = article.title;
-
-    // Update page header (the H1)
-    const titleEl = document.getElementById("articleTitle");
-    if (titleEl) titleEl.textContent = article.title;
 
     // Update breadcrumb
     const breadcrumbEl = document.querySelector(".breadcrumb-item.current");
     if (breadcrumbEl) breadcrumbEl.textContent = article.title;
+
+    // Update page header
+    const titleEl = document.getElementById("articleTitle");
+    if (titleEl) titleEl.textContent = article.title;
+
+    // Update date
+    const dateEl = document.getElementById("articleDate");
+    if (dateEl) dateEl.textContent = article.date || "";
+
+    // Update hero image
+    const heroEl = document.getElementById("articleHero");
+    if (heroEl && article.image) {
+      heroEl.src = article.image;
+      heroEl.alt = article.title;
+    }
+
+    // ✅ Update main content
+    const contentEl = document.getElementById("articleContent");
+    if (contentEl) contentEl.innerHTML = article.content;
   } else {
-    // Fallback: if not found
     document.title = "Article Not Found";
+    const contentEl = document.getElementById("articleContent");
+    if (contentEl) contentEl.innerHTML = "<p>Article not found.</p>";
   }
 
 
