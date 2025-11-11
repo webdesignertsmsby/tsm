@@ -674,10 +674,27 @@ background-color: var(--surface-btn-primary-hover);
   margin: 0 auto;
 }
 
-/* Center the last item if the number of cards is odd */
-.categories-grid:has(.category-card:last-child:nth-child(odd)) {
-  justify-items: center;
+/* Center lone last card (when there's an odd number of cards)
+   Keep 2 columns normally; but if the last child is alone, make it span both columns and center it */
+.categories-grid > .category-card:last-child:nth-child(odd) {
+  /* make the last odd item take the full row */
+  grid-column: 1 / -1;
+
+  /* center the card within that full row */
+  justify-self: center;
+
+  /* limit width so it doesn't stretch full-width; tweak to taste */
+  max-width: 520px;
+  width: 100%;
 }
+
+/* Make sure the card's image respects the narrowed max-width */
+.categories-grid > .category-card:last-child:nth-child(odd) .category-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
 
 .category-card {
   display: block;
