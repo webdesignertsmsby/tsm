@@ -662,6 +662,33 @@ background-color: var(--surface-btn-primary-hover);
   color: var(--text-low-emphasize);
 }
 
+/* Featured Blog Section */
+.featured-blog {
+  margin-bottom: 80px;
+}
+
+.featured-blog .blog-card {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.featured-blog .blog-card-image {
+  width: 55%;
+  aspect-ratio: auto;
+  object-fit: cover;
+}
+
+.featured-blog .blog-card-content {
+  width: 45%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 /* Blog Grid */
 .blog-grid {
   display: grid;
@@ -1050,6 +1077,15 @@ background-color: var(--surface-btn-primary-hover);
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+  .featured-blog .blog-card {
+    flex-direction: column;
+  }
+
+  .featured-blog .blog-card-image,
+  .featured-blog .blog-card-content {
+    width: 100%;
+  }
   
   .footer {
     padding: 30px 0 15px;
@@ -1405,6 +1441,10 @@ stroke-linecap="round" stroke-linejoin="round"/>
       <h2>Latest Articles & Insights</h2>
       <p>Stay updated with Feaspack. Featuring machine technology news, production tips, and industry trends.</p>
     </div>
+    <!-- Featured Blog -->
+    <div class="featured-blog" id="featuredBlog"></div>
+    
+    <!-- Blog Grid -->
     <div class="blog-grid" id="blogGrid"></div>
   </div>
 </section>
@@ -2520,73 +2560,100 @@ e.stopPropagation();
 });
 
   const blogPosts = [
-    {
-      id: 1,
-      img: "https://i.imgur.com/X7zO7fl.jpeg",
-      date: "8 Aug 2025",
-      title: "Blog title heading will go here",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-    },
-    {
-      id: 2,
-      img: "https://i.imgur.com/2pN0uFK.jpeg",
-      date: "8 Aug 2025",
-      title: "Blog title heading will go here",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-    },
-    {
-      id: 3,
-      img: "https://i.imgur.com/sWMSByt.jpeg",
-      date: "8 Aug 2025",
-      title: "Blog title heading will go here",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-    },
-    {
-      id: 4,
-      img: "https://i.imgur.com/X7zO7fl.jpeg",
-      date: "8 Aug 2025",
-      title: "Blog title heading will go here",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-    },
-    {
-      id: 5,
-      img: "https://i.imgur.com/2pN0uFK.jpeg",
-      date: "8 Aug 2025",
-      title: "Blog title heading will go here",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-    },
-    {
-      id: 6,
-      img: "https://i.imgur.com/sWMSByt.jpeg",
-      date: "8 Aug 2025",
-      title: "Blog title heading will go here",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
-    },
-  ];
+  {
+    id: 1,
+    img: "https://i.imgur.com/X7zO7fl.jpeg",
+    date: "8 Aug 2025",
+    title: "Blog title heading will go here",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+  },
+  {
+    id: 2,
+    img: "https://i.imgur.com/2pN0uFK.jpeg",
+    date: "8 Aug 2025",
+    title: "Blog title heading will go here",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+  },
+  {
+    id: 3,
+    img: "https://i.imgur.com/sWMSByt.jpeg",
+    date: "8 Aug 2025",
+    title: "Blog title heading will go here",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+  },
+  {
+    id: 4,
+    img: "https://i.imgur.com/X7zO7fl.jpeg",
+    date: "8 Aug 2025",
+    title: "Blog title heading will go here",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+  },
+  {
+    id: 5,
+    img: "https://i.imgur.com/2pN0uFK.jpeg",
+    date: "8 Aug 2025",
+    title: "Blog title heading will go here",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+  },
+  {
+    id: 6,
+    img: "https://i.imgur.com/sWMSByt.jpeg",
+    date: "8 Aug 2025",
+    title: "Blog title heading will go here",
+    desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros.",
+  },
+];
 
-  const blogGrid = document.getElementById("blogGrid");
+// === DOM elements ===
+const featuredContainer = document.getElementById("featuredBlog");
+const blogGrid = document.getElementById("blogGrid");
 
-  blogPosts.forEach(post => {
-  const card = document.createElement("div");
-  card.className = "blog-card";
-
-  card.innerHTML = `
-    <a href="blog-article.html?id=${post.id}">
-    <img src="${post.img}" alt="${post.title}" class="blog-card-image">
-    <div class="blog-card-content">
-      <p class="blog-card-date">${post.date}</p>
-      <h3 class="blog-card-title">${post.title}</h3>
-      <p class="blog-card-desc">${post.desc}</p>
-      <div class="blog-read-more">
-        Read more
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-        </svg>
-    </div>
+// === Render featured blog (id = 1) ===
+const featuredPost = blogPosts.find(post => post.id === 1);
+if (featuredPost) {
+  featuredContainer.innerHTML = `
+    <a href="blog-article.html?id=${featuredPost.id}" class="blog-card">
+      <img src="${featuredPost.img}" alt="${featuredPost.title}" class="blog-card-image">
+      <div class="blog-card-content">
+        <p class="blog-card-date">${featuredPost.date}</p>
+        <h3 class="blog-card-title">${featuredPost.title}</h3>
+        <p class="blog-card-desc">${featuredPost.desc}</p>
+        <div class="blog-read-more">
+          Read more
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </div>
+      </div>
     </a>
   `;
+}
+
+// === Render remaining blogs ===
+blogPosts
+  .filter(post => post.id !== 1)
+  .forEach(post => {
+    const card = document.createElement("div");
+    card.className = "blog-card";
+    card.innerHTML = `
+      <a href="blog-article.html?id=${post.id}">
+        <img src="${post.img}" alt="${post.title}" class="blog-card-image">
+        <div class="blog-card-content">
+          <p class="blog-card-date">${post.date}</p>
+          <h3 class="blog-card-title">${post.title}</h3>
+          <p class="blog-card-desc">${post.desc}</p>
+          <div class="blog-read-more">
+            Read more
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          </div>
+        </div>
+      </a>
+    `;
     blogGrid.appendChild(card);
   });
+
 </script>
 </body>
 </html>
