@@ -2790,13 +2790,13 @@ const productData = {
 function initializeTabNavigation() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const productGrid = document.getElementById('productGrid');
-    let currentCategory = 'powder';
+    let currentCategory = 'robotic';
     
     // Get category from URL hash or use default
     function getCategoryFromHash() {
         const hash = window.location.hash.substring(1); // Remove '#'
-        const validCategories = ['inline', 'rotary', 'tanks'];
-        return validCategories.includes(hash) ? hash : 'inline';
+        const validCategories = ['robotic', 'casepacker'];
+        return validCategories.includes(hash) ? hash : 'robotic';
     }
     
     // Set active tab based on category
