@@ -4581,12 +4581,13 @@ class FeaturedProductsCarousel {
   }
 }
 
-// Initialize Featured Products Carousel when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-  new FeaturedProductsCarousel();
-});
-
 document.addEventListener("DOMContentLoaded", function () {
+	new HeroSlider();
+
+  // If you also have featured products carousel, keep its initialization here too:
+  if (window.innerWidth > 1024) {
+    new FeaturedProductsCarousel();
+  }
     const playButton = document.querySelector(".video-play-button");
     const videoWrapper = document.querySelector(".video-wrapper");
     const iframe = videoWrapper.querySelector(".video-iframe");
@@ -4607,19 +4608,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Tampilkan iframe
         iframe.style.display = "block";
       });
-    }
-  }); 
-
-});
-
-	document.addEventListener("DOMContentLoaded", () => {
-  // Initialize Hero Slider AFTER the DOM is ready
-  new HeroSlider();
-
-  // If you also have featured products carousel, keep its initialization here too:
-  if (window.innerWidth > 1024) {
-    new FeaturedProductsCarousel();
-  }
+    } 
 });
 
   
