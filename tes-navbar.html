@@ -674,9 +674,9 @@ background-color: var(--surface-btn-primary-hover);
   margin: 0 auto;
 }
 
-.categories-grid::after {
-  content: "";
-  flex: auto;
+/* Center the last item if the number of cards is odd */
+.categories-grid:has(.category-card:last-child:nth-child(odd)) {
+  justify-items: center;
 }
 
 .category-card {
