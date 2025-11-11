@@ -394,6 +394,11 @@ color: var(--brand-primary);
 }
 
 .nav-item.dropdown .dropdown-content {
+  left: -275%;
+  transform: translateX(0%); /* gentle right offset */
+}
+	
+.nav-right .nav-item.dropdown .dropdown-content {
   left: 0;
   transform: translateX(0%); /* gentle right offset */
 }
@@ -1357,6 +1362,15 @@ class="dropdown-arrow">▼</span></a>
 <a href="labeling.html">Labeling Machine</a>
 </div>
 </div>
+<div class="dropdown-category">
+<span class="dropdown-category-label">Automation</span>
+<div class="dropdown-item">
+<a href="automation.html#robotic">Robotic</a>
+</div>
+<div class="dropdown-item">
+<a href="liquid-processing.html#casepacker">Case Packer</a>
+</div>
+</div>
 </div>
 </div>
 </li>
@@ -1595,6 +1609,15 @@ stroke-linecap="round" stroke-linejoin="round"/>
 <a href="labeling.html">Labeling Machine</a>
 </div>
 </div>
+<div class="mobile-dropdown-category">
+<span class="mobile-dropdown-category-label">Automation</span>
+<div class="mobile-dropdown-item">
+<a href="automation.html#robotic">Robotic</a>
+</div>
+<div class="mobile-dropdown-item">
+<a href="liquid-processing.html#casepacker">Case Packer</a>
+</div>
+</div>
 </div>
 </li>
 <li class="mobile-nav-item">
@@ -1721,6 +1744,7 @@ stroke-linecap="round" stroke-linejoin="round"/>
           <li><a href="liquid-processing.html" class="footer-link">Liquid Processing</a></li>
           <li><a href="mixer.html" class="footer-link">Mixer</a></li>
           <li><a href="labeling.html" class="footer-link">Labeling</a></li>
+          <li><a href="automation.html" class="footer-link">Automation</a></li>
         </ul>
       </div>
       
