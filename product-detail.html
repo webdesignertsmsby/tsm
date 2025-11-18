@@ -3987,10 +3987,10 @@ maintenance: [
 	  { label: "Maximum Pickup Height", value: "520 MM" },
 	  { label: "Rated Load", value: "20 KG" },
 	  { label: "Maximum Load", value: "25 KG" },
-	  { label: "Repeatability", value: "25" },
+	  { label: "Repeatability", value: "XYZ(MM)±0.2" },
 	  { label: "Rotary Shaft", value: "±180°" },
-	  { label: "Standart Stroke Rate (Strokes/minute)/25-305-25MM", value: "XYZ(MM)±0.2" },
-	  { label: "Net Weight", value: "25 KG" },
+	  { label: "Standart Stroke Rate (Strokes/minute)/25-305-25MM", value: "25 (Under 7KG Load)" },
+	  { label: "Net Weight", value: "1050 KG" },
 	  { label: "Installation Method", value: "Suspended" }
     ]
   },
@@ -4008,15 +4008,77 @@ maintenance: [
     category: "Environmental Requirements",
     items: [
       { label: "Ambient Temperature", value: "0-45C°" },
-      { label: "Relative Humidity", value: "15-85%" },
-	  { label: "Radiation", value: "EMC / EMI Shielding" }
+      { label: "Relative Humidity", value: "15-85%" }
     ]   
   },
   {
     category: "Safety & Noise",
     items: [
       { label: "Safety Features", value: "Safe Stop, Emergency Stop" },
-	  { label: "Noise Level", value: "<75 dB" }
+	  { label: "Noise Level", value: "<75 dB" },
+	  { label: "Radiation", value: "EMC / EMI Shielding" }
+    ]   
+  }
+],
+maintenance: [
+  { task: "", frequency: "", tools: "" }
+],
+    relatedProducts: [1, 5, 8]
+  },
+	{
+    id: 36,
+    title: "Robot Spider Arm Machine (FP-RSA-1200[3])",
+    code: "(FP-RSA-1200[3])",
+    image: "https://i.imgur.com/GIqCZEv.png",
+    category: "Automation",
+    subcategory: "Robotic",
+    suitableFor: [
+      { name: "All Packaged Products", icon: "https://i.imgur.com/yAtYOfj.png" }
+    ],
+    packaging: [
+      { name: "Pouch", icon: "https://i.imgur.com/caRDcd9.png" },
+      { name: "Sachet", icon: "https://i.imgur.com/tYjF2XE.png " }
+    ],
+	specs: [
+      { label: "Maximum Load", value: "8 KG" },
+      { label: "Repeatability Accuracy", value: "±0.1 MM" }
+    ],
+    specification: [
+  {
+    category: "Physical & Mechanical Specifications",
+    items: [
+      { label: "Number of Axles", value: "3" },
+      { label: "Wingspan", value: "1200 MM" },
+	  { label: "Maximum Pick and Place Height", value: "520 MM" },
+	  { label: "Rated Load", value: "5 KG" },
+	  { label: "Maximum Load", value: "8 KG" },
+	  { label: "Repeatability Accuracy", value: "±0.1 MM" },
+	  { label: "Stroke (Times/minute) 25/30 5/25 MM 0.1KG", value: "230 MM" },
+	  { label: "Net Weight", value: "93 KG" },
+	  { label: "Installation Method", value: "Hoisting" }
+    ]
+  },
+  {
+    category: "Power & Electrical",
+    items: [
+      { label: "Power Supply Voltage", value: "AC 380 V" },
+	  { label: "Rated Power", value: "5.5 KW" }
+    ]
+  },
+  {
+    category: "Environmental Requirements",
+    items: [
+      { label: "Ambient Temperature", value: "0-45C°" },
+      { label: "Relative Humidity", value: "15-85%" },
+	  { label: "Protection Rating", value: "IP 54" }
+    ]   
+  },
+  {
+    category: "Safety & Noise",
+    items: [
+      { label: "Safety Features", value: "Safe Stop, Emergency Stop" },
+	  { label: "Noise Level", value: "<75 dB" },
+	  { label: "Radiation", value: "EMC / EMI Shielding" }
     ]   
   }
 ],
