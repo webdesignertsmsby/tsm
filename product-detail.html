@@ -3975,46 +3975,48 @@ maintenance: [
     ],
 	specs: [
       { label: "Maximum Load", value: "25 KG" },
-      { label: "Number of Axles", value: "2" }
+      { label: "Repeatability", value: "XYZ(MM)±0.2" }
     ],
     specification: [
   {
-    category: "Capacity & Range",
+    category: "Physical & Mechanical Specifications",
     items: [
-      { label: "Net Weight", value: "110 KG" },
-      { label: "Load Capacity", value: "30 KG" },
-      { label: "Working Radius", value: "1525 MM)" },
-	  { label: "Maximum Range", value: "1730 MM)" },
-	  { label: "Robot Load-Bearing Capacity", value: "Max. Load Capacity with Suction Cup: 35KG)" },
-	  { label: "Palletizing Height", value: "1700 - 2600 MM)" },
-	  { label: "Required Workshop Height", value: "2500 MM + Lifting Height)" }
-    ]
-  },
-  {
-    category: "Palletizing Specs",
-    items: [
-      { label: "Palletizing Speed", value: "Up to 8-10 Boxes per minute" },
-	  { label: "Pallet Dimensions", value: "1000 MM * 800 MM / 1200 MM * 1000 MM / 1200 MM * 1200 MM" },
-      { label: "Stackable Carton Dimensions", value: "200 - 600 MM (L) x 140 - 145 MM (W) x 150 - 400 MM (H)" }
+      { label: "Dimensions", value: "1700 * 1700 * 2150MM" },
+      { label: "Number of Axles", value: "2" },
+      { label: "Wingspan", value: "1300 MM" },
+	  { label: "Maximum Pickup Height", value: "520 MM" },
+	  { label: "Rated Load", value: "20 KG" },
+	  { label: "Maximum Load", value: "25 KG" },
+	  { label: "Repeatability", value: "25" },
+	  { label: "Rotary Shaft", value: "±180°" },
+	  { label: "Standart Stroke Rate (Strokes/minute)/25-305-25MM", value: "XYZ(MM)±0.2" },
+	  { label: "Net Weight", value: "25 KG" },
+	  { label: "Installation Method", value: "Suspended" }
     ]
   },
   {
     category: "Power & Electrical",
     items: [
-      { label: "Rated Voltage", value: "Single phase 220V" },
-      { label: "Total Power for Palletizing", value: "4 KW" }
+      { label: "Power Supply Voltage", value: "AC 220 V" },
+	  { label: "Rated Power", value: "4.5 KW" },
+      { label: "I/O", value: "16 Input, 8 Output (Expandable)" },
+	  { label: "Communication Protocol", value: "TCP/IP Protocol-Free UDP Canopen Modbus-TCP (Scaable)" },
+	  { label: "Visual Interface", value: "Built in" }
+    ]
+  },
+  {
+    category: "Environmental Requirements",
+    items: [
+      { label: "Ambient Temperature", value: "0-45C°" },
+      { label: "Relative Humidity", value: "15-85%" },
+	  { label: "Radiation", value: "EMC / EMI Shielding" }
     ]   
   },
   {
-    category: "Physical Form",
+    category: "Safety & Noise",
     items: [
-      { label: "Dimensions of the host unit", value: "3200 MM (L) z 1730 MM (W) x 2385 MM (H)" }
-    ]   
-  },
-  {
-    category: "Safety",
-    items: [
-      { label: "Safety Features", value: "Optional Accessories: Safety Guardrails, Safety Light Curtains, Safety Sensor Mats, ETC." }
+      { label: "Safety Features", value: "Safe Stop, Emergency Stop" },
+	  { label: "Noise Level", value: "<75 dB" }
     ]   
   }
 ],
