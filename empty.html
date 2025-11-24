@@ -2628,45 +2628,6 @@ function(e) {
 e.stopPropagation();
 });
 
-function renderDiscoverProducts() {
-  const grid = document.querySelector(".empty-discover-grid");
-  grid.innerHTML = "";
-
-  // Determine how many cards to show based on screen width
-  let count = 3; // default desktop
-
-  if (window.innerWidth <= 480) {
-    count = 1; // mobile
-  } else if (window.innerWidth <= 1024) {
-    count = 2; // tablet
-  }
-
-  // Loop through productData (or whatever array you use)
-  const items = productData.slice(0, count); 
-
-  items.forEach(item => {
-    const card = document.createElement("div");
-    card.className = "empty-discover-card";
-
-    card.innerHTML = `
-      <a href="product-detail.html?id=${item.id}" class="empty-discover-card-link">
-        <img src="${item.img}" alt="${item.name}">
-        <h3>${item.name}</h3>
-      </a>
-    `;
-
-    grid.appendChild(card);
-  });
-}
-
-// first load
-renderDiscoverProducts();
-
-// re-render when resizing window
-window.addEventListener("resize", () => {
-  renderDiscoverProducts();
-});
-
 </script>
 </body>
 </html>
