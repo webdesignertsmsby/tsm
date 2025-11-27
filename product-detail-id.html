@@ -4384,6 +4384,20 @@ document.addEventListener("DOMContentLoaded", function() {
   const product = productData.find(p => p.id === id);
   if (!product) return;
 
+  // === ENGLISH BUTTON ===
+  const enLinks = document.querySelectorAll('a[href="product-detail.html"]');
+  enLinks.forEach(a => {
+    if (id) a.href = `product-detail.html?id=${id}`;
+  });
+
+  // === INDONESIA BUTTON ===
+  const idLinks = document.querySelectorAll('a[href="product-detail-id.html"], a[href="#"]');
+  idLinks.forEach(a => {
+    if (a.textContent.includes("Indonesia")) {
+      if (id) a.href = `product-detail-id.html?id=${id}`;
+    }
+  });
+
   // --- Breadcrumb ---
   const categoryInfo = categoryMap[product.category] || { name: product.category, link: "product-category.html" };
   const breadcrumbTrail = document.querySelector(".breadcrumb-trail");
