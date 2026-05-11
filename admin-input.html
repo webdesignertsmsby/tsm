@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin - Input Mesin Baru</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; max-width: 800px; margin: auto; }
+        .section { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
+        .item-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; margin-top: 5px; }
+        button { cursor: pointer; padding: 10px; margin-top: 10px; }
+        .btn-add { background: #28a745; color: white; border: none; }
+        .btn-del { background: #dc3545; color: white; border: none; padding: 5px 10px; }
+        .btn-submit { background: #007bff; color: white; border: none; width: 100%; font-size: 1.1em; }
+    </style>
+</head>
+<body>
+    <h2>Input Data Mesin Baru</h2>
+    <form id="machineForm">
+        <div class="section">
+            <h3>General Information</h3>
+            <label>Nama Mesin</label><input type="text" name="namaMesin" required>
+            <label>Serial Number</label><input type="text" name="serialNumber" required>
+            <label>URL Foto Mesin</label><input type="text" name="fotoMesin">
+            <label>Model</label><input type="text" name="model">
+            <label>Factory Date</label><input type="date" name="factoryDate">
+            <label>Nama Customer</label><input type="text" name="namaCustomer">
+        </div>
+
+        <div class="section">
+            <h3>Spesifikasi</h3>
+            <label>Packed Product</label>
+            <select name="packedProduct">
+                <option value="Powder">Powder</option><option value="Liquid">Liquid</option><option value="Granule">Granule</option>
+            </select>
+            <label>Bag Type</label>
+            <select name="bagType">
+                <option value="Bag Seal">Bag Seal</option><option value="Three Side Seal">Three Side Seal</option><option value="Four Side Seal">Four Side Seal</option>
+            </select>
+            <label>Packed Weight (Gram)</label><input type="number" name="packedWeight">
+            <label>Voltage</label><input type="text" name="voltage">
+            <label>Electrical Type</label>
+            <select name="electricalType">
+                <option value="Single Phase">Single Phase</option><option value="Three Phase">Three Phase</option>
+            </select>
+            <label>Speed (BPM)</label><input type="number" name="speed">
+            <label>Power</label><input type="text" name="power">
+        </div>
+
+        <div class="section" id="sparepartSection">
+            <h3>Spareparts</h3>
+            <div id="sparepartContainer">
+                <div class="item-row">
+                    <select class="sp-cat">
+                        <option value="Heater">Heater</option><option value="Knife">Knife</option><option value="Sensor">Sensor</option> <!-- Tambahkan kategori lain di sini -->
+                    </select>
+                    <input type="text" class="sp-part" placeholder="Part Number">
+                </div>
+            </div>
+            <button type="button" class="btn-add" onclick="addItem('sparepartContainer')">+ Tambah Sparepart</button>
+        </div>
+
+        <div class="section" id="videoSection">
+            <h3>Videos Maintenance</h3>
+            <div id="videoContainer">
+                <div class="item-row">
+                    <input type="text" class="vid-url" placeholder="URL Youtube">
+                </div>
+            </div>
+            <button type="button" class="btn-add" onclick="addItem('videoContainer')">+ Tambah Video</button>
+        </div>
+
+        <button type="submit" class="btn-submit">SIMPAN DATA MESIN</button>
+    </form>
+
+    <script>
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxpLeHms5DKIwhe3tGAD0sE2iHdfcbXi_tHmc0N2BSJ6BEYogJKuPg9JQNq7WF7Ttip/exec";
+
+        function addItem(containerId) {
+            const container = document.getElementById(containerId);
+            const div = document.createElement('div');
+            div.className = 'item-row';
+            if (containerId === 'sparepartContainer') {
+                div.innerHTML = `<select class="sp-cat"><option value="Heater">Heater</option><option value="Knife">Knife</option></select>
+                                 <input type="text" class="sp-part" placeholder="Part Number">
+                                 <button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>`;
+            } else {
+                div.innerHTML = `<input type="text" class="vid-url" placeholder="URL Youtube">
+                                 <button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>`;
+            }
+            container.appendChild(div);
+        }
+
+        document.getElementById('machineForm').onsubmit = async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData.entries());
+            
+            // Ambil data array sparepart & video
+            data.spareparts = Array.from(document.querySelectorAll('.item-row')).filter(r => r.querySelector('.sp-cat')).map(r => ({
+                cat: r.querySelector('.sp-cat').value,
+                pn: r.querySelector('.sp-part').value
+            }));
+            data.videos = Array.from(document.querySelectorAll('.vid-url')).map(r => r.value);
+
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+            alert("Data Berhasil Disimpan!");
+            e.target.reset();
+        };
+    </script>
+</body>
+</html>
