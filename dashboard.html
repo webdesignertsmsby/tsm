@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Your Machines</title>
+    <style>
+        :root { --primary: #007bff; --danger: #dc3545; --dark: #333; --light: #f4f4f9; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--light); margin: 0; padding: 20px; }
+        
+        /* Header Section */
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; flex-wrap: wrap; gap: 15px; }
+        .header h1 { margin: 0; color: var(--dark); font-size: 1.5rem; }
+        .btn-add { background: var(--primary); color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; transition: 0.3s; }
+        .btn-add:hover { opacity: 0.8; }
+
+        /* Grid System */
+        .machine-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+
+        /* Card Style */
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: relative; border-left: 5px solid var(--primary); }
+        .card h3 { margin: 0 0 5px 0; font-size: 1.2rem; color: var(--dark); }
+        .card p { margin: 0; color: #666; font-size: 0.9rem; }
+
+        /* Dropdown Menu (Titik Tiga) */
+        .menu-container { position: absolute; top: 15px; right: 15px; }
+        .dots { cursor: pointer; font-size: 1.5rem; color: #999; line-height: 1; }
+        .dropdown { display: none; position: absolute; right: 0; background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.2); border-radius: 5px; z-index: 10; min-width: 100px; }
+        .dropdown a, .dropdown button { display: block; padding: 10px; text-decoration: none; color: var(--dark); font-size: 0.8rem; border: none; background: none; width: 100%; text-align: left; cursor: pointer; }
+        .dropdown a:hover, .dropdown button:hover { background: #f0f0f0; }
+        .dropdown .delete-btn { color: var(--danger); border-top: 1px solid #eee; }
+        
+        .show { display: block; }
+
+        @media (max-width: 480px) {
+            .header { flex-direction: column; align-items: flex-start; }
+            .btn-add { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Manage Your Machines</h1>
+        <a href="admin-input.html" class="btn-add">+ Tambah Mesin Baru</a>
+    </div>
+
+    <div class="machine-grid" id="machineList">
+        <!-- Data akan muncul di sini secara dinamis -->
+        <p id="loading">Loading data mesin...</p>
+    </div>
+
+    <script>
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxpLeHms5DKIwhe3tGAD0sE2iHdfcbXi_tHmc0N2BSJ6BEYogJKuPg9JQNq7WF7Ttip/exec";
+
+        async function loadMachines() {
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+                const container = document.getElementById('machineList');
+                container.innerHTML = '';
+
+                if (data.length === 0) {
+                    container.innerHTML = '<p>Belum ada data mesin.</p>';
+                    return;
+                }
+
+                data.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <h3>${item.NamaMesin}</h3>
+                        <p>SN: ${item.SerialNumber}</p>
+                        <div class="menu-container">
+                            <div class="dots" onclick="toggleMenu(this)">&#8942;</div>
+                            <div class="dropdown">
+                                <a href="admin-input.html?edit=${item.SerialNumber}">Edit</a>
+                                <button class="delete-btn" onclick="deleteMachine('${item.SerialNumber}')">Delete</button>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            } catch (e) {
+                document.getElementById('loading').innerText = "Gagal memuat data.";
+            }
+        }
+
+        function toggleMenu(el) {
+            // Tutup semua dropdown lain
+            document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
+            // Buka yang diklik
+            el.nextElementSibling.classList.toggle('show');
+        }
+
+        // Tutup dropdown jika klik di luar
+        window.onclick = function(event) {
+            if (!event.target.matches('.dots')) {
+                document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
+            }
+        }
+
+        async function deleteMachine(sn) {
+            if (confirm(`Apakah Anda yakin ingin menghapus mesin dengan SN: ${sn}?`)) {
+                const res = await fetch(`${SCRIPT_URL}?action=delete&sn=${sn}`);
+                if (res.ok) {
+                    alert('Berhasil dihapus');
+                    loadMachines(); // Reload list
+                }
+            }
+        }
+
+        // Jalankan saat page load
+        loadMachines();
+    </script>
+</body>
+</html>
