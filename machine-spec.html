@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spesifikasi Mesin</title>
+    <style>
+        :root {
+            --bg-page: #f0f2f5;
+            --bg-card: #ffffff;
+            --text-main: #333;
+            --text-muted: #666;
+            --radius: 12px;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px 0; /* Memberi ruang atas bawah */
+        }
+
+        /* Container utama agar konten di tengah (Desktop & Tablet) */
+        .main-container {
+            max-width: 500px; /* Lebar maksimal agar tidak "kocak" di desktop */
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Gaya Card per Section */
+        .section-card {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .img-container {
+            width: 100%;
+            aspect-ratio: 1/1;
+            background: #e9ecef;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .img-container img { width: 100%; height: 100%; object-fit: cover; }
+
+        h2 { margin: 0; font-size: 1.4rem; }
+        .sn-text { color: var(--text-muted); font-size: 0.9rem; margin-top: 5px; display: block; }
+
+        .data-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 0.95rem;
+        }
+        .data-row:last-child { border-bottom: none; }
+        .label { color: var(--text-muted); }
+        .value { font-weight: 500; text-align: right; }
+
+        h3 { font-size: 1.1rem; margin: 0 0 15px 0; border-bottom: 2px solid var(--bg-page); padding-bottom: 8px; }
+
+        /* Accordion Video */
+        .video-item { border-bottom: 1px solid #eee; }
+        .video-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .video-content { display: none; padding-bottom: 15px; }
+        .video-content iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 8px;
+            border: none;
+        }
+        .active .video-content { display: block; }
+        .chevron { transition: transform 0.3s; }
+        .active .chevron { transform: rotate(180deg); }
+
+        #loading-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--bg-page); display: flex; align-items: center; justify-content: center; z-index: 100;
+        }
+    </style>
+</head>
+<body>
+
+<div id="loading-overlay">Memuat Data Mesin...</div>
+
+<div class="main-container" id="content" style="visibility: hidden;">
+    <div class="img-container">
+        <img id="v-foto" src="" alt="Mesin">
+    </div>
+
+    <div class="section-card">
+        <h2 id="v-nama">Nama Mesin</h2>
+        <span class="sn-text" id="v-sn">Serial Number</span>
+    </div>
+
+    <div class="section-card">
+        <div class="data-row"><span class="label">Model</span><span class="value" id="v-model">-</span></div>
+        <div class="data-row"><span class="label">Factory Date</span><span class="value" id="v-date">-</span></div>
+        <div class="data-row"><span class="label">Customer</span><span class="value" id="v-customer">-</span></div>
+    </div>
+
+    <div class="section-card">
+        <h3>Spesifikasi Mesin</h3>
+        <div class="data-row"><span class="label">Packed Product</span><span class="value" id="v-product">-</span></div>
+        <div class="data-row"><span class="label">Bag Type</span><span class="value" id="v-bag">-</span></div>
+        <div class="data-row"><span class="label">Packed Weight</span><span class="value" id="v-weight">-</span></div>
+        <div class="data-row"><span class="label">Voltage</span><span class="value" id="v-voltage">-</span></div>
+        <div class="data-row"><span class="label">Electrical Type</span><span class="value" id="v-electrical">-</span></div>
+        <div class="data-row"><span class="label">Speed</span><span class="value" id="v-speed">-</span></div>
+        <div class="data-row"><span class="label">Power</span><span class="value" id="v-power">-</span></div>
+    </div>
+
+    <div class="section-card">
+        <h3>Spareparts</h3>
+        <div id="sparepart-list"></div>
+    </div>
+
+    <div class="section-card">
+        <h3>Video Tutorial</h3>
+        <div id="video-list"></div>
+    </div>
+</div>
+
+<script>
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxpLeHms5DKIwhe3tGAD0sE2iHdfcbXi_tHmc0N2BSJ6BEYogJKuPg9JQNq7WF7Ttip/exec";
+    const urlParams = new URLSearchParams(window.location.search);
+    const sn = urlParams.get('sn');
+
+    if (!sn) {
+        document.body.innerHTML = "<div style='text-align:center; padding:50px;'>Parameter SN tidak ditemukan.</div>";
+    } else {
+        fetch(`${SCRIPT_URL}?sn=${sn}`)
+        .then(res => res.json())
+        .then(data => {
+            // Mapping data dari Sheets ke HTML
+            document.getElementById('v-foto').src = data.FotoMesin || 'https://via.placeholder.com/400?text=No+Image';
+            document.getElementById('v-nama').innerText = data.NamaMesin;
+            document.getElementById('v-sn').innerText = data.SerialNumber;
+            document.getElementById('v-model').innerText = data.Model;
+            document.getElementById('v-date').innerText = data.FactoryDate ? new Date(data.FactoryDate).toLocaleDateString('id-ID') : '-';
+            document.getElementById('v-customer').innerText = data.NamaCustomer;
+            
+            document.getElementById('v-product').innerText = data.PackedProduct;
+            document.getElementById('v-bag').innerText = data.BagType;
+            document.getElementById('v-weight').innerText = data.PackedWeight + " gr";
+            document.getElementById('v-voltage').innerText = data.Voltage;
+            document.getElementById('v-electrical').innerText = data.ElectricalType;
+            document.getElementById('v-speed').innerText = data.Speed + " BPM";
+            document.getElementById('v-power').innerText = data.Power;
+
+            // Render Spareparts
+            const spList = document.getElementById('sparepart-list');
+            data.SparepartsJSON.forEach(sp => {
+                spList.innerHTML += `<div class="data-row"><span class="label">${sp.cat}</span><span class="value">${sp.pn}</span></div>`;
+            });
+
+            // Render Video Accordion
+            const vidList = document.getElementById('video-list');
+            data.VideosJSON.forEach((url, index) => {
+                const videoId = extractYoutubeId(url);
+                const activeClass = index === 0 ? 'active' : ''; // Open first video by default
+                vidList.innerHTML += `
+                    <div class="video-item ${activeClass}">
+                        <div class="video-header" onclick="this.parentElement.classList.toggle('active')">
+                            <span>Tutorial Video ${index + 1}</span>
+                            <span class="chevron">▼</span>
+                        </div>
+                        <div class="video-content">
+                            <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('loading-overlay').style.display = 'none';
+            document.getElementById('content').style.visibility = 'visible';
+        })
+        .catch(err => {
+            console.error(err);
+            document.getElementById('loading-overlay').innerText = "Data tidak ditemukan.";
+        });
+    }
+
+    function extractYoutubeId(url) {
+        const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+        const match = url.match(regExp);
+        return (match && match[2].length == 11) ? match[2] : null;
+    }
+</script>
+
+</body>
+</html>
