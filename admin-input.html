@@ -1,115 +1,234 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Admin - Input Mesin Baru</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Input Mesin</title>
     <style>
-        body { font-family: sans-serif; padding: 20px; max-width: 800px; margin: auto; }
-        .section { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
-        .item-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
-        label { display: block; margin-top: 10px; font-weight: bold; }
-        input, select { width: 100%; padding: 8px; margin-top: 5px; }
-        button { cursor: pointer; padding: 10px; margin-top: 10px; }
-        .btn-add { background: #28a745; color: white; border: none; }
-        .btn-del { background: #dc3545; color: white; border: none; padding: 5px 10px; }
-        .btn-submit { background: #007bff; color: white; border: none; width: 100%; font-size: 1.1em; }
+        :root {
+            --primary: #007bff;
+            --bg: #f8f9fa;
+            --card: #ffffff;
+            --text: #333;
+            --border: #dee2e6;
+        }
+
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: var(--bg); 
+            color: var(--text);
+            margin: 0; padding: 20px; 
+        }
+
+        .container { max-width: 900px; margin: auto; }
+
+        .header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; }
+
+        .section { 
+            background: var(--card); 
+            padding: 25px; 
+            margin-bottom: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        h3 { margin-top: 0; border-bottom: 2px solid var(--bg); padding-bottom: 10px; color: var(--primary); }
+
+        /* Grid System for Responsiveness */
+        .form-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+        }
+
+        .full-width { grid-column: span 2; }
+
+        .form-group { display: flex; flex-direction: column; margin-bottom: 10px; }
+        label { font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; color: #666; }
+        
+        input, select { 
+            padding: 12px; 
+            border: 1px solid var(--border); 
+            border-radius: 6px; 
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(0,123,255,0.1); }
+
+        /* Dynamic Item Rows */
+        .item-row { 
+            display: flex; 
+            gap: 10px; 
+            background: var(--bg); 
+            padding: 10px; 
+            border-radius: 8px; 
+            margin-bottom: 10px; 
+            align-items: center;
+        }
+
+        .btn-add { background: #e7f1ff; color: var(--primary); border: 1px dashed var(--primary); padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        .btn-del { background: #fee2e2; color: #dc3545; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold; }
+        
+        .btn-submit { 
+            background: var(--primary); 
+            color: white; 
+            border: none; 
+            padding: 18px; 
+            width: 100%; 
+            border-radius: 8px; 
+            font-size: 1.1rem; 
+            font-weight: bold; 
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,123,255,0.2);
+            margin-top: 20px;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            .item-row { flex-direction: column; align-items: stretch; }
+            .btn-del { width: 100%; }
+        }
     </style>
 </head>
 <body>
-    <h2>Input Data Mesin Baru</h2>
+
+<div class="container">
+    <div class="header">
+        <a href="dashboard.html" class="btn-back">← Back</a>
+        <h2>Input Data Mesin</h2>
+    </div>
+
     <form id="machineForm">
+        <!-- GENERAL INFO -->
         <div class="section">
             <h3>General Information</h3>
-            <label>Nama Mesin</label><input type="text" name="namaMesin" required>
-            <label>Serial Number</label><input type="text" name="serialNumber" required>
-            <label>URL Foto Mesin</label><input type="text" name="fotoMesin">
-            <label>Model</label><input type="text" name="model">
-            <label>Factory Date</label><input type="date" name="factoryDate">
-            <label>Nama Customer</label><input type="text" name="namaCustomer">
+            <div class="form-grid">
+                <div class="form-group full-width"><label>Nama Mesin</label><input type="text" name="namaMesin" required placeholder="Contoh: Auto Pouch Filler"></div>
+                <div class="form-group"><label>Serial Number</label><input type="text" name="serialNumber" required placeholder="SN-2026-XXXX"></div>
+                <div class="form-group"><label>Model</label><input type="text" name="model" placeholder="Ex: FP-2500"></div>
+                <div class="form-group full-width"><label>URL Foto Mesin</label><input type="text" name="fotoMesin" placeholder="https://link-foto.com/image.jpg"></div>
+                <div class="form-group"><label>Factory Date</label><input type="date" name="factoryDate"></div>
+                <div class="form-group"><label>Nama Customer</label><input type="text" name="namaCustomer" placeholder="PT. ABC Indonesia"></div>
+            </div>
         </div>
 
+        <!-- SPESIFIKASI -->
         <div class="section">
             <h3>Spesifikasi</h3>
-            <label>Packed Product</label>
-            <select name="packedProduct">
-                <option value="Powder">Powder</option><option value="Liquid">Liquid</option><option value="Granule">Granule</option>
-            </select>
-            <label>Bag Type</label>
-            <select name="bagType">
-                <option value="Bag Seal">Bag Seal</option><option value="Three Side Seal">Three Side Seal</option><option value="Four Side Seal">Four Side Seal</option>
-            </select>
-            <label>Packed Weight (Gram)</label><input type="number" name="packedWeight">
-            <label>Voltage</label><input type="text" name="voltage">
-            <label>Electrical Type</label>
-            <select name="electricalType">
-                <option value="Single Phase">Single Phase</option><option value="Three Phase">Three Phase</option>
-            </select>
-            <label>Speed (BPM)</label><input type="number" name="speed">
-            <label>Power</label><input type="text" name="power">
+            <div class="form-grid">
+                <div class="form-group"><label>Packed Product</label>
+                    <select name="packedProduct">
+                        <option value="Powder">Powder</option>
+                        <option value="Liquid">Liquid</option>
+                        <option value="Granule">Granule</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Bag Type</label>
+                    <select name="bagType">
+                        <option value="Bag Seal">Bag Seal</option>
+                        <option value="Three Side Seal">Three Side Seal</option>
+                        <option value="Four Side Seal">Four Side Seal</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Packed Weight (Gram)</label><input type="number" name="packedWeight"></div>
+                <div class="form-group"><label>Voltage</label><input type="text" name="voltage" placeholder="220V / 380V"></div>
+                <div class="form-group"><label>Electrical Type</label>
+                    <select name="electricalType">
+                        <option value="Single Phase">Single Phase</option>
+                        <option value="Three Phase">Three Phase</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Speed (BPM)</label><input type="number" name="speed"></div>
+                <div class="form-group"><label>Power</label><input type="text" name="power" placeholder="2.5 kW"></div>
+            </div>
         </div>
 
-        <div class="section" id="sparepartSection">
+        <!-- SPAREPART -->
+        <div class="section">
             <h3>Spareparts</h3>
             <div id="sparepartContainer">
                 <div class="item-row">
-                    <select class="sp-cat">
-                        <option value="Heater">Heater</option><option value="Knife">Knife</option><option value="Sensor">Sensor</option> <!-- Tambahkan kategori lain di sini -->
+                    <select class="sp-cat" style="flex:1">
+                        <option value="Heater">Heater</option><option value="Thermo">Thermo</option><option value="Knife">Knife</option><option value="PLC">PLC</option><option value="Seal">Seal</option><option value="Coding">Coding</option><option value="Sensor">Sensor</option>
                     </select>
-                    <input type="text" class="sp-part" placeholder="Part Number">
+                    <input type="text" class="sp-part" style="flex:2" placeholder="Part Number / Type">
                 </div>
             </div>
             <button type="button" class="btn-add" onclick="addItem('sparepartContainer')">+ Tambah Sparepart</button>
         </div>
 
-        <div class="section" id="videoSection">
-            <h3>Videos Maintenance</h3>
+        <!-- VIDEO -->
+        <div class="section">
+            <h3>Maintenance Videos</h3>
             <div id="videoContainer">
                 <div class="item-row">
-                    <input type="text" class="vid-url" placeholder="URL Youtube">
+                    <input type="text" class="vid-url" style="flex:1" placeholder="Link YouTube (https://...)">
                 </div>
             </div>
             <button type="button" class="btn-add" onclick="addItem('videoContainer')">+ Tambah Video</button>
         </div>
 
-        <button type="submit" class="btn-submit">SIMPAN DATA MESIN</button>
+        <button type="submit" class="btn-submit" id="btnSubmit">SIMPAN DATA MESIN</button>
     </form>
+</div>
 
-    <script>
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxpLeHms5DKIwhe3tGAD0sE2iHdfcbXi_tHmc0N2BSJ6BEYogJKuPg9JQNq7WF7Ttip/exec";
+<script>
+    const SCRIPT_URL = "URL_APPS_SCRIPT_ANDA_DI_SINI";
 
-        function addItem(containerId) {
-            const container = document.getElementById(containerId);
-            const div = document.createElement('div');
-            div.className = 'item-row';
-            if (containerId === 'sparepartContainer') {
-                div.innerHTML = `<select class="sp-cat"><option value="Heater">Heater</option><option value="Knife">Knife</option></select>
-                                 <input type="text" class="sp-part" placeholder="Part Number">
-                                 <button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>`;
-            } else {
-                div.innerHTML = `<input type="text" class="vid-url" placeholder="URL Youtube">
-                                 <button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>`;
-            }
-            container.appendChild(div);
+    function addItem(containerId) {
+        const container = document.getElementById(containerId);
+        const div = document.createElement('div');
+        div.className = 'item-row';
+        if (containerId === 'sparepartContainer') {
+            div.innerHTML = `
+                <select class="sp-cat" style="flex:1">
+                    <option value="Heater">Heater</option><option value="Thermo">Thermo</option><option value="Knife">Knife</option><option value="PLC">PLC</option><option value="Seal">Seal</option><option value="Coding">Coding</option><option value="Sensor">Sensor</option>
+                </select>
+                <input type="text" class="sp-part" style="flex:2" placeholder="Part Number">
+                <button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>`;
+        } else {
+            div.innerHTML = `
+                <input type="text" class="vid-url" style="flex:1" placeholder="Link YouTube">
+                <button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>`;
         }
+        container.appendChild(div);
+    }
 
-        document.getElementById('machineForm').onsubmit = async (e) => {
-            e.preventDefault();
-            const formData = new FormData(e.target);
-            const data = Object.fromEntries(formData.entries());
-            
-            // Ambil data array sparepart & video
-            data.spareparts = Array.from(document.querySelectorAll('.item-row')).filter(r => r.querySelector('.sp-cat')).map(r => ({
-                cat: r.querySelector('.sp-cat').value,
-                pn: r.querySelector('.sp-part').value
-            }));
-            data.videos = Array.from(document.querySelectorAll('.vid-url')).map(r => r.value);
+    document.getElementById('machineForm').onsubmit = async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('btnSubmit');
+        btn.innerText = "Sedang Menyimpan...";
+        btn.disabled = true;
 
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+        
+        data.spareparts = Array.from(document.querySelectorAll('#sparepartContainer .item-row')).map(r => ({
+            cat: r.querySelector('.sp-cat').value,
+            pn: r.querySelector('.sp-part').value
+        }));
+        data.videos = Array.from(document.querySelectorAll('#videoContainer .vid-url')).map(r => r.value);
+
+        try {
             await fetch(SCRIPT_URL, {
                 method: 'POST',
+                mode: 'no-cors', // GitHub Pages fix
                 body: JSON.stringify(data)
             });
             alert("Data Berhasil Disimpan!");
-            e.target.reset();
-        };
-    </script>
+            window.location.href = "dashboard.html";
+        } catch (err) {
+            alert("Error: " + err);
+        } finally {
+            btn.innerText = "SIMPAN DATA MESIN";
+            btn.disabled = false;
+        }
+    };
+</script>
+
 </body>
 </html>
