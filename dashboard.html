@@ -159,7 +159,7 @@
             card.className = 'card';
             // Clickable card: navigasi ke halaman spek
             card.onclick = () => {
-                window.location.href = `machine-spec.html?sn=${encodeURIComponent(item.SerialNumber)}`;
+                window.location.href = `machine-spec.html?id=${encodeURIComponent(item.SerialNumber)}`;
             };
 
             card.innerHTML = `
