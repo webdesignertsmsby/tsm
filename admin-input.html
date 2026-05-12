@@ -246,6 +246,78 @@
             btn.disabled = false;
         }
     };
+
+    // Jalankan saat halaman load
+window.onload = async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const snToEdit = urlParams.get('edit');
+
+    if (snToEdit) {
+        document.querySelector('h2').innerText = "Edit Data Mesin"; // Ubah Judul
+        const btn = document.getElementById('btnSubmit');
+        btn.innerText = "UPDATE DATA MESIN";
+        
+        // Tampilkan loading saat ambil data
+        btn.disabled = true;
+        btn.innerText = "Mengambil Data...";
+
+        try {
+            // Kita ambil semua data dulu, lalu cari yang SN-nya cocok
+            const response = await fetch(SCRIPT_URL);
+            const allData = await response.json();
+            const existingData = allData.find(item => item.SerialNumber === snToEdit);
+
+            if (existingData) {
+                fillForm(existingData);
+            } else {
+                alert("Data tidak ditemukan!");
+            }
+        } catch (err) {
+            console.error("Error loading data:", err);
+        } finally {
+            btn.disabled = false;
+            btn.innerText = "UPDATE DATA MESIN";
+        }
+    }
+};
+
+// Fungsi untuk mengisi form secara otomatis
+function fillForm(data) {
+    // Isi field General & Spesifikasi (yang punya atribut 'name')
+    const form = document.getElementById('machineForm');
+    for (const key in data) {
+        const input = form.querySelector(`[name="${key}"]`);
+        if (input) {
+            // Case khusus untuk huruf pertama kecil/besar sesuai key di Sheets
+            input.value = data[key];
+        }
+    }
+
+    // Isi Spareparts
+    if (data.Spareparts) {
+        const spContainer = document.getElementById('sparepartContainer');
+        spContainer.innerHTML = ''; // Kosongkan baris default
+        
+        // Parse data sparepart (asumsi format JSON string dari sheets)
+        let spareparts = [];
+        try {
+            spareparts = JSON.parse(data.Spareparts);
+        } catch(e) { spareparts = []; }
+
+        spareparts.forEach(sp => {
+            const div = document.createElement('div');
+            div.className = 'item-row';
+            div.innerHTML = `
+                <select class="sp-cat" style="flex:1">
+                    <option value="${sp.cat}" selected>${sp.cat}</option>
+                    <option value="Heater">Heater</option><option value="Thermo">Thermo</option><option value="Knife">Knife</option>
+                    </select>
+                <input type="text" class="sp-part" style="flex:2" value="${sp.pn}" placeholder="Part Number">
+                <button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>`;
+            spContainer.appendChild(div);
+        });
+    }
+}
 </script>
 
 </body>
