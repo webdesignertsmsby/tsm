@@ -137,65 +137,90 @@
 
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTxktuhuSsqzxyGCHmyRUVLwRHpPs9uWDb1ILi9xDckT1vLs8t5WltLa_GrANWrCos/exec";
-    const urlParams = new URLSearchParams(window.location.search);
-    const sn = urlParams.get('sn');
+    window.onload = () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        // Kita coba ambil dari 'sn' atau 'id' agar lebih fleksibel
+        const sn = urlParams.get('sn') || urlParams.get('id'); 
 
-    if (!sn) {
-        document.body.innerHTML = "<div style='text-align:center; padding:50px;'>Parameter SN tidak ditemukan.</div>";
-    } else {
+        if (!sn) {
+            document.getElementById('loading-overlay').innerText = "Serial Number tidak ditemukan.";
+            return;
+        }
+
         fetch(`${SCRIPT_URL}?sn=${sn}`)
         .then(res => res.json())
         .then(data => {
-            // Mapping data dari Sheets ke HTML
-            document.getElementById('v-foto').src = data.FotoMesin || 'https://via.placeholder.com/400?text=No+Image';
-            document.getElementById('v-nama').innerText = data.NamaMesin;
-            document.getElementById('v-sn').innerText = data.SerialNumber;
-            document.getElementById('v-model').innerText = data.Model;
-            document.getElementById('v-date').innerText = data.FactoryDate ? new Date(data.FactoryDate).toLocaleDateString('id-ID') : '-';
-            document.getElementById('v-customer').innerText = data.NamaCustomer;
-            
-            document.getElementById('v-product').innerText = data.PackedProduct;
-            document.getElementById('v-bag').innerText = data.BagType;
-            document.getElementById('v-weight').innerText = data.PackedWeight + " gr";
-            document.getElementById('v-voltage').innerText = data.Voltage;
-            document.getElementById('v-electrical').innerText = data.ElectricalType;
-            document.getElementById('v-speed').innerText = data.Speed + " BPM";
-            document.getElementById('v-power').innerText = data.Power;
+            if (!data || data.error) {
+                document.getElementById('loading-overlay').innerText = "Data tidak ditemukan.";
+                return;
+            }
 
-            // Render Spareparts
-            const spList = document.getElementById('sparepart-list');
-            data.SparepartsJSON.forEach(sp => {
-                spList.innerHTML += `<div class="data-row"><span class="label">${sp.cat}</span><span class="value">${sp.pn}</span></div>`;
-            });
+            // Update Header & Info Utama
+            document.getElementById('mesin-name').innerText = data.NamaMesin || "-";
+            document.getElementById('mesin-sn').innerText = data.SerialNumber || "-";
+            document.getElementById('mesin-img').src = data.FotoMesin || "https://via.placeholder.com/400x300?text=No+Image";
+            document.getElementById('cust-name').innerText = data.NamaCustomer || "General Spec";
 
-            // Render Video Accordion
+            // Update Spesifikasi
+            document.getElementById('spec-model').innerText = data.Model || "-";
+            document.getElementById('spec-date').innerText = data.FactoryDate ? new Date(data.FactoryDate).toLocaleDateString('id-ID') : "-";
+            document.getElementById('spec-product').innerText = data.PackedProduct || "-";
+            document.getElementById('spec-bag').innerText = data.BagType || "-";
+            document.getElementById('spec-weight').innerText = data.PackedWeight || "-";
+            document.getElementById('spec-voltage').innerText = data.Voltage || "-";
+            document.getElementById('spec-elec').innerText = data.ElectricalType || "-";
+            document.getElementById('spec-speed').innerText = data.Speed || "-";
+            document.getElementById('spec-power').innerText = data.Power || "-";
+
+            // Render Spareparts (Parse JSON String)
+            const spareList = document.getElementById('sparepart-list');
+            spareList.innerHTML = ''; // Kosongkan
+            if (data.SparepartsJSON) {
+                try {
+                    const spArray = JSON.parse(data.SparepartsJSON);
+                    spArray.forEach(sp => {
+                        spareList.innerHTML += `<li><strong>${sp.cat}:</strong> ${sp.pn}</li>`;
+                    });
+                } catch(e) { console.error("Gagal parse SparepartsJSON"); }
+            }
+
+            // Render Videos (Parse JSON String)
             const vidList = document.getElementById('video-list');
-            data.VideosJSON.forEach((url, index) => {
-                const videoId = extractYoutubeId(url);
-                const activeClass = index === 0 ? 'active' : ''; // Open first video by default
-                vidList.innerHTML += `
-                    <div class="video-item ${activeClass}">
-                        <div class="video-header" onclick="this.parentElement.classList.toggle('active')">
-                            <span>Tutorial Video ${index + 1}</span>
-                            <span class="chevron">▼</span>
-                        </div>
-                        <div class="video-content">
-                            <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>
-                        </div>
-                    </div>
-                `;
-            });
+            vidList.innerHTML = ''; // Kosongkan
+            if (data.VideosJSON) {
+                try {
+                    const vidArray = JSON.parse(data.VideosJSON);
+                    vidArray.forEach((url, index) => {
+                        const videoId = extractYoutubeId(url);
+                        if (videoId) {
+                            const activeClass = index === 0 ? 'active' : '';
+                            vidList.innerHTML += `
+                                <div class="video-item ${activeClass}">
+                                    <div class="video-header" onclick="this.parentElement.classList.toggle('active')">
+                                        <span>Tutorial Video ${index + 1}</span>
+                                        <span class="chevron">▼</span>
+                                    </div>
+                                    <div class="video-content">
+                                        <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>
+                                    </div>
+                                </div>`;
+                        }
+                    });
+                } catch(e) { console.error("Gagal parse VideosJSON"); }
+            }
 
+            // Hilangkan Loading
             document.getElementById('loading-overlay').style.display = 'none';
             document.getElementById('content').style.visibility = 'visible';
         })
         .catch(err => {
             console.error(err);
-            document.getElementById('loading-overlay').innerText = "Data tidak ditemukan.";
+            document.getElementById('loading-overlay').innerText = "Gagal memuat data. Periksa koneksi.";
         });
     }
 
     function extractYoutubeId(url) {
+        if (!url) return null;
         const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
         const match = url.match(regExp);
         return (match && match[2].length == 11) ? match[2] : null;
