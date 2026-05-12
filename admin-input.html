@@ -253,16 +253,23 @@
         }));
         data.videos = Array.from(document.querySelectorAll('#videoContainer .vid-url')).map(r => r.value);
 
-        try {
+      try {
             await fetch(SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors', // GitHub Pages fix
+                mode: 'no-cors', 
+                headers: {
+                    'Content-Type': 'text/plain', // Ubah ke plain text
+                },
                 body: JSON.stringify(data)
             });
-            alert("Data Berhasil Disimpan!");
+            
+            // Karena no-cors tidak bisa baca response, 
+            // asumsikan jika tidak masuk ke catch, maka berhasil.
+            alert("Data Berhasil Dikirim ke Sistem!");
             window.location.href = "dashboard.html";
         } catch (err) {
-            alert("Error: " + err);
+            console.error("Detail Error:", err);
+            alert("Koneksi gagal. Pastikan URL Apps Script benar.");
         } finally {
             btn.innerText = "SIMPAN DATA MESIN";
             btn.disabled = false;
