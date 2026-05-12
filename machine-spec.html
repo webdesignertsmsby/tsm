@@ -9,25 +9,24 @@
         body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-page); margin: 0; padding: 20px 0; }
         .main-container { max-width: 500px; margin: 0 auto; padding: 0 15px; }
         .section-card { background: var(--bg-card); padding: 20px; border-radius: var(--radius); margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .img-container img { width: 100%; border-radius: var(--radius); object-fit: cover; }
+        .img-container img { width: 100%; border-radius: var(--radius); object-fit: cover; height: 300px; background: #eee; }
         .spec-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
         .video-item { border: 1px solid #ddd; border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
         .video-header { background: #f8f9fa; padding: 12px; cursor: pointer; display: flex; justify-content: space-between; }
-        .video-content { display: none; padding: 0; }
+        .video-content { display: none; }
         .video-item.active .video-content { display: block; }
         .video-content iframe { width: 100%; aspect-ratio: 16/9; border: none; }
-        #loading-overlay-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; display: flex; justify-content: center; align-items: center; z-index: 9999; }
+        #loading-overlay-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; display: flex; justify-content: center; align-items: center; z-index: 9999; flex-direction: column; }
     </style>
 </head>
 <body>
 
 <div id="loading-overlay-screen">
-    <div style="text-align: center;">
-        <p>Memuat data mesin...</p>
-    </div>
+    <div style="border: 4px solid #f3f3f3; border-top: 4px solid #007bff; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite;"></div>
+    <p id="loading-text" style="margin-top: 15px; font-family: sans-serif;">Memuat data mesin...</p>
 </div>
 
-<div id="content" class="main-container" style="visibility: hidden;">
+<div id="content" class="main-container" style="display: none;">
     <div class="section-card">
         <div class="img-container">
             <img id="mesin-img" src="" alt="Foto Mesin">
@@ -39,15 +38,17 @@
 
     <div class="section-card">
         <h3>Spesifikasi Teknis</h3>
-        <div class="spec-item"><span>Model</span><span id="spec-model"></span></div>
-        <div class="spec-item"><span>Factory Date</span><span id="spec-date"></span></div>
-        <div class="spec-item"><span>Product</span><span id="spec-product"></span></div>
-        <div class="spec-item"><span>Bag Type</span><span id="spec-bag"></span></div>
-        <div class="spec-item"><span>Weight</span><span id="spec-weight"></span></div>
-        <div class="spec-item"><span>Voltage</span><span id="spec-voltage"></span></div>
-        <div class="spec-item"><span>Electrical</span><span id="spec-elec"></span></div>
-        <div class="spec-item"><span>Speed</span><span id="spec-speed"></span></div>
-        <div class="spec-item"><span>Power</span><span id="spec-power"></span></div>
+        <div id="specs-container">
+            <div class="spec-item"><span>Model</span><span id="spec-model">-</span></div>
+            <div class="spec-item"><span>Factory Date</span><span id="spec-date">-</span></div>
+            <div class="spec-item"><span>Product</span><span id="spec-product">-</span></div>
+            <div class="spec-item"><span>Bag Type</span><span id="spec-bag">-</span></div>
+            <div class="spec-item"><span>Weight</span><span id="spec-weight">-</span></div>
+            <div class="spec-item"><span>Voltage</span><span id="spec-voltage">-</span></div>
+            <div class="spec-item"><span>Electrical</span><span id="spec-elec">-</span></div>
+            <div class="spec-item"><span>Speed</span><span id="spec-speed">-</span></div>
+            <div class="spec-item"><span>Power</span><span id="spec-power">-</span></div>
+        </div>
     </div>
 
     <div class="section-card">
@@ -61,36 +62,41 @@
     </div>
 </div>
 
+<style> @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } } </style>
+
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTxktuhuSsqzxyGCHmyRUVLwRHpPs9uWDb1ILi9xDckT1vLs8t5WltLa_GrANWrCos/exec"; // Ganti dengan URL deployment Anda
+    // GANTI DENGAN URL APPS SCRIPT-MU
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTxktuhuSsqzxyGCHmyRUVLwRHpPs9uWDb1ILi9xDckT1vLs8t5WltLa_GrANWrCos/exec"; 
 
     window.onload = async () => {
         const urlParams = new URLSearchParams(window.location.search);
-        const sn = urlParams.get('id'); // Di dashboard Anda menggunakan ?id=
+        
+        // TROUBLESHOOT UTAMA: Ambil 'id' ATAU 'sn' (buat jaga-jaga)
+        const sn = urlParams.get('id') || urlParams.get('sn');
         
         const loader = document.getElementById('loading-overlay-screen');
+        const loadText = document.getElementById('loading-text');
 
         if (!sn) {
-            loader.innerHTML = "ID Mesin tidak ditemukan di URL.";
+            loadText.innerHTML = "<b style='color:red'>Error: ID Mesin tidak ditemukan di URL.</b><br><small>Pastikan URL mengandung ?id=...</small>";
             return;
         }
 
         try {
-            const response = await fetch(`${SCRIPT_URL}?sn=${sn}`);
+            const response = await fetch(`${SCRIPT_URL}?sn=${encodeURIComponent(sn)}`);
             const data = await response.json();
 
             if (!data || data.error) {
-                loader.innerHTML = "Data mesin tidak ditemukan di database.";
+                loadText.innerText = "Data mesin tidak ditemukan di database.";
                 return;
             }
 
-            // Isi Data Header
-            document.getElementById('mesin-img').src = data.FotoMesin || "https://via.placeholder.com/400";
+            // Render Data ke HTML
+            document.getElementById('mesin-img').src = data.FotoMesin || "";
             document.getElementById('mesin-name').innerText = data.NamaMesin || "-";
             document.getElementById('mesin-sn').innerText = data.SerialNumber || "-";
             document.getElementById('cust-name').innerText = data.NamaCustomer || "";
 
-            // Isi Data Spek
             document.getElementById('spec-model').innerText = data.Model || "-";
             document.getElementById('spec-date').innerText = data.FactoryDate ? new Date(data.FactoryDate).toLocaleDateString('id-ID') : "-";
             document.getElementById('spec-product').innerText = data.PackedProduct || "-";
@@ -101,44 +107,39 @@
             document.getElementById('spec-speed').innerText = data.Speed || "-";
             document.getElementById('spec-power').innerText = data.Power || "-";
 
-            // Render Spareparts
+            // Spareparts
             const spList = document.getElementById('sparepart-list');
             if (data.SparepartsJSON) {
                 const sps = JSON.parse(data.SparepartsJSON);
-                sps.forEach(item => {
-                    spList.innerHTML += `<li><strong>${item.cat}:</strong> ${item.pn}</li>`;
-                });
+                spList.innerHTML = sps.map(item => `<li><strong>${item.cat}:</strong> ${item.pn}</li>`).join('');
             }
 
-            // Render Videos
+            // Videos
             const vidList = document.getElementById('video-list');
             if (data.VideosJSON) {
                 const vids = JSON.parse(data.VideosJSON);
-                vids.forEach((url, i) => {
+                vidList.innerHTML = vids.map((url, i) => {
                     const vId = extractYoutubeId(url);
-                    if (vId) {
-                        const active = i === 0 ? 'active' : '';
-                        vidList.innerHTML += `
-                            <div class="video-item ${active}">
-                                <div class="video-header" onclick="this.parentElement.classList.toggle('active')">
-                                    <span>Video Tutorial ${i+1}</span>
-                                    <span>▼</span>
-                                </div>
-                                <div class="video-content">
-                                    <iframe src="https://www.youtube.com/embed/${vId}" allowfullscreen></iframe>
-                                </div>
-                            </div>`;
-                    }
-                });
+                    if (!vId) return '';
+                    return `
+                        <div class="video-item ${i === 0 ? 'active' : ''}">
+                            <div class="video-header" onclick="this.parentElement.classList.toggle('active')">
+                                <span>Video Tutorial ${i+1}</span><span>▼</span>
+                            </div>
+                            <div class="video-content">
+                                <iframe src="https://www.youtube.com/embed/${vId}" allowfullscreen></iframe>
+                            </div>
+                        </div>`;
+                }).join('');
             }
 
-            // Sembunyikan Loader, Tampilkan Konten
+            // Tampilkan Konten
             loader.style.display = 'none';
-            document.getElementById('content').style.visibility = 'visible';
+            document.getElementById('content').style.display = 'block';
 
         } catch (e) {
             console.error(e);
-            loader.innerHTML = "Gagal memuat data. Periksa koneksi internet.";
+            loadText.innerText = "Gagal memuat data. Periksa koneksi atau URL Apps Script.";
         }
     };
 
