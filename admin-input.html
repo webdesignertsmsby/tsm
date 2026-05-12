@@ -253,26 +253,26 @@
     const snToEdit = urlParams.get('edit');
 
     if (snToEdit) {
-        // 1. Ubah UI ke Mode Edit
-        document.getElementById('formTitle').innerText = "Edit Data Mesin";
+        document.querySelector('h2').innerText = "Edit Data Mesin";
         const btn = document.getElementById('btnSubmit');
         btn.innerText = "UPDATE DATA";
         
         try {
-            // 2. Ambil data spesifik dari Apps Script
-            // Kita tambahkan parameter ?sn= agar Apps Script mencari 1 data saja
+            // PERBAIKAN: Menambahkan mode cors dan menangani redirect
             const response = await fetch(`${SCRIPT_URL}?sn=${encodeURIComponent(snToEdit)}`);
+            
+            if (!response.ok) throw new Error('Network response was not ok');
+            
             const data = await response.json();
 
             if (data && !data.error) {
-                // 3. Isi form dengan data yang didapat
                 fillForm(data);
             } else {
-                alert("Data mesin tidak ditemukan di database.");
+                alert("Data tidak ditemukan di Database.");
             }
         } catch (err) {
-            console.error("Gagal mengambil data:", err);
-            alert("Terjadi kesalahan koneksi saat mengambil data.");
+            console.error("Gagal load data:", err);
+            // Tips: Jika masih error, pastikan Deployment Apps Script sudah "Anyone"
         }
     }
 };
