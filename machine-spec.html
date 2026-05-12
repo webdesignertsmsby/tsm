@@ -5,128 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Spesifikasi Mesin</title>
     <style>
-        :root {
-            --bg-page: #f0f2f5;
-            --bg-card: #ffffff;
-            --text-main: #333;
-            --text-muted: #666;
-            --radius: 12px;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-page);
-            color: var(--text-main);
-            margin: 0;
-            padding: 20px 0; /* Memberi ruang atas bawah */
-        }
-
-        /* Container utama agar konten di tengah (Desktop & Tablet) */
-        .main-container {
-            max-width: 500px; /* Lebar maksimal agar tidak "kocak" di desktop */
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-
-        /* Gaya Card per Section */
-        .section-card {
-            background: var(--bg-card);
-            padding: 20px;
-            border-radius: var(--radius);
-            margin-bottom: 15px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        .img-container {
-            width: 100%;
-            aspect-ratio: 1/1;
-            background: #e9ecef;
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
-
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
-
-        h2 { margin: 0; font-size: 1.4rem; }
-        .sn-text { color: var(--text-muted); font-size: 0.9rem; margin-top: 5px; display: block; }
-
-        .data-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #f0f0f0;
-            font-size: 0.95rem;
-        }
-        .data-row:last-child { border-bottom: none; }
-        .label { color: var(--text-muted); }
-        .value { font-weight: 500; text-align: right; }
-
-        h3 { font-size: 1.1rem; margin: 0 0 15px 0; border-bottom: 2px solid var(--bg-page); padding-bottom: 8px; }
-
-        /* Accordion Video */
-        .video-item { border-bottom: 1px solid #eee; }
-        .video-header {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 0;
-            cursor: pointer;
-            font-weight: 500;
-        }
-        .video-content { display: none; padding-bottom: 15px; }
-        .video-content iframe {
-            width: 100%;
-            aspect-ratio: 16/9;
-            border-radius: 8px;
-            border: none;
-        }
-        .active .video-content { display: block; }
-        .chevron { transition: transform 0.3s; }
-        .active .chevron { transform: rotate(180deg); }
-
-        #loading-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--bg-page); display: flex; align-items: center; justify-content: center; z-index: 100;
-        }
+        :root { --bg-page: #f0f2f5; --bg-card: #ffffff; --primary: #007bff; --radius: 12px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg-page); margin: 0; padding: 20px 0; }
+        .main-container { max-width: 500px; margin: 0 auto; padding: 0 15px; }
+        .section-card { background: var(--bg-card); padding: 20px; border-radius: var(--radius); margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .img-container img { width: 100%; border-radius: var(--radius); object-fit: cover; }
+        .spec-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+        .video-item { border: 1px solid #ddd; border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
+        .video-header { background: #f8f9fa; padding: 12px; cursor: pointer; display: flex; justify-content: space-between; }
+        .video-content { display: none; padding: 0; }
+        .video-item.active .video-content { display: block; }
+        .video-content iframe { width: 100%; aspect-ratio: 16/9; border: none; }
+        #loading-overlay-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; display: flex; justify-content: center; align-items: center; z-index: 9999; }
     </style>
 </head>
 <body>
 
-<div id="loading-overlay">Memuat Data Mesin...</div>
+<div id="loading-overlay-screen">
+    <div style="text-align: center;">
+        <p>Memuat data mesin...</p>
+    </div>
+</div>
 
-<div class="main-container" id="content" style="visibility: hidden;">
-    <div class="img-container">
-        <img id="v-foto" src="" alt="Mesin">
+<div id="content" class="main-container" style="visibility: hidden;">
+    <div class="section-card">
+        <div class="img-container">
+            <img id="mesin-img" src="" alt="Foto Mesin">
+        </div>
+        <h2 id="mesin-name" style="margin: 15px 0 5px 0;"></h2>
+        <p id="mesin-sn" style="color: #666; margin: 0;"></p>
+        <p id="cust-name" style="font-weight: bold; color: var(--primary); margin-top: 5px;"></p>
     </div>
 
     <div class="section-card">
-        <h2 id="v-nama">Nama Mesin</h2>
-        <span class="sn-text" id="v-sn">Serial Number</span>
+        <h3>Spesifikasi Teknis</h3>
+        <div class="spec-item"><span>Model</span><span id="spec-model"></span></div>
+        <div class="spec-item"><span>Factory Date</span><span id="spec-date"></span></div>
+        <div class="spec-item"><span>Product</span><span id="spec-product"></span></div>
+        <div class="spec-item"><span>Bag Type</span><span id="spec-bag"></span></div>
+        <div class="spec-item"><span>Weight</span><span id="spec-weight"></span></div>
+        <div class="spec-item"><span>Voltage</span><span id="spec-voltage"></span></div>
+        <div class="spec-item"><span>Electrical</span><span id="spec-elec"></span></div>
+        <div class="spec-item"><span>Speed</span><span id="spec-speed"></span></div>
+        <div class="spec-item"><span>Power</span><span id="spec-power"></span></div>
     </div>
 
     <div class="section-card">
-        <div class="data-row"><span class="label">Model</span><span class="value" id="v-model">-</span></div>
-        <div class="data-row"><span class="label">Factory Date</span><span class="value" id="v-date">-</span></div>
-        <div class="data-row"><span class="label">Customer</span><span class="value" id="v-customer">-</span></div>
-    </div>
-
-    <div class="section-card">
-        <h3>Spesifikasi Mesin</h3>
-        <div class="data-row"><span class="label">Packed Product</span><span class="value" id="v-product">-</span></div>
-        <div class="data-row"><span class="label">Bag Type</span><span class="value" id="v-bag">-</span></div>
-        <div class="data-row"><span class="label">Packed Weight</span><span class="value" id="v-weight">-</span></div>
-        <div class="data-row"><span class="label">Voltage</span><span class="value" id="v-voltage">-</span></div>
-        <div class="data-row"><span class="label">Electrical Type</span><span class="value" id="v-electrical">-</span></div>
-        <div class="data-row"><span class="label">Speed</span><span class="value" id="v-speed">-</span></div>
-        <div class="data-row"><span class="label">Power</span><span class="value" id="v-power">-</span></div>
-    </div>
-
-    <div class="section-card">
-        <h3>Spareparts</h3>
-        <div id="sparepart-list"></div>
+        <h3>Spareparts Utama</h3>
+        <ul id="sparepart-list" style="padding-left: 20px;"></ul>
     </div>
 
     <div class="section-card">
@@ -136,14 +62,16 @@
 </div>
 
 <script>
-    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTxktuhuSsqzxyGCHmyRUVLwRHpPs9uWDb1ILi9xDckT1vLs8t5WltLa_GrANWrCos/exec";
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTxktuhuSsqzxyGCHmyRUVLwRHpPs9uWDb1ILi9xDckT1vLs8t5WltLa_GrANWrCos/exec"; // Ganti dengan URL deployment Anda
+
     window.onload = async () => {
         const urlParams = new URLSearchParams(window.location.search);
-        // DASHBOARD mengirimkan '?id=', maka kita tangkap 'id'
-        const sn = urlParams.get('id'); 
+        const sn = urlParams.get('id'); // Di dashboard Anda menggunakan ?id=
+        
+        const loader = document.getElementById('loading-overlay-screen');
 
         if (!sn) {
-            document.getElementById('loading-overlay').innerHTML = "<h3>Error: Serial Number tidak ditemukan di URL.</h3>";
+            loader.innerHTML = "ID Mesin tidak ditemukan di URL.";
             return;
         }
 
@@ -152,23 +80,19 @@
             const data = await response.json();
 
             if (!data || data.error) {
-                document.getElementById('loading-overlay').innerHTML = "<h3>Data Mesin Tidak Ditemukan.</h3>";
+                loader.innerHTML = "Data mesin tidak ditemukan di database.";
                 return;
             }
 
-            // 1. Update Header & Foto
+            // Isi Data Header
+            document.getElementById('mesin-img').src = data.FotoMesin || "https://via.placeholder.com/400";
             document.getElementById('mesin-name').innerText = data.NamaMesin || "-";
             document.getElementById('mesin-sn').innerText = data.SerialNumber || "-";
-            document.getElementById('mesin-img').src = data.FotoMesin || "https://via.placeholder.com/400x300?text=No+Image";
-            document.getElementById('cust-name').innerText = data.NamaCustomer || "General Specification";
+            document.getElementById('cust-name').innerText = data.NamaCustomer || "";
 
-            // 2. Update Spesifikasi (Pastikan ID di HTML cocok)
+            // Isi Data Spek
             document.getElementById('spec-model').innerText = data.Model || "-";
-            // Format Tanggal agar lebih enak dibaca
-            if (data.FactoryDate) {
-                const date = new Date(data.FactoryDate);
-                document.getElementById('spec-date').innerText = date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-            }
+            document.getElementById('spec-date').innerText = data.FactoryDate ? new Date(data.FactoryDate).toLocaleDateString('id-ID') : "-";
             document.getElementById('spec-product').innerText = data.PackedProduct || "-";
             document.getElementById('spec-bag').innerText = data.BagType || "-";
             document.getElementById('spec-weight').innerText = data.PackedWeight || "-";
@@ -177,58 +101,52 @@
             document.getElementById('spec-speed').innerText = data.Speed || "-";
             document.getElementById('spec-power').innerText = data.Power || "-";
 
-            // 3. Render Spareparts (Parsing JSON String)
-            const spareList = document.getElementById('sparepart-list');
-            spareList.innerHTML = ""; // Kosongkan placeholder
+            // Render Spareparts
+            const spList = document.getElementById('sparepart-list');
             if (data.SparepartsJSON) {
-                const spArray = JSON.parse(data.SparepartsJSON);
-                spArray.forEach(item => {
-                    const li = document.createElement('li');
-                    li.innerHTML = `<strong>${item.cat}:</strong> ${item.pn}`;
-                    spareList.appendChild(li);
+                const sps = JSON.parse(data.SparepartsJSON);
+                sps.forEach(item => {
+                    spList.innerHTML += `<li><strong>${item.cat}:</strong> ${item.pn}</li>`;
                 });
             }
 
-            // 4. Render Videos (Parsing JSON String)
+            // Render Videos
             const vidList = document.getElementById('video-list');
-            vidList.innerHTML = ""; // Kosongkan placeholder
             if (data.VideosJSON) {
-                const vidArray = JSON.parse(data.VideosJSON);
-                vidArray.forEach((url, index) => {
-                    const videoId = extractYoutubeId(url);
-                    if (videoId) {
-                        const activeClass = index === 0 ? 'active' : '';
+                const vids = JSON.parse(data.VideosJSON);
+                vids.forEach((url, i) => {
+                    const vId = extractYoutubeId(url);
+                    if (vId) {
+                        const active = i === 0 ? 'active' : '';
                         vidList.innerHTML += `
-                            <div class="video-item ${activeClass}">
+                            <div class="video-item ${active}">
                                 <div class="video-header" onclick="this.parentElement.classList.toggle('active')">
-                                    <span>Tutorial Video ${index + 1}</span>
-                                    <span class="chevron">▼</span>
+                                    <span>Video Tutorial ${i+1}</span>
+                                    <span>▼</span>
                                 </div>
                                 <div class="video-content">
-                                    <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+                                    <iframe src="https://www.youtube.com/embed/${vId}" allowfullscreen></iframe>
                                 </div>
                             </div>`;
                     }
                 });
             }
 
-            // Sembunyikan Loading, Tampilkan Konten
-            document.getElementById('loading-overlay').style.display = 'none';
+            // Sembunyikan Loader, Tampilkan Konten
+            loader.style.display = 'none';
             document.getElementById('content').style.visibility = 'visible';
 
-        } catch (err) {
-            console.error("Gagal load data:", err);
-            document.getElementById('loading-overlay').innerHTML = "<h3>Gagal terhubung ke Database.</h3>";
+        } catch (e) {
+            console.error(e);
+            loader.innerHTML = "Gagal memuat data. Periksa koneksi internet.";
         }
     };
 
     function extractYoutubeId(url) {
-        if (!url) return null;
         const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
         const match = url.match(regExp);
         return (match && match[2].length == 11) ? match[2] : null;
     }
 </script>
-
 </body>
 </html>
