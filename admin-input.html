@@ -105,12 +105,12 @@
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.9);
+            background: white; /* Gunakan solid white agar form di belakang tidak berbayang */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            z-index: 99999; /* Pastikan ini angka tertinggi */
         }
         
         .spinner {
@@ -291,14 +291,15 @@
     const overlay = document.getElementById('loadingOverlay');
 
     if (sn) {
-        // Jika mode EDIT
+        // Mode EDIT: Tampilkan loading sampai fetch & fillForm selesai
         try {
             const response = await fetch(`${SCRIPT_URL}?sn=${sn}`);
             const data = await response.json();
 
             if (data && !data.error) {
+                // Tunggu proses pengisian form selesai
                 fillForm(data);
-                // Sembunyikan loading setelah data terisi
+                // Setelah semua beres, baru hapus overlay
                 overlay.style.display = 'none';
             } else {
                 alert("Data tidak ditemukan di Database.");
@@ -306,16 +307,15 @@
             }
         } catch (err) {
             console.error("Gagal load data:", err);
-            overlay.innerHTML = "<p style='color:red'>Gagal memuat data. Periksa koneksi internet.</p>";
+            overlay.innerHTML = "<p style='color:red; padding:20px;'>Gagal memuat data. Periksa koneksi internet atau Deployment URL Anda.</p>";
         }
     } else {
-        // Jika mode INPUT BARU (langsung hilangkan loading)
+        // Mode INPUT BARU: Langsung hilangkan loading
         overlay.style.display = 'none';
     }
 };
 
 function fillForm(data) {
-    // 1. Mapping data standar (Sesuaikan Key dengan Header Spreadsheet)
     const fields = {
         'NamaMesin': 'namaMesin',
         'SerialNumber': 'serialNumber',
@@ -335,49 +335,43 @@ function fillForm(data) {
     for (const [key, name] of Object.entries(fields)) {
         const input = document.getElementsByName(name)[0];
         if (input && data[key] !== undefined) {
-            // Handle format tanggal untuk input type="date"
+            // Perbaikan format tanggal agar muncul di input type="date"
             if (input.type === 'date' && data[key]) {
                 const date = new Date(data[key]);
-                input.value = date.toISOString().split('T')[0];
+                if (!isNaN(date)) {
+                    input.value = date.toISOString().split('T')[0];
+                }
             } else {
                 input.value = data[key];
             }
         }
     }
 
-    // 2. Kunci Serial Number
-    const snInput = document.getElementsByName('serialNumber')[0];
-    if (snInput) {
-        snInput.readOnly = true;
-        snInput.style.backgroundColor = "#eee";
+    // Lock Serial Number
+    const snField = document.getElementsByName('serialNumber')[0];
+    if (snField) {
+        snField.readOnly = true;
+        snField.style.backgroundColor = "#eee";
     }
 
-    // 3. Handle Spareparts (Menggunakan key SparepartsJSON)
+    // Load Spareparts
     if (data.SparepartsJSON) {
         try {
             const spData = JSON.parse(data.SparepartsJSON);
             const container = document.getElementById('sparepartContainer');
-            container.innerHTML = ''; // Reset baris kosong
-            spData.forEach(item => {
-                addSparepartRow(item.cat, item.pn);
-            });
-        } catch (e) {
-            console.error("Gagal parse SparepartsJSON:", e);
-        }
+            container.innerHTML = ''; 
+            spData.forEach(item => addSparepartRow(item.cat, item.pn));
+        } catch (e) { console.error("Error parse SparepartsJSON", e); }
     }
 
-    // 4. Handle Videos (Menggunakan key VideosJSON)
+    // Load Videos
     if (data.VideosJSON) {
         try {
             const vidData = JSON.parse(data.VideosJSON);
             const container = document.getElementById('videoContainer');
-            container.innerHTML = ''; // Reset baris kosong
-            vidData.forEach(url => {
-                addVideoRow(url);
-            });
-        } catch (e) {
-            console.error("Gagal parse VideosJSON:", e);
-        }
+            container.innerHTML = '';
+            vidData.forEach(url => addVideoRow(url));
+        } catch (e) { console.error("Error parse VideosJSON", e); }
     }
 }
 
