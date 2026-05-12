@@ -11,6 +11,7 @@
             --card: #ffffff;
             --text: #333;
             --border: #dee2e6;
+            --success: #28a745;
         }
 
         body { 
@@ -21,7 +22,6 @@
         }
 
         .container { max-width: 900px; margin: auto; }
-
         .header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
         .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; }
 
@@ -35,7 +35,6 @@
 
         h3 { margin-top: 0; border-bottom: 2px solid var(--bg); padding-bottom: 10px; color: var(--primary); }
 
-        /* Grid System for Responsiveness */
         .form-grid { 
             display: grid; 
             grid-template-columns: repeat(2, 1fr); 
@@ -43,7 +42,6 @@
         }
 
         .full-width { grid-column: span 2; }
-
         .form-group { display: flex; flex-direction: column; margin-bottom: 10px; }
         label { font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; color: #666; }
         
@@ -57,84 +55,68 @@
         
         input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(0,123,255,0.1); }
 
-        /* Untuk browser modern (Chrome, Firefox, Edge, Safari) */
-        input::placeholder, 
-        select::placeholder {
-            color: #b0b0b0; 
-            opacity: 1;   
-            font-weight: 400; 
-        }
+        input::placeholder { color: #b0b0b0; opacity: 1; font-weight: 400; }
 
         select {
-            padding: 12px;
-            padding-right: 40px; /* Beri ruang ekstra untuk ikon baru */
-            border: 1px solid var(--border); 
-            border-radius: 6px; 
-            font-size: 1rem;
-            outline: none;
-            cursor: pointer;
-        
-            /* LANGKAH KRUSIAL: Hilangkan panah bawaan browser */
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            appearance: none;
-        
-            /* Ganti dengan ikon kustom (chevron) menggunakan background image */
+            padding-right: 40px;
+            -webkit-appearance: none; -moz-appearance: none; appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
-            background-position: calc(100% - 15px) center; /* Jarak 15px dari border kanan */
-            background-size: 12px; /* Ukuran ikon panah */
-            background-color: white; /* Pastikan background tidak transparan */
-        }
-                
-        /* Khusus untuk Internet Explorer 10-11 */
-        input:-ms-input-placeholder {
-            color: #b0b0b0;
-        }
-        
-        /* Khusus untuk Microsoft Edge (versi lama) */
-        input::-ms-input-placeholder {
-            color: #b0b0b0;
+            background-position: calc(100% - 15px) center;
+            background-size: 12px;
+            background-color: white;
         }
 
-        /* Dynamic Item Rows */
-        .item-row { 
-            display: flex; 
-            gap: 10px; 
-            background: var(--bg); 
-            padding: 10px; 
-            border-radius: 8px; 
-            margin-bottom: 10px; 
-            align-items: center;
-        }
-
+        .item-row { display: flex; gap: 10px; background: var(--bg); padding: 10px; border-radius: 8px; margin-bottom: 10px; align-items: center; }
         .btn-add { background: #e7f1ff; color: var(--primary); border: 1px dashed var(--primary); padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; }
         .btn-del { background: #fee2e2; color: #dc3545; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold; }
         
         .btn-submit { 
-            background: var(--primary); 
-            color: white; 
-            border: none; 
-            padding: 18px; 
-            width: 100%; 
-            border-radius: 8px; 
-            font-size: 1.1rem; 
-            font-weight: bold; 
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,123,255,0.2);
-            margin-top: 20px;
+            background: var(--primary); color: white; border: none; padding: 18px; width: 100%; border-radius: 8px; 
+            font-size: 1.1rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,123,255,0.2); margin-top: 20px;
         }
 
-        /* Mobile Adjustments */
+        /* CUSTOM MODAL POPUP UI */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000;
+        }
+        .modal-card {
+            background: white; padding: 30px; border-radius: 15px; text-align: center;
+            max-width: 320px; width: 90%; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .modal-icon { 
+            width: 60px; height: 60px; background: #d4edda; color: var(--success); 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-size: 30px; margin: 0 auto 15px; 
+        }
+        .modal-card h2 { margin: 0 0 10px; font-size: 1.5rem; }
+        .modal-card p { color: #666; margin-bottom: 20px; }
+        .btn-modal { 
+            background: var(--primary); color: white; border: none; padding: 10px 25px; 
+            border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%;
+        }
+
         @media (max-width: 600px) {
             .form-grid { grid-template-columns: 1fr; }
             .full-width { grid-column: span 1; }
             .item-row { flex-direction: column; align-items: stretch; }
-            .btn-del { width: 100%; }
         }
     </style>
 </head>
 <body>
+
+<div class="modal-overlay" id="successModal">
+    <div class="modal-card">
+        <div class="modal-icon">✓</div>
+        <h2>Berhasil!</h2>
+        <p>Data mesin telah berhasil disimpan ke sistem.</p>
+        <button class="btn-modal" onclick="closeModal()">OK, Mantap</button>
+    </div>
+</div>
 
 <div class="container">
     <div class="header">
@@ -142,8 +124,7 @@
         <h2>Input Data Mesin</h2>
     </div>
 
-    <form id="machineForm">
-        <!-- GENERAL INFO -->
+    <form id="machineForm" autocomplete="off">
         <div class="section">
             <h3>General Information</h3>
             <div class="form-grid">
@@ -156,7 +137,6 @@
             </div>
         </div>
 
-        <!-- SPESIFIKASI -->
         <div class="section">
             <h3>Spesifikasi</h3>
             <div class="form-grid">
@@ -187,7 +167,6 @@
             </div>
         </div>
 
-        <!-- SPAREPART -->
         <div class="section">
             <h3>Spareparts</h3>
             <div id="sparepartContainer">
@@ -201,7 +180,6 @@
             <button type="button" class="btn-add" onclick="addItem('sparepartContainer')">+ Tambah Sparepart</button>
         </div>
 
-        <!-- VIDEO -->
         <div class="section">
             <h3>Maintenance Videos</h3>
             <div id="videoContainer">
@@ -224,18 +202,15 @@
         const div = document.createElement('div');
         div.className = 'item-row';
         if (containerId === 'sparepartContainer') {
-            div.innerHTML = `
-                <select class="sp-cat" style="flex:1">
-                    <option value="Heater">Heater</option><option value="Thermo">Thermo</option><option value="Knife">Knife</option><option value="PLC">PLC</option><option value="Seal">Seal</option><option value="Coding">Coding</option><option value="Sensor">Sensor</option><option value="Sealbar">Sealbar</option><option value="Touchscreen">Touchscreen</option><option value="Bearing">Bearing</option><option value="Belt">Belt</option><option value="Motor">Motor</option><option value="Spring">Spring</option><option value="Filter">Filter</option><option value="Akrilik & Cup">Akrilik & Cup</option><option value="Mainboard">Mainboard</option><option value="Angin Cyclinder">Angin Cyclinder</option><option value="Bushing">Bushing</option><option value="Box 1">Box 1</option><option value="Electrical">Electrical</option><option value="Mechanical">Mechanical</option><option value="Corong">Corong</option>
-                </select>
-                <input type="text" class="sp-part" style="flex:2" placeholder="Part Number">
-                <button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>`;
+            div.innerHTML = `<select class="sp-cat" style="flex:1"><option value="Heater">Heater</option><option value="Thermo">Thermo</option><option value="Knife">Knife</option><option value="PLC">PLC</option><option value="Seal">Seal</option><option value="Coding">Coding</option><option value="Sensor">Sensor</option><option value="Sealbar">Sealbar</option><option value="Touchscreen">Touchscreen</option><option value="Bearing">Bearing</option><option value="Belt">Belt</option><option value="Motor">Motor</option><option value="Spring">Spring</option><option value="Filter">Filter</option><option value="Akrilik & Cup">Akrilik & Cup</option><option value="Mainboard">Mainboard</option><option value="Angin Cyclinder">Angin Cyclinder</option><option value="Bushing">Bushing</option><option value="Box 1">Box 1</option><option value="Electrical">Electrical</option><option value="Mechanical">Mechanical</option><option value="Corong">Corong</option></select><input type="text" class="sp-part" style="flex:2" placeholder="Part Number"><button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>`;
         } else {
-            div.innerHTML = `
-                <input type="text" class="vid-url" style="flex:1" placeholder="Link YouTube">
-                <button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>`;
+            div.innerHTML = `<input type="text" class="vid-url" style="flex:1" placeholder="Link YouTube"><button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>`;
         }
         container.appendChild(div);
+    }
+
+    function closeModal() {
+        window.location.href = "dashboard.html";
     }
 
     document.getElementById('machineForm').onsubmit = async (e) => {
@@ -253,23 +228,19 @@
         }));
         data.videos = Array.from(document.querySelectorAll('#videoContainer .vid-url')).map(r => r.value);
 
-      try {
+        try {
             await fetch(SCRIPT_URL, {
                 method: 'POST',
-                mode: 'no-cors', 
-                headers: {
-                    'Content-Type': 'text/plain', // Ubah ke plain text
-                },
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain' },
                 body: JSON.stringify(data)
             });
             
-            // Karena no-cors tidak bisa baca response, 
-            // asumsikan jika tidak masuk ke catch, maka berhasil.
-            alert("Data Berhasil Dikirim ke Sistem!");
-            window.location.href = "dashboard.html";
+            // Tampilkan Modal UI Kustom
+            document.getElementById('successModal').style.display = 'flex';
+            
         } catch (err) {
-            console.error("Detail Error:", err);
-            alert("Koneksi gagal. Pastikan URL Apps Script benar.");
+            alert("Koneksi gagal: " + err);
         } finally {
             btn.innerText = "SIMPAN DATA MESIN";
             btn.disabled = false;
