@@ -137,33 +137,38 @@
 
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTxktuhuSsqzxyGCHmyRUVLwRHpPs9uWDb1ILi9xDckT1vLs8t5WltLa_GrANWrCos/exec";
-    window.onload = () => {
+    window.onload = async () => {
         const urlParams = new URLSearchParams(window.location.search);
-        // Kita coba ambil dari 'sn' atau 'id' agar lebih fleksibel
-        const sn = urlParams.get('sn') || urlParams.get('id'); 
+        // DASHBOARD mengirimkan '?id=', maka kita tangkap 'id'
+        const sn = urlParams.get('id'); 
 
         if (!sn) {
-            document.getElementById('loading-overlay').innerText = "Serial Number tidak ditemukan.";
+            document.getElementById('loading-overlay').innerHTML = "<h3>Error: Serial Number tidak ditemukan di URL.</h3>";
             return;
         }
 
-        fetch(`${SCRIPT_URL}?sn=${sn}`)
-        .then(res => res.json())
-        .then(data => {
+        try {
+            const response = await fetch(`${SCRIPT_URL}?sn=${sn}`);
+            const data = await response.json();
+
             if (!data || data.error) {
-                document.getElementById('loading-overlay').innerText = "Data tidak ditemukan.";
+                document.getElementById('loading-overlay').innerHTML = "<h3>Data Mesin Tidak Ditemukan.</h3>";
                 return;
             }
 
-            // Update Header & Info Utama
+            // 1. Update Header & Foto
             document.getElementById('mesin-name').innerText = data.NamaMesin || "-";
             document.getElementById('mesin-sn').innerText = data.SerialNumber || "-";
             document.getElementById('mesin-img').src = data.FotoMesin || "https://via.placeholder.com/400x300?text=No+Image";
-            document.getElementById('cust-name').innerText = data.NamaCustomer || "General Spec";
+            document.getElementById('cust-name').innerText = data.NamaCustomer || "General Specification";
 
-            // Update Spesifikasi
+            // 2. Update Spesifikasi (Pastikan ID di HTML cocok)
             document.getElementById('spec-model').innerText = data.Model || "-";
-            document.getElementById('spec-date').innerText = data.FactoryDate ? new Date(data.FactoryDate).toLocaleDateString('id-ID') : "-";
+            // Format Tanggal agar lebih enak dibaca
+            if (data.FactoryDate) {
+                const date = new Date(data.FactoryDate);
+                document.getElementById('spec-date').innerText = date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+            }
             document.getElementById('spec-product').innerText = data.PackedProduct || "-";
             document.getElementById('spec-bag').innerText = data.BagType || "-";
             document.getElementById('spec-weight').innerText = data.PackedWeight || "-";
@@ -172,52 +177,50 @@
             document.getElementById('spec-speed').innerText = data.Speed || "-";
             document.getElementById('spec-power').innerText = data.Power || "-";
 
-            // Render Spareparts (Parse JSON String)
+            // 3. Render Spareparts (Parsing JSON String)
             const spareList = document.getElementById('sparepart-list');
-            spareList.innerHTML = ''; // Kosongkan
+            spareList.innerHTML = ""; // Kosongkan placeholder
             if (data.SparepartsJSON) {
-                try {
-                    const spArray = JSON.parse(data.SparepartsJSON);
-                    spArray.forEach(sp => {
-                        spareList.innerHTML += `<li><strong>${sp.cat}:</strong> ${sp.pn}</li>`;
-                    });
-                } catch(e) { console.error("Gagal parse SparepartsJSON"); }
+                const spArray = JSON.parse(data.SparepartsJSON);
+                spArray.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<strong>${item.cat}:</strong> ${item.pn}`;
+                    spareList.appendChild(li);
+                });
             }
 
-            // Render Videos (Parse JSON String)
+            // 4. Render Videos (Parsing JSON String)
             const vidList = document.getElementById('video-list');
-            vidList.innerHTML = ''; // Kosongkan
+            vidList.innerHTML = ""; // Kosongkan placeholder
             if (data.VideosJSON) {
-                try {
-                    const vidArray = JSON.parse(data.VideosJSON);
-                    vidArray.forEach((url, index) => {
-                        const videoId = extractYoutubeId(url);
-                        if (videoId) {
-                            const activeClass = index === 0 ? 'active' : '';
-                            vidList.innerHTML += `
-                                <div class="video-item ${activeClass}">
-                                    <div class="video-header" onclick="this.parentElement.classList.toggle('active')">
-                                        <span>Tutorial Video ${index + 1}</span>
-                                        <span class="chevron">▼</span>
-                                    </div>
-                                    <div class="video-content">
-                                        <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>
-                                    </div>
-                                </div>`;
-                        }
-                    });
-                } catch(e) { console.error("Gagal parse VideosJSON"); }
+                const vidArray = JSON.parse(data.VideosJSON);
+                vidArray.forEach((url, index) => {
+                    const videoId = extractYoutubeId(url);
+                    if (videoId) {
+                        const activeClass = index === 0 ? 'active' : '';
+                        vidList.innerHTML += `
+                            <div class="video-item ${activeClass}">
+                                <div class="video-header" onclick="this.parentElement.classList.toggle('active')">
+                                    <span>Tutorial Video ${index + 1}</span>
+                                    <span class="chevron">▼</span>
+                                </div>
+                                <div class="video-content">
+                                    <iframe src="https://www.youtube.com/embed/${videoId}" frameborder="0" allowfullscreen></iframe>
+                                </div>
+                            </div>`;
+                    }
+                });
             }
 
-            // Hilangkan Loading
+            // Sembunyikan Loading, Tampilkan Konten
             document.getElementById('loading-overlay').style.display = 'none';
             document.getElementById('content').style.visibility = 'visible';
-        })
-        .catch(err => {
-            console.error(err);
-            document.getElementById('loading-overlay').innerText = "Gagal memuat data. Periksa koneksi.";
-        });
-    }
+
+        } catch (err) {
+            console.error("Gagal load data:", err);
+            document.getElementById('loading-overlay').innerHTML = "<h3>Gagal terhubung ke Database.</h3>";
+        }
+    };
 
     function extractYoutubeId(url) {
         if (!url) return null;
