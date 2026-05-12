@@ -278,7 +278,7 @@
 };
 
 function fillForm(data) {
-    // 1. Mapping data standar dari Apps Script ke Input Form
+    // 1. Mapping data standar (Sesuaikan Key dengan Header Spreadsheet)
     const fields = {
         'NamaMesin': 'namaMesin',
         'SerialNumber': 'serialNumber',
@@ -298,7 +298,7 @@ function fillForm(data) {
     for (const [key, name] of Object.entries(fields)) {
         const input = document.getElementsByName(name)[0];
         if (input && data[key] !== undefined) {
-            // Cek jika field adalah tanggal, konversi ke format YYYY-MM-DD
+            // Handle format tanggal untuk input type="date"
             if (input.type === 'date' && data[key]) {
                 const date = new Date(data[key]);
                 input.value = date.toISOString().split('T')[0];
@@ -308,39 +308,77 @@ function fillForm(data) {
         }
     }
 
-    // 2. Kunci Serial Number agar tidak diubah saat edit
+    // 2. Kunci Serial Number
     const snInput = document.getElementsByName('serialNumber')[0];
     if (snInput) {
         snInput.readOnly = true;
         snInput.style.backgroundColor = "#eee";
     }
 
-    // 3. Handle data Spareparts (JSON String)
+    // 3. Handle Spareparts (Menggunakan key SparepartsJSON)
     if (data.SparepartsJSON) {
         try {
             const spData = JSON.parse(data.SparepartsJSON);
             const container = document.getElementById('sparepartContainer');
-            container.innerHTML = ''; // Bersihkan baris default
+            container.innerHTML = ''; // Reset baris kosong
             spData.forEach(item => {
                 addSparepartRow(item.cat, item.pn);
             });
         } catch (e) {
-            console.error("Gagal memproses data sparepart:", e);
+            console.error("Gagal parse SparepartsJSON:", e);
         }
     }
 
-    // 4. Handle data Videos (JSON String)
+    // 4. Handle Videos (Menggunakan key VideosJSON)
     if (data.VideosJSON) {
         try {
             const vidData = JSON.parse(data.VideosJSON);
             const container = document.getElementById('videoContainer');
-            container.innerHTML = ''; // Bersihkan baris default
+            container.innerHTML = ''; // Reset baris kosong
             vidData.forEach(url => {
                 addVideoRow(url);
             });
         } catch (e) {
-            console.error("Gagal memproses data video:", e);
+            console.error("Gagal parse VideosJSON:", e);
         }
+    }
+}
+
+// --- FUNGSI HELPER (Pastikan fungsi ini ada di bawah fillForm) ---
+
+function addSparepartRow(category = 'Heater', partNumber = '') {
+    const container = document.getElementById('sparepartContainer');
+    const div = document.createElement('div');
+    div.className = 'item-row';
+    const options = ["Heater", "Thermo", "Knife", "PLC", "Seal", "Coding", "Sensor", "Sealbar", "Touchscreen", "Bearing", "Belt", "Motor", "Spring", "Filter", "Akrilik & Cup", "Mainboard", "Angin Cyclinder", "Bushing", "Box 1", "Electrical", "Mechanical", "Corong"];
+    
+    div.innerHTML = `
+        <select class="sp-cat" style="flex:1">
+            ${options.map(opt => `<option value="${opt}" ${opt === category ? 'selected' : ''}>${opt}</option>`).join('')}
+        </select>
+        <input type="text" class="sp-part" style="flex:2" placeholder="Part Number" value="${partNumber}">
+        <button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>
+    `;
+    container.appendChild(div);
+}
+
+function addVideoRow(url = '') {
+    const container = document.getElementById('videoContainer');
+    const div = document.createElement('div');
+    div.className = 'item-row';
+    div.innerHTML = `
+        <input type="text" class="vid-url" style="flex:1" placeholder="Link YouTube" value="${url}">
+        <button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>
+    `;
+    container.appendChild(div);
+}
+
+// Fungsi tombol "Tambah" di HTML
+function addItem(containerId) {
+    if (containerId === 'sparepartContainer') {
+        addSparepartRow();
+    } else {
+        addVideoRow();
     }
 }
 
