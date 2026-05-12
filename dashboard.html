@@ -63,9 +63,16 @@
         .card-body { padding: 15px; }
 
         .card-title { 
-            margin: 0 0 5px 0; font-size: 1.1rem; font-weight: 700; 
-            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-            overflow: hidden; text-overflow: ellipsis; height: 2.8em; /* Max 2 line */
+            margin: 0 0 5px 0; 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            line-height: 1.4em; /* Tentukan tinggi baris yang pasti */
+            height: 2.8em;      /* Tinggi total = 2 baris x 1.4em */
+            display: -webkit-box; 
+            -webkit-line-clamp: 2; 
+            -webkit-box-orient: vertical;
+            overflow: hidden;   /* Ini wajib untuk menyembunyikan sisa teks */
+            text-overflow: ellipsis; 
         }
         
         .card-customer { 
