@@ -316,9 +316,9 @@ function fillForm(data) {
     }
 
     // 3. Handle data Spareparts (JSON String)
-    if (data.Spareparts) {
+    if (data.SparepartsJSON) {
         try {
-            const spData = JSON.parse(data.Spareparts);
+            const spData = JSON.parse(data.SparepartsJSON);
             const container = document.getElementById('sparepartContainer');
             container.innerHTML = ''; // Bersihkan baris default
             spData.forEach(item => {
@@ -330,9 +330,9 @@ function fillForm(data) {
     }
 
     // 4. Handle data Videos (JSON String)
-    if (data.MaintenanceVideos) {
+    if (data.VideosJSON) {
         try {
-            const vidData = JSON.parse(data.MaintenanceVideos);
+            const vidData = JSON.parse(data.VideosJSON);
             const container = document.getElementById('videoContainer');
             container.innerHTML = ''; // Bersihkan baris default
             vidData.forEach(url => {
