@@ -11,12 +11,26 @@
         .section-card { background: var(--bg-card); padding: 20px; border-radius: var(--radius); margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
         .spec-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eeeeee75; }
         .video-item { 
-            border-bottom: 1px solid rgba(238, 238, 238, 0.5); /* Menggunakan separator halus yang sama */
-            margin-bottom: 10px; 
+            border: 1px solid #EEEEEE75; 
+            border-radius: 8px;        
+            margin-bottom: 12px;        
             overflow: hidden; 
+            background: #ffffff;       
         }
-        .video-item:last-child {
-            border-bottom: none; /* Hilangkan garis di item terakhir */
+
+        .video-header { 
+            background: transparent; 
+            padding: 14px 15px;        
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            font-weight: 600;
+        }
+   
+        .video-content { 
+            display: none; 
+            padding: 0 15px 15px 15px;   /* Memberi ruang di kiri, kanan, dan bawah iframe */
         }
         .video-header { 
             background: transparent; /* Hapus fill color abu-abu */
