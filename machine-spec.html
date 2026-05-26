@@ -17,24 +17,14 @@
             overflow: hidden; 
             background: #ffffff;       
         }
-
-        .video-header { 
-            background: transparent; 
-            padding: 14px 15px;        
-            cursor: pointer; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            font-weight: 600;
-        }
    
         .video-content { 
             display: none; 
-            padding: 0 15px 15px 15px;   /* Memberi ruang di kiri, kanan, dan bawah iframe */
+            padding: 0 16px 16px 15px;   /* Memberi ruang di kiri, kanan, dan bawah iframe */
         }
         .video-header { 
             background: transparent; /* Hapus fill color abu-abu */
-            padding: 14px 5px; 
+            padding: 14px 16px; 
             cursor: pointer; 
             display: flex; 
             justify-content: space-between; 
@@ -191,7 +181,7 @@
                     }
             
                     return `
-                        <div class="video-item ${i === 0 ? 'active' : ''}">
+                        <div class="video-item">
                             <div class="video-header" onclick="this.parentElement.classList.toggle('active')">
                                 <span class="vid-title">${videoTitle}</span>
                                 <i class="ph ph-caret-down"></i>
