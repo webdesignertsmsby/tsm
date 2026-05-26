@@ -118,7 +118,12 @@
             const spList = document.getElementById('sparepart-list');
             if (data.SparepartsJSON) {
                 const sps = JSON.parse(data.SparepartsJSON);
-                spList.innerHTML = sps.map(item => `<li><strong>${item.cat}:</strong> ${item.pn}</li>`).join('');
+                spList.innerHTML = sps.map(item => `
+                    <div class="spec-item">
+                        <span>${item.cat}</span>
+                        <span>${item.pn}</span>
+                    </div>
+                `).join('');
             }
 
             // Videos
