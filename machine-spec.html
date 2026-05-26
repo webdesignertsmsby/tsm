@@ -27,25 +27,33 @@
 </div>
 
 <div id="content" class="main-container" style="display: none;">
-    <div class="section-card">
+    <div class="section-card" style="padding: 0; overflow: hidden;">
         <div class="img-container">
-            <img id="mesin-img" src="" alt="Foto Mesin">
+            <img id="mesin-img" src="" alt="Foto Mesin" style="border-radius: var(--radius) var(--radius) 0 0;">
         </div>
-        <h2 id="mesin-name" style="margin: 15px 0 5px 0;"></h2>
-        <p id="mesin-sn" style="color: #666; margin: 0;"></p>
-        <p id="cust-name" style="font-weight: bold; color: var(--primary); margin-top: 5px;"></p>
+    </div>
+
+    <div class="section-card" style="margin-top: 15px;">
+        <h2 id="mesin-name" style="margin: 0 0 5px 0; font-size: 1.5rem;">-</h2>
+        <p id="mesin-sn" style="color: #666; margin: 0; font-family: monospace; font-size: 0.95rem;"></p>
+    </div>
+
+    <div class="section-card">
+        <div id="specs-base-container">
+            <div class="spec-item"><span>Model</span><span id="spec-model">-</span></div>
+            <div class="spec-item"><span>Factory Date</span><span id="spec-date">-</span></div>
+            <div class="spec-item"><span>Customer</span><span id="cust-name" style="font-weight: bold; color: var(--primary);">-</span></div>
+        </div>
     </div>
 
     <div class="section-card">
         <h3>Spesifikasi Teknis</h3>
-        <div id="specs-container">
-            <div class="spec-item"><span>Model</span><span id="spec-model">-</span></div>
-            <div class="spec-item"><span>Factory Date</span><span id="spec-date">-</span></div>
-            <div class="spec-item"><span>Product</span><span id="spec-product">-</span></div>
+        <div id="specs-tech-container">
+            <div class="spec-item"><span>Packed Product</span><span id="spec-product">-</span></div>
             <div class="spec-item"><span>Bag Type</span><span id="spec-bag">-</span></div>
-            <div class="spec-item"><span>Weight</span><span id="spec-weight">-</span></div>
+            <div class="spec-item"><span>Packed Weight</span><span id="spec-weight">-</span></div>
             <div class="spec-item"><span>Voltage</span><span id="spec-voltage">-</span></div>
-            <div class="spec-item"><span>Electrical</span><span id="spec-elec">-</span></div>
+            <div class="spec-item"><span>Electrical Type</span><span id="spec-elec">-</span></div>
             <div class="spec-item"><span>Speed</span><span id="spec-speed">-</span></div>
             <div class="spec-item"><span>Power</span><span id="spec-power">-</span></div>
         </div>
