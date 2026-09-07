@@ -22,7 +22,6 @@
         
         .container { max-width: 1200px; margin: auto; }
 
-        /* Header & Search Section */
         .header { 
             display: flex; justify-content: space-between; align-items: center; 
             margin-bottom: 30px; flex-wrap: wrap; gap: 15px; 
@@ -41,15 +40,18 @@
             background: var(--primary); color: white; text-decoration: none; 
             padding: 12px 24px; border-radius: 8px; font-weight: bold; transition: 0.3s; 
         }
+        .btn-logout {
+            background: white; color: var(--danger); text-decoration: none;
+            padding: 12px 18px; border-radius: 8px; font-weight: bold;
+            border: 1px solid var(--danger); cursor: pointer;
+        }
 
-        /* Grid System */
         .machine-grid { 
             display: grid; 
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
             gap: 25px; 
         }
 
-        /* Modern Card Style */
         .card { 
             background: white; border-radius: 15px; overflow: hidden;
             box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative; 
@@ -66,26 +68,25 @@
             margin: 0 0 5px 0; 
             font-size: 1.1rem; 
             font-weight: 700; 
-            line-height: 1.4em; /* Tentukan tinggi baris yang pasti */
-            height: 2.8em;      /* Tinggi total = 2 baris x 1.4em */
+            line-height: 1.4em;
+            height: 2.8em;
             display: -webkit-box; 
             -webkit-line-clamp: 2; 
             -webkit-box-orient: vertical;
-            overflow: hidden;   /* Ini wajib untuk menyembunyikan sisa teks */
+            overflow: hidden;
             text-overflow: ellipsis; 
         }
         
         .card-customer { 
             margin: 0; color: var(--text-sub); font-size: 0.9rem; 
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; /* Max 1 line */
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
 
         .card-sn { 
             margin: 5px 0 0 0; color: #9ca3af; font-size: 0.85rem; 
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; /* Max 1 line */
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
 
-        /* Dropdown Menu */
         .menu-container { position: absolute; top: 195px; right: 10px; z-index: 5; }
         .dots { 
             cursor: pointer; font-size: 1.5rem; color: #666; background: white;
@@ -109,6 +110,27 @@
 
         .loading-text { text-align: center; grid-column: 1 / -1; padding: 50px; color: var(--text-sub); }
 
+        /* Login gate */
+        #loginOverlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--light); display: flex; align-items: center; justify-content: center;
+            z-index: 9999;
+        }
+        .login-card {
+            background: white; padding: 30px; border-radius: 15px; width: 90%; max-width: 340px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center;
+        }
+        .login-card h2 { margin-top: 0; }
+        .login-card input {
+            width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd;
+            box-sizing: border-box; margin-bottom: 12px; font-size: 1rem;
+        }
+        .login-card button {
+            width: 100%; padding: 12px; border-radius: 8px; border: none;
+            background: var(--primary); color: white; font-weight: bold; cursor: pointer;
+        }
+        .login-error { color: var(--danger); font-size: 0.85rem; min-height: 18px; margin-bottom: 8px; }
+
         @media (max-width: 600px) {
             .header { flex-direction: column; align-items: stretch; }
             .search-container { max-width: 100%; }
@@ -117,13 +139,24 @@
 </head>
 <body>
 
-<div class="container">
+<div id="loginOverlay">
+    <div class="login-card">
+        <h2>Login Admin</h2>
+        <p style="color:#666; font-size:0.9rem;">Masukkan kode admin untuk mengelola data mesin.</p>
+        <div class="login-error" id="loginError"></div>
+        <input type="password" id="tokenInput" placeholder="Kode admin">
+        <button onclick="submitLogin()">Masuk</button>
+    </div>
+</div>
+
+<div class="container" id="mainApp" style="display:none;">
     <div class="header">
         <h1>Manage Your Machines</h1>
         <div class="search-container">
             <input type="text" id="searchInput" class="search-input" placeholder="Cari mesin, customer, atau SN...">
         </div>
         <a href="admin-input.html" class="btn-add">+ Tambah Mesin Baru</a>
+        <button class="btn-logout" onclick="logout()">Keluar</button>
     </div>
 
     <div class="machine-grid" id="machineList">
@@ -135,10 +168,42 @@
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTxktuhuSsqzxyGCHmyRUVLwRHpPs9uWDb1ILi9xDckT1vLs8t5WltLa_GrANWrCos/exec";
     let allMachines = [];
 
+    function getToken() {
+        return sessionStorage.getItem('adminToken') || '';
+    }
+
+    function showLogin(message) {
+        document.getElementById('loginOverlay').style.display = 'flex';
+        document.getElementById('mainApp').style.display = 'none';
+        document.getElementById('loginError').innerText = message || '';
+    }
+
+    function submitLogin() {
+        const val = document.getElementById('tokenInput').value.trim();
+        if (!val) return;
+        sessionStorage.setItem('adminToken', val);
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.getElementById('mainApp').style.display = 'block';
+        loadMachines();
+    }
+
+    function logout() {
+        sessionStorage.removeItem('adminToken');
+        location.reload();
+    }
+
     async function loadMachines() {
         try {
-            const response = await fetch(SCRIPT_URL);
-            allMachines = await response.json();
+            const response = await fetch(`${SCRIPT_URL}?token=${encodeURIComponent(getToken())}`);
+            const data = await response.json();
+
+            if (data && data.error) {
+                // Token salah atau kosong -> minta login ulang
+                showLogin('Kode admin salah. Coba lagi.');
+                return;
+            }
+
+            allMachines = data;
             renderMachines(allMachines);
         } catch (e) {
             document.getElementById('statusMsg').innerText = "Gagal memuat data.";
@@ -157,9 +222,8 @@
         data.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
-            // Clickable card: navigasi ke halaman spek
             card.onclick = () => {
-                window.location.href = `machine-spec.html?id=${encodeURIComponent(item.SerialNumber)}`;
+                window.location.href = `admin-input.html?edit=${encodeURIComponent(item.SerialNumber)}`;
             };
 
             card.innerHTML = `
@@ -172,7 +236,7 @@
                 <div class="menu-container">
                     <div class="dots" onclick="toggleMenu(event, this)">&#8942;</div>
                     <div class="dropdown">
-                        <a href="admin-input.html?edit=${item.SerialNumber}" onclick="event.stopPropagation()">Edit</a>
+                        <a href="admin-input.html?edit=${encodeURIComponent(item.SerialNumber)}" onclick="event.stopPropagation()">Edit</a>
                         <button class="delete-btn" onclick="event.stopPropagation(); deleteMachine('${item.SerialNumber}')">Delete</button>
                     </div>
                 </div>
@@ -181,7 +245,6 @@
         });
     }
 
-    // Fungsi Search
     document.getElementById('searchInput').oninput = (e) => {
         const query = e.target.value.toLowerCase();
         const filtered = allMachines.filter(m => 
@@ -193,26 +256,46 @@
     };
 
     function toggleMenu(event, el) {
-        event.stopPropagation(); // Mencegah klik card terpicu
+        event.stopPropagation();
         document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
         el.nextElementSibling.classList.toggle('show');
     }
 
-    window.onclick = () => {
-        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
+    window.onclick = (e) => {
+        if (!e.target.classList.contains('dots')) {
+            document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
+        }
     }
 
     async function deleteMachine(sn) {
         if (confirm(`Apakah Anda yakin ingin menghapus mesin dengan SN: ${sn}?`)) {
-            const res = await fetch(`${SCRIPT_URL}?action=delete&sn=${sn}`);
-            if (res.ok) {
-                alert('Berhasil dihapus');
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'text/plain' },
+                    body: JSON.stringify({ action: 'delete', sn: sn, token: getToken() })
+                });
+                alert('Permintaan hapus terkirim.');
                 loadMachines();
+            } catch (err) {
+                alert('Gagal menghapus: ' + err);
             }
         }
     }
 
-    loadMachines();
+    // Kalau sudah pernah login di halaman ini (sessionStorage), langsung masuk
+    window.onload = () => {
+        if (getToken()) {
+            document.getElementById('loginOverlay').style.display = 'none';
+            document.getElementById('mainApp').style.display = 'block';
+            loadMachines();
+        }
+    };
+
+    document.getElementById('tokenInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') submitLogin();
+    });
 </script>
 </body>
 </html>
