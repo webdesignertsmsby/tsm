@@ -3,124 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Your Machines - FEASPACK</title>
+    <title>Admin - Input Mesin</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <style>
-        :root { 
-            --primary: #007bff; 
-            --danger: #dc3545; 
-            --dark: #1f2937; 
-            --light: #f3f4f6; 
-            --text-sub: #6b7280;
+        :root {
+            --primary: #007bff;
+            --bg: #f8f9fa;
+            --card: #ffffff;
+            --text: #333;
+            --border: #dee2e6;
+            --success: #28a745;
+            --danger: #dc3545;
         }
-
+ 
         body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: var(--light); 
+            font-family: 'Segoe UI', sans-serif; 
+            background: var(--bg); 
+            color: var(--text);
             margin: 0; padding: 20px; 
-            color: var(--dark);
         }
-        
-        .container { max-width: 1200px; margin: auto; }
-
-        .header { 
-            display: flex; justify-content: space-between; align-items: center; 
-            margin-bottom: 30px; flex-wrap: wrap; gap: 15px; 
+ 
+        .container { max-width: 900px; margin: auto; }
+        .header { display: flex; align-items: center; gap: 15px; margin-bottom: 20px; }
+        .btn-back { text-decoration: none; color: var(--primary); font-weight: bold; }
+ 
+        .section { 
+            background: var(--card); 
+            padding: 25px; 
+            margin-bottom: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        .header h1 { margin: 0; font-size: 1.5rem; }
-
-        .search-container { flex: 1; max-width: 400px; position: relative; }
-        .search-input {
-            width: 100%; padding: 12px 20px; border-radius: 50px;
-            border: 1px solid #ddd; outline: none; box-sizing: border-box;
-            transition: 0.3s;
-        }
-        .search-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,123,255,0.1); }
-
-        .btn-add { 
-            background: var(--primary); color: white; text-decoration: none; 
-            padding: 12px 24px; border-radius: 8px; font-weight: bold; transition: 0.3s; 
-        }
-        .btn-logout {
-            background: white; color: var(--danger); text-decoration: none;
-            padding: 12px 18px; border-radius: 8px; font-weight: bold;
-            border: 1px solid var(--danger); cursor: pointer;
-        }
-
-        .machine-grid { 
+ 
+        h3 { margin-top: 0; border-bottom: 2px solid var(--bg); padding-bottom: 10px; color: var(--primary); }
+ 
+        .form-grid { 
             display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-            gap: 25px; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
         }
-
-        .card { 
-            background: white; border-radius: 15px; overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: relative; 
-            transition: transform 0.2s; cursor: pointer;
-            border: 1px solid #e5e7eb;
-        }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
-
-        .card-img { width: 100%; height: 180px; object-fit: cover; background: #eee; }
-
-        .card-body { padding: 15px; }
-
-        .card-title { 
-            margin: 0 0 5px 0; 
-            font-size: 1.1rem; 
-            font-weight: 700; 
-            line-height: 1.4em;
-            height: 2.8em;
-            display: -webkit-box; 
-            -webkit-line-clamp: 2; 
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            text-overflow: ellipsis; 
+ 
+        .full-width { grid-column: span 2; }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 10px; }
+        label { font-size: 0.85rem; font-weight: 600; margin-bottom: 5px; color: #666; }
+        
+        input, select { 
+            padding: 12px; 
+            border: 1px solid var(--border); 
+            border-radius: 6px; 
+            font-size: 1rem;
+            outline: none;
         }
         
-        .card-customer { 
-            margin: 0; color: var(--text-sub); font-size: 0.9rem; 
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        input:focus { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(0,123,255,0.1); }
+ 
+        input::placeholder { color: #b0b0b0; opacity: 1; font-weight: 400; }
+ 
+        select {
+            padding-right: 40px;
+            -webkit-appearance: none; -moz-appearance: none; appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: calc(100% - 15px) center;
+            background-size: 12px;
+            background-color: white;
         }
-
-        .card-sn { 
-            margin: 5px 0 0 0; color: #9ca3af; font-size: 0.85rem; 
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
-
-        .menu-container { position: absolute; top: 195px; right: 10px; z-index: 5; }
-        .dots { 
-            cursor: pointer; font-size: 1.5rem; color: #666; background: white;
-            width: 30px; height: 30px; border-radius: 50%; display: flex; 
-            align-items: center; justify-content: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .dropdown { 
-            display: none; position: absolute; right: 0; background: white; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15); border-radius: 8px; 
-            z-index: 10; min-width: 120px; overflow: hidden;
-        }
-        .dropdown button, .dropdown a { 
-            display: block; padding: 10px 15px; text-decoration: none; 
-            color: var(--dark); font-size: 0.85rem; border: none; 
-            background: none; width: 100%; text-align: left; cursor: pointer; 
-        }
-        .dropdown a:hover, .dropdown button:hover { background: #f9fafb; }
-        .dropdown .delete-btn { color: var(--danger); border-top: 1px solid #f3f4f6; }
+ 
+        .item-row { display: flex; gap: 10px; background: var(--bg); padding: 10px; border-radius: 8px; margin-bottom: 10px; align-items: center; }
+        .btn-add { background: #e7f1ff; color: var(--primary); border: 1px dashed var(--primary); padding: 10px; width: 100%; border-radius: 6px; font-weight: bold; cursor: pointer; }
+        .btn-del { background: #fee2e2; color: #dc3545; border: none; padding: 10px; border-radius: 6px; cursor: pointer; font-weight: bold; }
         
-        .show { display: block; }
-
-        .loading-text { text-align: center; grid-column: 1 / -1; padding: 50px; color: var(--text-sub); }
-
+        .btn-submit { 
+            background: var(--primary); color: white; border: none; padding: 18px; width: 100%; border-radius: 8px; 
+            font-size: 1.1rem; font-weight: bold; cursor: pointer; box-shadow: 0 4px 6px rgba(0,123,255,0.2); margin-top: 20px;
+        }
+ 
+        .access-code-box {
+            background: #eef6ff; border: 1px dashed var(--primary); border-radius: 8px;
+            padding: 12px; font-family: monospace; font-size: 1.1rem; text-align: center;
+            letter-spacing: 1px; color: var(--primary); font-weight: bold;
+        }
+        .access-code-hint { font-size: 0.8rem; color: #888; margin-top: 6px; }
+ 
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5); display: none; align-items: center; justify-content: center; z-index: 1000;
+        }
+        .modal-card {
+            background: white; padding: 30px; border-radius: 15px; text-align: center;
+            max-width: 340px; width: 90%; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: slideIn 0.3s ease-out;
+        }
+        @keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .modal-icon { 
+            width: 60px; height: 60px; background: #d4edda; color: var(--success); 
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-size: 30px; margin: 0 auto 15px; 
+        }
+        .modal-card h2 { margin: 0 0 10px; font-size: 1.5rem; }
+        .modal-card p { color: #666; margin-bottom: 20px; }
+        .btn-modal { 
+            background: var(--primary); color: white; border: none; padding: 10px 25px; 
+            border-radius: 6px; font-weight: bold; cursor: pointer; width: 100%;
+        }
+        #qrPreview { display: flex; justify-content: center; margin-bottom: 12px; }
+        .link-box {
+            font-size: 0.75rem; word-break: break-all; background: #f3f4f6; padding: 8px;
+            border-radius: 6px; color: #555; margin-bottom: 15px;
+        }
+ 
+        #loadingOverlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .hidden { display: none; }
+ 
         /* Login gate */
         #loginOverlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--light); display: flex; align-items: center; justify-content: center;
-            z-index: 9999;
+            background: var(--bg); display: flex; align-items: center; justify-content: center;
+            z-index: 100000;
         }
         .login-card {
             background: white; padding: 30px; border-radius: 15px; width: 90%; max-width: 340px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.1); text-align: center;
         }
-        .login-card h2 { margin-top: 0; }
         .login-card input {
             width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ddd;
             box-sizing: border-box; margin-bottom: 12px; font-size: 1rem;
@@ -130,172 +160,366 @@
             background: var(--primary); color: white; font-weight: bold; cursor: pointer;
         }
         .login-error { color: var(--danger); font-size: 0.85rem; min-height: 18px; margin-bottom: 8px; }
-
+ 
         @media (max-width: 600px) {
-            .header { flex-direction: column; align-items: stretch; }
-            .search-container { max-width: 100%; }
+            .form-grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            .item-row { flex-direction: column; align-items: stretch; }
         }
     </style>
 </head>
 <body>
-
+ 
 <div id="loginOverlay">
     <div class="login-card">
         <h2>Login Admin</h2>
-        <p style="color:#666; font-size:0.9rem;">Masukkan kode admin untuk mengelola data mesin.</p>
+        <p style="color:#666; font-size:0.9rem;">Masukkan kode admin untuk input/edit data mesin.</p>
         <div class="login-error" id="loginError"></div>
         <input type="password" id="tokenInput" placeholder="Kode admin">
         <button onclick="submitLogin()">Masuk</button>
     </div>
 </div>
-
-<div class="container" id="mainApp" style="display:none;">
-    <div class="header">
-        <h1>Manage Your Machines</h1>
-        <div class="search-container">
-            <input type="text" id="searchInput" class="search-input" placeholder="Cari mesin, customer, atau SN...">
-        </div>
-        <a href="admin-input.html" class="btn-add">+ Tambah Mesin Baru</a>
-        <button class="btn-logout" onclick="logout()">Keluar</button>
-    </div>
-
-    <div class="machine-grid" id="machineList">
-        <p class="loading-text" id="statusMsg">Loading data mesin...</p>
+ 
+<div id="loadingOverlay" style="display:none;">
+    <div class="spinner"></div>
+    <p>Sedang mengambil data mesin...</p>
+</div>
+ 
+<div class="modal-overlay" id="successModal">
+    <div class="modal-card">
+        <div class="modal-icon">✓</div>
+        <h2>Berhasil!</h2>
+        <p>Data mesin telah berhasil disimpan ke sistem.</p>
+        <div id="qrPreview"></div>
+        <div class="link-box" id="qrLinkText"></div>
+        <p style="font-size:0.85rem; color:#888; margin-top:-10px;">Screenshot / cetak QR ini dan tempel di mesin untuk customer.</p>
+        <button class="btn-modal" onclick="closeModal()">Selesai</button>
     </div>
 </div>
-
+ 
+<div class="container" id="mainApp" style="display:none;">
+    <div class="header">
+        <a href="dashboard.html" class="btn-back">← Back</a>
+        <h2>Input Data Mesin</h2>
+    </div>
+ 
+    <form id="machineForm" autocomplete="off">
+        <div class="section">
+            <h3>General Information</h3>
+            <div class="form-grid">
+                <div class="form-group full-width"><label>Nama Mesin</label><input type="text" name="namaMesin" required placeholder="Contoh: Auto Pouch Filler"></div>
+                <div class="form-group"><label>Serial Number</label><input type="text" name="serialNumber" required placeholder="Masukkan serial number mesin..."></div>
+                <div class="form-group"><label>Model</label><input type="text" name="model" placeholder="Masukkan model mesin..."></div>
+                <div class="form-group full-width"><label>URL Foto Mesin</label><input type="text" name="fotoMesin" placeholder="https://link-foto.com/image.jpg"></div>
+                <div class="form-group"><label>Factory Date</label><input type="date" name="factoryDate"></div>
+                <div class="form-group"><label>Nama Customer</label><input type="text" name="namaCustomer" placeholder="Contoh: PT. ABC Indonesia"></div>
+                <div class="form-group full-width">
+                    <label>Kode Akses Customer (otomatis, jangan diubah manual)</label>
+                    <div class="access-code-box" id="accessCodeDisplay">-</div>
+                    <div class="access-code-hint">Ini kode yang dipakai di QR untuk halaman customer. Kalau kamu klik "Buat Kode Baru", QR lama yang sudah ditempel di mesin akan berhenti berfungsi.</div>
+                    <button type="button" class="btn-add" style="margin-top:8px;" onclick="regenerateAccessCode()">🔄 Buat Kode Baru</button>
+                </div>
+            </div>
+        </div>
+ 
+        <div class="section">
+            <h3>Spesifikasi</h3>
+            <div class="form-grid">
+                <div class="form-group"><label>Packed Product</label>
+                    <select name="packedProduct">
+                        <option value="Powder">Powder</option>
+                        <option value="Liquid">Liquid</option>
+                        <option value="Granule">Granule</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Bag Type</label>
+                    <select name="bagType">
+                        <option value="Bag Seal">Bag Seal</option>
+                        <option value="Three Side Seal">Three Side Seal</option>
+                        <option value="Four Side Seal">Four Side Seal</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Packed Weight</label><input type="text" name="packedWeight" placeholder="Contoh: 150 gr"></div>
+                <div class="form-group"><label>Voltage</label><input type="text" name="voltage" placeholder="Contoh: 220V"></div>
+                <div class="form-group"><label>Electrical Type</label>
+                    <select name="electricalType">
+                        <option value="Single Phase">Single Phase</option>
+                        <option value="Three Phase">Three Phase</option>
+                    </select>
+                </div>
+                <div class="form-group"><label>Speed</label><input type="text" name="speed" placeholder="Contoh: 60 BPM"></div>
+                <div class="form-group"><label>Power</label><input type="text" name="power" placeholder="Contoh: 2.5 kW"></div>
+            </div>
+        </div>
+ 
+        <div class="section">
+            <h3>Spareparts</h3>
+            <div id="sparepartContainer">
+                <div class="item-row">
+                    <select class="sp-cat" style="flex:1">
+                        <option value="Heater">Heater</option><option value="Thermo">Thermo</option><option value="Knife">Knife</option><option value="PLC">PLC</option><option value="Seal">Seal</option><option value="Coding">Coding</option><option value="Sensor">Sensor</option><option value="Sealbar">Sealbar</option><option value="Touchscreen">Touchscreen</option><option value="Bearing">Bearing</option><option value="Belt">Belt</option><option value="Motor">Motor</option><option value="Spring">Spring</option><option value="Filter">Filter</option><option value="Akrilik & Cup">Akrilik & Cup</option><option value="Mainboard">Mainboard</option><option value="Angin Cyclinder">Angin Cyclinder</option><option value="Bushing">Bushing</option><option value="Box 1">Box 1</option><option value="Electrical">Electrical</option><option value="Mechanical">Mechanical</option><option value="Corong">Corong</option>
+                    </select>
+                    <input type="text" class="sp-part" style="flex:2" placeholder="Part Number / Type">
+                </div>
+            </div>
+            <button type="button" class="btn-add" onclick="addItem('sparepartContainer')">+ Tambah Sparepart</button>
+        </div>
+ 
+        <div class="section">
+            <h3>Maintenance Videos</h3>
+            <div id="videoContainer">
+                <div class="item-row">
+                    <input type="text" class="vid-url" style="flex:1" placeholder="Link YouTube (https://...)">
+                </div>
+            </div>
+            <button type="button" class="btn-add" onclick="addItem('videoContainer')">+ Tambah Video</button>
+        </div>
+ 
+        <button type="submit" class="btn-submit" id="btnSubmit">SIMPAN DATA MESIN</button>
+    </form>
+</div>
+ 
 <script>
     const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyTxktuhuSsqzxyGCHmyRUVLwRHpPs9uWDb1ILi9xDckT1vLs8t5WltLa_GrANWrCos/exec";
-    let allMachines = [];
-
+    let currentAccessCode = null;
+ 
     function getToken() {
         return sessionStorage.getItem('adminToken') || '';
     }
-
+ 
     function showLogin(message) {
         document.getElementById('loginOverlay').style.display = 'flex';
         document.getElementById('mainApp').style.display = 'none';
         document.getElementById('loginError').innerText = message || '';
     }
-
+ 
     function submitLogin() {
         const val = document.getElementById('tokenInput').value.trim();
         if (!val) return;
         sessionStorage.setItem('adminToken', val);
         document.getElementById('loginOverlay').style.display = 'none';
         document.getElementById('mainApp').style.display = 'block';
-        loadMachines();
+        initPage();
     }
-
-    function logout() {
-        sessionStorage.removeItem('adminToken');
-        location.reload();
+ 
+    document.getElementById('tokenInput').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') submitLogin();
+    });
+ 
+    function generateAccessCode() {
+        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        let code = '';
+        for (let i = 0; i < 10; i++) {
+            code += chars.charAt(Math.floor(Math.random() * chars.length));
+            if (i === 4) code += '-';
+        }
+        return code;
     }
-
-    async function loadMachines() {
+ 
+    function setAccessCode(code) {
+        currentAccessCode = code;
+        document.getElementById('accessCodeDisplay').innerText = code;
+    }
+ 
+    function regenerateAccessCode() {
+        if (confirm('QR lama yang sudah ditempel di mesin akan berhenti berfungsi. Lanjutkan buat kode baru?')) {
+            setAccessCode(generateAccessCode());
+        }
+    }
+ 
+    function customerLink(code) {
+        // Otomatis pakai domain tempat halaman ini dibuka (GitHub Pages ATAU domain sendiri)
+        const base = window.location.href.replace('admin-input.html', 'machine-spec.html').split('?')[0];
+        return `${base}?code=${encodeURIComponent(code)}`;
+    }
+ 
+    function addItem(containerId) {
+        const container = document.getElementById(containerId);
+        const div = document.createElement('div');
+        div.className = 'item-row';
+        if (containerId === 'sparepartContainer') {
+            div.innerHTML = `<select class="sp-cat" style="flex:1"><option value="Heater">Heater</option><option value="Thermo">Thermo</option><option value="Knife">Knife</option><option value="PLC">PLC</option><option value="Seal">Seal</option><option value="Coding">Coding</option><option value="Sensor">Sensor</option><option value="Sealbar">Sealbar</option><option value="Touchscreen">Touchscreen</option><option value="Bearing">Bearing</option><option value="Belt">Belt</option><option value="Motor">Motor</option><option value="Spring">Spring</option><option value="Filter">Filter</option><option value="Akrilik & Cup">Akrilik & Cup</option><option value="Mainboard">Mainboard</option><option value="Angin Cyclinder">Angin Cyclinder</option><option value="Bushing">Bushing</option><option value="Box 1">Box 1</option><option value="Electrical">Electrical</option><option value="Mechanical">Mechanical</option><option value="Corong">Corong</option></select><input type="text" class="sp-part" style="flex:2" placeholder="Part Number"><button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>`;
+        } else {
+            div.innerHTML = `<input type="text" class="vid-url" style="flex:1" placeholder="Link YouTube"><button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>`;
+        }
+        container.appendChild(div);
+    }
+ 
+    function closeModal() {
+        window.location.href = "dashboard.html";
+    }
+ 
+    document.getElementById('machineForm').onsubmit = async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('btnSubmit');
+        btn.innerText = "Sedang Menyimpan...";
+        btn.disabled = true;
+ 
+        const formData = new FormData(e.target);
+        const data = Object.fromEntries(formData.entries());
+ 
+        data.spareparts = Array.from(document.querySelectorAll('#sparepartContainer .item-row')).map(r => ({
+            cat: r.querySelector('.sp-cat').value,
+            pn: r.querySelector('.sp-part').value
+        }));
+        data.videos = Array.from(document.querySelectorAll('#videoContainer .vid-url')).map(r => r.value);
+        data.accessCode = currentAccessCode || generateAccessCode();
+        data.token = getToken();
+ 
         try {
-            const response = await fetch(`${SCRIPT_URL}?token=${encodeURIComponent(getToken())}`);
-            const data = await response.json();
-
-            if (data && data.error) {
-                // Token salah atau kosong -> minta login ulang
-                showLogin('Kode admin salah. Coba lagi.');
-                return;
-            }
-
-            allMachines = data;
-            renderMachines(allMachines);
-        } catch (e) {
-            document.getElementById('statusMsg').innerText = "Gagal memuat data.";
+            await fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify(data)
+            });
+ 
+            const link = customerLink(data.accessCode);
+            document.getElementById('qrLinkText').innerText = link;
+            document.getElementById('qrPreview').innerHTML = '';
+            new QRCode(document.getElementById('qrPreview'), { text: link, width: 180, height: 180 });
+ 
+            document.getElementById('successModal').style.display = 'flex';
+ 
+        } catch (err) {
+            alert("Koneksi gagal: " + err);
+        } finally {
+            btn.innerText = "SIMPAN DATA MESIN";
+            btn.disabled = false;
         }
-    }
-
-    function renderMachines(data) {
-        const container = document.getElementById('machineList');
-        container.innerHTML = '';
-
-        if (data.length === 0) {
-            container.innerHTML = '<p class="loading-text">Belum ada data mesin.</p>';
-            return;
-        }
-
-        data.forEach(item => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.onclick = () => {
-                window.location.href = `admin-input.html?edit=${encodeURIComponent(item.SerialNumber)}`;
-            };
-
-            card.innerHTML = `
-                <img src="${item.FotoMesin || 'https://via.placeholder.com/300x200?text=No+Image'}" class="card-img" alt="Foto Mesin">
-                <div class="card-body">
-                    <h3 class="card-title">${item.NamaMesin}</h3>
-                    <p class="card-customer">${item.NamaCustomer || 'Internal'}</p>
-                    <p class="card-sn">SN: ${item.SerialNumber}</p>
-                </div>
-                <div class="menu-container">
-                    <div class="dots" onclick="toggleMenu(event, this)">&#8942;</div>
-                    <div class="dropdown">
-                        <a href="admin-input.html?edit=${encodeURIComponent(item.SerialNumber)}" onclick="event.stopPropagation()">Edit</a>
-                        <button class="delete-btn" onclick="event.stopPropagation(); deleteMachine('${item.SerialNumber}')">Delete</button>
-                    </div>
-                </div>
-            `;
-            container.appendChild(card);
-        });
-    }
-
-    document.getElementById('searchInput').oninput = (e) => {
-        const query = e.target.value.toLowerCase();
-        const filtered = allMachines.filter(m => 
-            m.NamaMesin.toLowerCase().includes(query) || 
-            (m.NamaCustomer && m.NamaCustomer.toLowerCase().includes(query)) || 
-            m.SerialNumber.toLowerCase().includes(query)
-        );
-        renderMachines(filtered);
     };
-
-    function toggleMenu(event, el) {
-        event.stopPropagation();
-        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
-        el.nextElementSibling.classList.toggle('show');
-    }
-
-    window.onclick = (e) => {
-        if (!e.target.classList.contains('dots')) {
-            document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('show'));
+ 
+    async function initPage() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const sn = urlParams.get('edit');
+        const overlay = document.getElementById('loadingOverlay');
+ 
+        if (sn) {
+            overlay.style.display = 'flex';
+            try {
+                const response = await fetch(`${SCRIPT_URL}?sn=${encodeURIComponent(sn)}&token=${encodeURIComponent(getToken())}`);
+                const data = await response.json();
+ 
+                if (data && data.error === 'Unauthorized') {
+                    showLogin('Kode admin salah. Coba lagi.');
+                    return;
+                }
+ 
+                if (data && !data.error) {
+                    fillForm(data);
+                    overlay.style.display = 'none';
+                } else {
+                    alert("Data tidak ditemukan di Database.");
+                    window.location.href = 'dashboard.html';
+                }
+            } catch (err) {
+                console.error("Gagal load data:", err);
+                overlay.innerHTML = "<p style='color:red; padding:20px;'>Gagal memuat data. Periksa koneksi internet atau Deployment URL Anda.</p>";
+            }
+        } else {
+            setAccessCode(generateAccessCode());
+            overlay.style.display = 'none';
         }
     }
-
-    async function deleteMachine(sn) {
-        if (confirm(`Apakah Anda yakin ingin menghapus mesin dengan SN: ${sn}?`)) {
-            try {
-                await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain' },
-                    body: JSON.stringify({ action: 'delete', sn: sn, token: getToken() })
-                });
-                alert('Permintaan hapus terkirim.');
-                loadMachines();
-            } catch (err) {
-                alert('Gagal menghapus: ' + err);
+ 
+    function fillForm(data) {
+        const fields = {
+            'NamaMesin': 'namaMesin',
+            'SerialNumber': 'serialNumber',
+            'FotoMesin': 'fotoMesin',
+            'Model': 'model',
+            'FactoryDate': 'factoryDate',
+            'NamaCustomer': 'namaCustomer',
+            'PackedProduct': 'packedProduct',
+            'BagType': 'bagType',
+            'PackedWeight': 'packedWeight',
+            'Voltage': 'voltage',
+            'ElectricalType': 'electricalType',
+            'Speed': 'speed',
+            'Power': 'power'
+        };
+ 
+        for (const [key, name] of Object.entries(fields)) {
+            const input = document.getElementsByName(name)[0];
+            if (input && data[key] !== undefined) {
+                if (input.type === 'date' && data[key]) {
+                    const date = new Date(data[key]);
+                    if (!isNaN(date)) {
+                        input.value = date.toISOString().split('T')[0];
+                    }
+                } else {
+                    input.value = data[key];
+                }
             }
         }
+ 
+        if (data.AccessCode) {
+            setAccessCode(data.AccessCode);
+        } else {
+            setAccessCode(generateAccessCode());
+        }
+ 
+        const snField = document.getElementsByName('serialNumber')[0];
+        if (snField) {
+            snField.readOnly = true;
+            snField.style.backgroundColor = "#eee";
+        }
+ 
+        if (data.SparepartsJSON) {
+            try {
+                const spData = JSON.parse(data.SparepartsJSON);
+                const container = document.getElementById('sparepartContainer');
+                container.innerHTML = '';
+                spData.forEach(item => addSparepartRow(item.cat, item.pn));
+            } catch (e) { console.error("Error parse SparepartsJSON", e); }
+        }
+ 
+        if (data.VideosJSON) {
+            try {
+                const vidData = JSON.parse(data.VideosJSON);
+                const container = document.getElementById('videoContainer');
+                container.innerHTML = '';
+                vidData.forEach(url => addVideoRow(url));
+            } catch (e) { console.error("Error parse VideosJSON", e); }
+        }
     }
-
-    // Kalau sudah pernah login di halaman ini (sessionStorage), langsung masuk
+ 
+    function addSparepartRow(category = 'Heater', partNumber = '') {
+        const container = document.getElementById('sparepartContainer');
+        const div = document.createElement('div');
+        div.className = 'item-row';
+        const options = ["Heater", "Thermo", "Knife", "PLC", "Seal", "Coding", "Sensor", "Sealbar", "Touchscreen", "Bearing", "Belt", "Motor", "Spring", "Filter", "Akrilik & Cup", "Mainboard", "Angin Cyclinder", "Bushing", "Box 1", "Electrical", "Mechanical", "Corong"];
+ 
+        div.innerHTML = `
+            <select class="sp-cat" style="flex:1">
+                ${options.map(opt => `<option value="${opt}" ${opt === category ? 'selected' : ''}>${opt}</option>`).join('')}
+            </select>
+            <input type="text" class="sp-part" style="flex:2" placeholder="Part Number" value="${partNumber}">
+            <button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>
+        `;
+        container.appendChild(div);
+    }
+ 
+    function addVideoRow(url = '') {
+        const container = document.getElementById('videoContainer');
+        const div = document.createElement('div');
+        div.className = 'item-row';
+        div.innerHTML = `
+            <input type="text" class="vid-url" style="flex:1" placeholder="Link YouTube" value="${url}">
+            <button type="button" class="btn-del" onclick="this.parentElement.remove()">X</button>
+        `;
+        container.appendChild(div);
+    }
+ 
+    // Kalau sudah pernah login (sessionStorage), langsung masuk
     window.onload = () => {
         if (getToken()) {
             document.getElementById('loginOverlay').style.display = 'none';
             document.getElementById('mainApp').style.display = 'block';
-            loadMachines();
+            initPage();
         }
     };
-
-    document.getElementById('tokenInput').addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') submitLogin();
-    });
 </script>
+ 
 </body>
 </html>
